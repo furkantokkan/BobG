@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: 98ef27160bb23824ab52e794865d2614
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -2751194556888501852
+    second: Defend_P1_low|Capsule_65_01.001|Take 001|BaseLayer
+  - first:
+      74: -4190689660195112059
+    second: Defend_P1_low|Capsule_65_01|Take 001|BaseLayer
+  - first:
+      74: 2745318695935484334
+    second: Defend_P1_low|Defend_P1_low001|Take 001|BaseLayer
+  - first:
+      74: -5129453894308834850
+    second: Defend_P1_low|Defend_P1_low002|Take 001|BaseLayer
+  - first:
+      74: 7634028863660716006
+    second: Defend_P1_low|Defend_P1_low003|Take 001|BaseLayer
+  - first:
+      74: -8217420407569560283
+    second: Defend_P1_low|Defend_P1_low004|Take 001|BaseLayer
+  - first:
+      74: 6747815065280447446
+    second: Defend_P1_low|Defend_P1_low005|Take 001|BaseLayer
+  - first:
+      74: 8035914073975516347
+    second: Defend_P1_low|Defend_P1_low006|Take 001|BaseLayer
+  - first:
+      74: 1196245707210499917
+    second: Defend_P1_low|Defend_P1_low|Take 001|BaseLayer
+  - first:
+      74: -6076474447742741634
+    second: Defend_P1_low|Helmet_Base_low001|Take 001|BaseLayer
+  - first:
+      74: 2729711441199849575
+    second: Defend_P1_low|Helmet_Base_low002|Take 001|BaseLayer
+  - first:
+      74: -8038527945219592775
+    second: Defend_P1_low|Helmet_Base_low003|Take 001|BaseLayer
+  - first:
+      74: 6304622575479268081
+    second: Defend_P1_low|Helmet_Base_low004|Take 001|BaseLayer
+  - first:
+      74: 2704878262057864806
+    second: Defend_P1_low|Helmet_Base_low005|Take 001|BaseLayer
+  - first:
+      74: -6086884583993322088
+    second: Defend_P1_low|Helmet_Base_low006|Take 001|BaseLayer
+  - first:
+      74: 5963671579512971871
+    second: Defend_P1_low|Helmet_Base_low|Take 001|BaseLayer
+  - first:
+      74: 7306449064673922825
+    second: Defend_P1_low|Insid_1_low001|Take 001|BaseLayer
+  - first:
+      74: -4250681587323881787
+    second: Defend_P1_low|Insid_1_low002|Take 001|BaseLayer
+  - first:
+      74: 4699462161673609234
+    second: Defend_P1_low|Insid_1_low003|Take 001|BaseLayer
+  - first:
+      74: -6421268090164979695
+    second: Defend_P1_low|Insid_1_low004|Take 001|BaseLayer
+  - first:
+      74: 8630219562592554939
+    second: Defend_P1_low|Insid_1_low005|Take 001|BaseLayer
+  - first:
+      74: 1466621897803649813
+    second: Defend_P1_low|Insid_1_low006|Take 001|BaseLayer
+  - first:
+      74: 3037521343005625409
+    second: Defend_P1_low|Insid_1_low|Take 001|BaseLayer
+  - first:
+      74: 1280593666201369345
+    second: Defend_P1_low|Insid_2_low001|Take 001|BaseLayer
+  - first:
+      74: -2323328603757415044
+    second: Defend_P1_low|Insid_2_low002|Take 001|BaseLayer
+  - first:
+      74: -3863194930160807297
+    second: Defend_P1_low|Insid_2_low003|Take 001|BaseLayer
+  - first:
+      74: 1901632040838169067
+    second: Defend_P1_low|Insid_2_low004|Take 001|BaseLayer
+  - first:
+      74: 5929252930735742832
+    second: Defend_P1_low|Insid_2_low005|Take 001|BaseLayer
+  - first:
+      74: -5176099793674166880
+    second: Defend_P1_low|Insid_2_low006|Take 001|BaseLayer
+  - first:
+      74: 7886361812545417283
+    second: Defend_P1_low|Insid_2_low|Take 001|BaseLayer
+  - first:
+      74: 8130829248535422322
+    second: Defend_P1_low|Part_1_low001|Take 001|BaseLayer
+  - first:
+      74: 6591496488929789397
+    second: Defend_P1_low|Part_1_low002|Take 001|BaseLayer
+  - first:
+      74: -9162870158186898930
+    second: Defend_P1_low|Part_1_low003|Take 001|BaseLayer
+  - first:
+      74: -4125028141801909120
+    second: Defend_P1_low|Part_1_low004|Take 001|BaseLayer
+  - first:
+      74: -8988099003650672572
+    second: Defend_P1_low|Part_1_low005|Take 001|BaseLayer
+  - first:
+      74: 1671442289744011794
+    second: Defend_P1_low|Part_1_low006|Take 001|BaseLayer
+  - first:
+      74: 754302809146378333
+    second: Defend_P1_low|Part_1_low|Take 001|BaseLayer
+  - first:
+      74: -2012708601687220174
+    second: Defend_P1_low|SPart_2_low002|Take 001|BaseLayer
+  - first:
+      74: 2476941664234813881
+    second: Defend_P1_low|SPart_2_low003|Take 001|BaseLayer
+  - first:
+      74: -600186989050671376
+    second: Defend_P1_low|SPart_2_low004|Take 001|BaseLayer
+  - first:
+      74: -1391508944610181742
+    second: Defend_P1_low|SPart_2_low005|Take 001|BaseLayer
+  - first:
+      74: 3745928991375702939
+    second: Defend_P1_low|SPart_2_low006|Take 001|BaseLayer
+  - first:
+      74: 8177698151268626942
+    second: Defend_P1_low|SPart_2_low007|Take 001|BaseLayer
+  - first:
+      74: -2484016081729254985
+    second: Defend_P1_low|SPart_2_low008|Take 001|BaseLayer
+  - first:
+      74: -287118366900459645
+    second: Defend_P1_low|SPart_2_low009|Take 001|BaseLayer
+  - first:
+      74: 979833592476563960
+    second: Defend_P1_low|SPart_2_low010|Take 001|BaseLayer
+  - first:
+      74: -547686462837328650
+    second: Defend_P1_low|SPart_2_low011|Take 001|BaseLayer
+  - first:
+      74: -7554653709848185433
+    second: Defend_P1_low|SPart_2_low012|Take 001|BaseLayer
+  - first:
+      74: -1225993342808153249
+    second: Defend_P1_low|SPart_2_low013|Take 001|BaseLayer
+  - first:
+      74: 6975197143659970923
+    second: Defend_P1_low|SPart_2_low014|Take 001|BaseLayer
+  - first:
+      74: -1358960496426622536
+    second: Defend_P1_low|SPart_2_low|Take 001|BaseLayer
+  - first:
+      74: -4702242133167327609
+    second: Defend_P1_low|Stop_1_low001|Take 001|BaseLayer
+  - first:
+      74: 7467568120825871706
+    second: Defend_P1_low|Stop_1_low002|Take 001|BaseLayer
+  - first:
+      74: 3797083304699998910
+    second: Defend_P1_low|Stop_1_low003|Take 001|BaseLayer
+  - first:
+      74: -6477637558496383751
+    second: Defend_P1_low|Stop_1_low004|Take 001|BaseLayer
+  - first:
+      74: 1073219235716585481
+    second: Defend_P1_low|Stop_1_low005|Take 001|BaseLayer
+  - first:
+      74: 8580409612874844286
+    second: Defend_P1_low|Stop_1_low006|Take 001|BaseLayer
+  - first:
+      74: 8546624691329859935
+    second: Defend_P1_low|Stop_1_low|Take 001|BaseLayer
+  - first:
+      74: 7144475604722480919
+    second: Defend_P1_low|Stop_2_low001|Take 001|BaseLayer
+  - first:
+      74: -4048918280980820514
+    second: Defend_P1_low|Stop_2_low002|Take 001|BaseLayer
+  - first:
+      74: 6009982591385236253
+    second: Defend_P1_low|Stop_2_low003|Take 001|BaseLayer
+  - first:
+      74: 2890141680468727665
+    second: Defend_P1_low|Stop_2_low004|Take 001|BaseLayer
+  - first:
+      74: -7248839399947112048
+    second: Defend_P1_low|Stop_2_low005|Take 001|BaseLayer
+  - first:
+      74: 6078677335288791306
+    second: Defend_P1_low|Stop_2_low006|Take 001|BaseLayer
+  - first:
+      74: 204455808959915348
+    second: Defend_P1_low|Stop_2_low|Take 001|BaseLayer
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
