@@ -1,4 +1,6 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
@@ -6,6 +8,9 @@ public class GameManager : Singleton<GameManager>
     public float CountDown = 2f;
     int asyncSceneIndex = 1;
     public bool taptic = true;
+
+    public List<Enemy> allEnemiesList = new List<Enemy>();
+    
     #region GameState
     public enum GAMESTATE
     {
@@ -29,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
+        allEnemiesList.AddRange(FindObjectsOfType<Enemy>());
     }
     void Update()
     {
@@ -102,7 +108,6 @@ public class GameManager : Singleton<GameManager>
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
     }
-    
     #endregion
     void OnValueChanged()
     {

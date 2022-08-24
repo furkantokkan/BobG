@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
 public class Player : Humanoid
@@ -17,6 +16,7 @@ public class Player : Humanoid
     
     private void Awake()
     {
+        gameObject.tag = "Player";
         fireRateStorage = fireRate;
     }
 
