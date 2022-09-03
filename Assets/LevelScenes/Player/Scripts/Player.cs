@@ -30,14 +30,10 @@ public class Player : Humanoid
     
     private void JoystickMove()
     {
-        if (!lockRotation)
-        {
-            transform.position +=
-                (Vector3.right * Joystick.Instance.direction.x + Vector3.forward * Joystick.Instance.direction.y) *
-                (Time.deltaTime * playerSpeed);
-            rotateRoot.forward = new Vector3(Joystick.Instance.direction.x, 0f, Joystick.Instance.direction.y) *
-                                 (Time.deltaTime * playerSpeed);
-        }
+        if(Joystick.Instance == null) return;
+        transform.position += (Vector3.right * Joystick.Instance.direction.x + Vector3.forward * Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
+        if(Joystick.Instance.active)
+            rotateRoot.forward = new Vector3(Joystick.Instance.direction.x, 0f, Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
     }
 
     protected override void Attack(Transform point, Transform parent)
