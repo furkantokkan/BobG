@@ -335,4 +335,9 @@ public class Enemy : Humanoid
         tacticExecute = false;
         tacticCounter = tacticWaitTime;
     }
+    private void OnDrawGizmos()
+    {
+
+    }
+
 }

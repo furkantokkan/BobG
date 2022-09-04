@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Humanoid
 {
+    [Header("Values")]
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private float fireRate;
     [SerializeField] private Transform rotateRoot;
