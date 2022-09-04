@@ -79,15 +79,6 @@ public class ProgressController : MonoBehaviour
             healthLevel = startingLevel;
         }
     }
-
-    private void OnEnable()
-    {
-
-    }
-    private void OnDisable()
-    {
-
-    }
     private void UpdateLevel(int newLevel, Stat newStat)
     {
         switch (newStat)
@@ -119,6 +110,10 @@ public class ProgressController : MonoBehaviour
     }
     private void LevelUpEffect()
     {
+        if (levelUpParticule == null)
+        {
+            return;
+        }
         Instantiate(levelUpParticule, transform);
     }
 }
