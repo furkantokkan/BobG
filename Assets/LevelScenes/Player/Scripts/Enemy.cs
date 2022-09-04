@@ -90,7 +90,6 @@ public class Enemy : Humanoid
         if (target != null)
         {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
-            print(distanceToTarget);
         }
 
         if (tacticCounter > 0 && currentState == State.Fire)
@@ -173,11 +172,9 @@ public class Enemy : Humanoid
             {
                 CanAttackPlayer = true;
                 PlayerCollider = colliders[i];
-                Debug.Log("true");
                 return true;
             }
         }
-        Debug.Log("false");
         return false;
     }
 
