@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb79f5534f70bd46bcb1a1a27be595e, type: 3}
   m_Name: Progression
   m_EditorClassIdentifier: 
-  characterClasses: []
+  characterClasses:
+  - characterClass: 0
+    stats:
+    - stat: 0
+      prefabs: []
+      levels: []
