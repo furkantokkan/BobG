@@ -8,6 +8,7 @@ public class Progression : ScriptableObject
     [SerializeField] private ProgressionCharacterClass[] characterClasses = null;
 
     Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
+    Dictionary<CharacterClass, Dictionary<int, GameObject[]>> prefabLookupTable = null;
 
     public float GetStat(Stat newStat, CharacterClass newCharacterClass, int level)
     {
@@ -45,6 +46,18 @@ public class Progression : ScriptableObject
 
         return levels[level - 1];
     }
+    public GameObject GetPrefab(int level, CharacterClass newCharacterClass)
+    {
+        BuildLookup();
+        GameObject[] prefabs = prefabLookupTable[newCharacterClass][level];
+        if (prefabs.Length < level)
+        {
+            Debug.LogWarning("Object is null");
+            return new GameObject();
+        }
+
+        return prefabs[level - 1];
+    }
     public int GetLevelLength(Stat newStat, CharacterClass newCharacterClass)
     {
         BuildLookup();
@@ -54,23 +67,32 @@ public class Progression : ScriptableObject
 
     private void BuildLookup()
     {
-        if (lookupTable != null)
+        if (lookupTable != null && prefabLookupTable != null)
         {
             return;
         }
 
         lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
+        prefabLookupTable = new Dictionary<CharacterClass, Dictionary<int, GameObject[]>>();
 
         foreach (ProgressionCharacterClass progressionClass in characterClasses)
         {
             var statLookupTable = new Dictionary<Stat, float[]>();
+            var levelLookupTable = new Dictionary<int, GameObject[]>();
 
             foreach (ProgressionStat progressionStat in progressionClass.stats)
             {
                 statLookupTable[progressionStat.stat] = progressionStat.levels;
+                for (int i = 0; i < progressionStat.levels.Length; i++)
+                {
+                    levelLookupTable[i] = progressionStat.prefabs;
+                }
             }
 
+
+
             lookupTable[progressionClass.characterClass] = statLookupTable;
+            prefabLookupTable[progressionClass.characterClass] = levelLookupTable;
         }
     }
 
@@ -85,6 +107,7 @@ public class Progression : ScriptableObject
     class ProgressionStat
     {
         public Stat stat;
+        public GameObject[] prefabs;
         public float[] levels;
     }
 }
