@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField]GameObject StartP, InGameP, NextP, GameOverP;
+    [SerializeField] GameObject StartP, InGameP, NextP, GameOverP;
     TextMeshProUGUI m_CoinText, m_LevelText;
-    [SerializeField]Sprite MuteOn, MuteOff, TapticOn, TapticOff;
+    [SerializeField] Sprite MuteOn, MuteOff, TapticOn, TapticOff;
     public Image fillImage;
     GameObject m_Settings;
     int m_Coin;
@@ -20,7 +20,7 @@ public class UIManager : Singleton<UIManager>
         set
         {
             m_Coin += value;
-           // m_CoinText.text = m_Coin.ToString();
+            // m_CoinText.text = m_Coin.ToString();
         }
     }
     void OnEnable()
@@ -54,22 +54,23 @@ public class UIManager : Singleton<UIManager>
             case GameManager.GAMESTATE.GameOver:
                 GameOverP.SetActive(true);
                 break;
-            case GameManager.GAMESTATE.Finish: ImageFiller();
+            case GameManager.GAMESTATE.Finish:
+                ImageFiller();
                 NextP.SetActive(true);
                 break;
         }
     }
     public void SetLevel()
     {
-        PlayerPrefs.SetInt("Coin",m_Coin);
+        PlayerPrefs.SetInt("Coin", m_Coin);
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 1) + 1);
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
     }
     public void Settings()
     {
-        if(m_Settings.activeInHierarchy)
+        if (m_Settings.activeInHierarchy)
             m_Settings.SetActive(false);
-        else 
+        else
             m_Settings.SetActive(true);
     }
     public void Mute()
@@ -83,12 +84,39 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.taptic = !GameManager.Instance.taptic;
         m_Settings.transform.GetChild(0).GetComponent<Image>().sprite = IconChanger(TapticOn, TapticOff, GameManager.Instance.taptic);
     }
-    Sprite IconChanger(Sprite first, Sprite second,bool state)
+    Sprite IconChanger(Sprite first, Sprite second, bool state)
     {
         return state ? first : second;
     }
     void ImageFiller()
     {
         _fill = _fill >= 1 ? 0 : _fill += .2f;
+    }
+
+    public void OnClickUpgradeButton(string name)
+    {
+        switch (name)
+        {
+            case "Income":
+                ProgressController.Instance.UpdateLevel(
+                    ProgressController.Instance.incomeLevel += 1, Stat.INCOME);
+                break;
+            case "Power":
+                ProgressController.Instance.UpdateLevel(
+                     ProgressController.Instance.powerLevel += 1, Stat.POWER);
+                break;
+            case "Armor":
+                ProgressController.Instance.UpdateLevel(
+                    ProgressController.Instance.armorLevel += 1, Stat.ARMOR);
+                break;
+            case "Speed":
+                ProgressController.Instance.UpdateLevel(
+                     ProgressController.Instance.speedLevel += 1, Stat.SPEED);
+                break;
+            case "Health":
+                ProgressController.Instance.UpdateLevel(
+                     ProgressController.Instance.healthLevel += 1, Stat.HEALTH);
+                break;
+        }
     }
 }

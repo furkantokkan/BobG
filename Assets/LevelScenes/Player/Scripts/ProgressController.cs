@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressController : MonoBehaviour
+public class ProgressController : Singleton<ProgressController>
 {
     [Range(1, 99)]
     [SerializeField] private int startingLevel = 1;
     [SerializeField] CharacterClass characterClass;
     [SerializeField] Progression progression = null;
     [SerializeField] private GameObject levelUpParticule;
+
 
 
     public int incomeLevel;
@@ -79,8 +80,13 @@ public class ProgressController : MonoBehaviour
             healthLevel = startingLevel;
         }
     }
-    private void UpdateLevel(int newLevel, Stat newStat)
+    public void UpdateLevel(int newLevel, Stat newStat)
     {
+        if (progression == null)
+        {
+            return;
+        }
+
         switch (newStat)
         {
             case Stat.INCOME:

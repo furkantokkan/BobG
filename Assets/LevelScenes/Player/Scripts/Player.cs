@@ -10,6 +10,7 @@ public class Player : Humanoid
     [SerializeField] private float fireRate;
     [SerializeField] private Transform rotateRoot;
     [SerializeField] private float playerSpeed;
+
     private float fireRateStorage;
     public bool CanAttack { get; set; } = false;
     public Collider EnemyCollider { get; set; }

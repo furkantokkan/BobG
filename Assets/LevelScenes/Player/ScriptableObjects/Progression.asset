@@ -15,6 +15,7 @@ MonoBehaviour:
   characterClasses:
   - characterClass: 0
     stats:
-    - stat: 0
+    - stat: 1
       prefabs: []
-      levels: []
+      levels:
+      - 5
