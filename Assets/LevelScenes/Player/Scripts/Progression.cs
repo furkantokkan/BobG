@@ -8,7 +8,7 @@ public class Progression : ScriptableObject
     [SerializeField] private ProgressionCharacterClass[] characterClasses = null;
 
     Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
-    Dictionary<CharacterClass, Dictionary<int, GameObject[]>> prefabLookupTable = null;
+    Dictionary<CharacterClass, Dictionary<int, int[]>> prefabLookupTable = null;
 
     public float GetStat(Stat newStat, CharacterClass newCharacterClass, int level)
     {
@@ -46,14 +46,14 @@ public class Progression : ScriptableObject
 
         return levels[level - 1];
     }
-    public GameObject GetPrefab(int level, CharacterClass newCharacterClass)
+    public int GetWeaponID(int level, CharacterClass newCharacterClass)
     {
         BuildLookup();
-        GameObject[] prefabs = prefabLookupTable[newCharacterClass][level];
+        int[] prefabs = prefabLookupTable[newCharacterClass][level];
         if (prefabs.Length < level)
         {
             Debug.LogWarning("Object is null");
-            return new GameObject();
+            return 0;
         }
 
         return prefabs[level - 1];
@@ -73,19 +73,19 @@ public class Progression : ScriptableObject
         }
 
         lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
-        prefabLookupTable = new Dictionary<CharacterClass, Dictionary<int, GameObject[]>>();
+        prefabLookupTable = new Dictionary<CharacterClass, Dictionary<int, int[]>>();
 
         foreach (ProgressionCharacterClass progressionClass in characterClasses)
         {
             var statLookupTable = new Dictionary<Stat, float[]>();
-            var levelLookupTable = new Dictionary<int, GameObject[]>();
+            var levelLookupTable = new Dictionary<int, int[]>();
 
             foreach (ProgressionStat progressionStat in progressionClass.stats)
             {
                 statLookupTable[progressionStat.stat] = progressionStat.levels;
                 for (int i = 0; i < progressionStat.levels.Length; i++)
                 {
-                    levelLookupTable[i] = progressionStat.prefabs;
+                    levelLookupTable[i] = progressionStat.weaponID;
                 }
             }
 
@@ -107,7 +107,7 @@ public class Progression : ScriptableObject
     class ProgressionStat
     {
         public Stat stat;
-        public GameObject[] prefabs;
+        public int[] weaponID;
         public float[] levels;
     }
 }

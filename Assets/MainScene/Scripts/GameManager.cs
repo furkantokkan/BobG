@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
+    public const int MAX_LEVEL_INDEX = 14;
+
     public float CountDown = 2f;
     int asyncSceneIndex = 1;
     public bool taptic = true;
+
 
     public List<Enemy> allEnemiesList = new List<Enemy>();
     

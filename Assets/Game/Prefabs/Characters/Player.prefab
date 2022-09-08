@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 284425885}
+  - component: {fileID: 146297217}
   m_Layer: 7
   m_Name: Weapons
   m_TagString: Untagged
@@ -33,6 +34,18 @@ Transform:
   m_Father: {fileID: 8667450483289103236}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146297217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284425884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167978fa4a5a86c40ba8ffac4e9d82d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &210567824115753208
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +608,7 @@ GameObject:
   - component: {fileID: 1153322587426106838}
   - component: {fileID: 2859424423905632883}
   - component: {fileID: 20899606995424953}
+  - component: {fileID: 1940396762}
   m_Layer: 7
   m_Name: Silah_1
   m_TagString: Untagged
@@ -666,6 +680,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1940396762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966591328276445036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3051f540e630140a0adf37ef4e3f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &1991203262588457423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,9 +1456,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3464825039102254534}
   - component: {fileID: 3464825039102254535}
+  - component: {fileID: 1206298723}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1469,6 +1497,28 @@ MonoBehaviour:
   fireRate: 2
   rotateRoot: {fileID: 7383631788929352615}
   playerSpeed: 12
+--- !u!114 &1206298723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464825039102254536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afe986e1e8af3f468185404ce19bdae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponRoot: {fileID: 284425884}
+  startingLevel: 1
+  characterClass: 0
+  progression: {fileID: 11400000, guid: 267746f48833d674eb9dc04084f149f8, type: 2}
+  levelUpParticule: {fileID: 0}
+  incomeLevel: 0
+  powerLevel: 0
+  armorLevel: 0
+  speedLevel: 0
+  healthLevel: 0
 --- !u!1 &3807672816654405831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,6 +2267,7 @@ GameObject:
   - component: {fileID: 7573466431012719994}
   - component: {fileID: 6824501558925116127}
   - component: {fileID: 8741899517835884053}
+  - component: {fileID: 207505677}
   m_Layer: 7
   m_Name: Silah_3
   m_TagString: Untagged
@@ -2288,6 +2339,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &207505677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084596775564842944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3051f540e630140a0adf37ef4e3f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &7197445975794689546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2394,7 @@ GameObject:
   - component: {fileID: 7173628774141516064}
   - component: {fileID: 6062411113242744453}
   - component: {fileID: 8342625291954692687}
+  - component: {fileID: 1570666257}
   m_Layer: 7
   m_Name: Silah_2
   m_TagString: Untagged
@@ -2402,6 +2467,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1570666257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549732752997319578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3051f540e630140a0adf37ef4e3f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &7848528144217360751
 GameObject:
   m_ObjectHideFlags: 0

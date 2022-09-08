@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Humanoid
 {
+
     [Header("Values")]
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private float fireRate;
@@ -14,8 +15,8 @@ public class Player : Humanoid
     private float fireRateStorage;
     public bool CanAttack { get; set; } = false;
     public Collider EnemyCollider { get; set; }
-    private Vector2 direction => Joystick.Instance.direction;   
-    
+    private Vector2 direction => Joystick.Instance.direction;
+
     private void Awake()
     {
         gameObject.tag = "Player";
@@ -25,17 +26,17 @@ public class Player : Humanoid
     private void Update()
     {
         healthBar.transform.parent.parent.LookAt(Camera.main.transform);
-        Attack(bulletPoint,transform);
+        Attack(bulletPoint, transform);
         DetectEnemy();
         LookAtEnemy(EnemyCollider);
         JoystickMove();
     }
-    
+
     private void JoystickMove()
     {
-        if(Joystick.Instance == null) return;
+        if (Joystick.Instance == null) return;
         transform.position += (Vector3.right * Joystick.Instance.direction.x + Vector3.forward * Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
-        if(Joystick.Instance.active)
+        if (Joystick.Instance.active)
             rotateRoot.forward = new Vector3(Joystick.Instance.direction.x, 0f, Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
     }
 
@@ -46,13 +47,18 @@ public class Player : Humanoid
             fireRate -= Time.deltaTime;
             if (fireRate <= 0)
             {
-                base.Attack(point,parent);
+                base.Attack(point, parent);
                 fireRate = fireRateStorage;
                 CanAttack = false;
-            } 
+            }
         }
     }
-    
+
+    public void UpdateWeapon(int id)
+    {
+
+    }
+
     private void DetectEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);

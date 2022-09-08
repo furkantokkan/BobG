@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ProgressController : Singleton<ProgressController>
 {
+    [Header("Attactments")]
+    [SerializeField] private GameObject weaponRoot;
     [Range(1, 99)]
     [SerializeField] private int startingLevel = 1;
     [SerializeField] CharacterClass characterClass;
     [SerializeField] Progression progression = null;
     [SerializeField] private GameObject levelUpParticule;
-
-
 
     public int incomeLevel;
     public int powerLevel;
@@ -19,7 +19,7 @@ public class ProgressController : Singleton<ProgressController>
     public int speedLevel;
     public int healthLevel;
 
-    public event Action onLevelUp;
+    public event Action<Stat, int> onLevelUp;
 
     private void Awake()
     {
@@ -79,10 +79,17 @@ public class ProgressController : Singleton<ProgressController>
             speedLevel = startingLevel;
             healthLevel = startingLevel;
         }
+
+        weaponRoot.GetComponent<WeaponRoot>().ActivateWeapon(progression.GetWeaponID(powerLevel, characterClass));
     }
     public void UpdateLevel(int newLevel, Stat newStat)
     {
         if (progression == null)
+        {
+            return;
+        }
+
+        if (newLevel > GameManager.MAX_LEVEL_INDEX)
         {
             return;
         }
@@ -95,6 +102,7 @@ public class ProgressController : Singleton<ProgressController>
                 break;
             case Stat.POWER:
                 powerLevel = newLevel;
+                weaponRoot.GetComponent<WeaponRoot>().ActivateWeapon(progression.GetWeaponID(newLevel, characterClass));
                 PlayerPrefs.SetInt("PowerLevel", newLevel);
                 break;
             case Stat.ARMOR:
@@ -111,7 +119,7 @@ public class ProgressController : Singleton<ProgressController>
                 break;
         }
 
-        onLevelUp?.Invoke();
+        onLevelUp?.Invoke(newStat, newLevel);
         LevelUpEffect();
     }
     private void LevelUpEffect()
