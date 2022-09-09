@@ -79,9 +79,24 @@ public class Player : Humanoid
             Destroy(other.gameObject);
             healthBar.fillAmount -= 0.05f;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
-            if (healthBar.fillAmount <= 0)
+            if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
-                Destroy(gameObject);
+                healthBar.transform.parent.gameObject.SetActive(false);
+                GetComponent<PlayerAnim>().DeathAnim();
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Lava"))
+        {
+            healthBar.fillAmount -= 0.3f * Time.deltaTime;
+            healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
+            if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
+            {
+                healthBar.transform.parent.gameObject.SetActive(false); 
+                transform.GetChild(0).GetComponent<PlayerAnim>().DeathAnim();
             }
         }
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     private Animator anim;
-
     public enum GunState
     {
         RunPistol,
@@ -39,14 +38,15 @@ public class PlayerAnim : MonoBehaviour
             anim.SetBool("IsFire",false);
     }
 
-    void DanceAnim()
+    public void DanceAnim()
     {
         anim.SetFloat("DanceState",Random.Range(0,2));
         anim.SetTrigger("Dance");
     }
-    void DeathAnim()
+    public void DeathAnim()
     {
         anim.SetTrigger("Death");
+        GameManager.Instance.Gamestate = GameManager.GAMESTATE.Empty;
     }
     void SetState()
     {

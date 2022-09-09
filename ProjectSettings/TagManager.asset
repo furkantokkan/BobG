@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Lava
   layers:
   - Default
   - TransparentFX

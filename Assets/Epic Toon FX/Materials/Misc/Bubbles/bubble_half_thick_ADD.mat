@@ -10,8 +10,8 @@ Material:
   m_Name: bubble_half_thick_ADD
   m_Shader: {fileID: 4800000, guid: 23ed30d97d7aab0429a49d39cb89d8be, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
-    _MK_BLEND_ADDITIVE _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_RECEIVE_SHADOWS _MK_SURFACE_TYPE_TRANSPARENT
-    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_BLEND_ADDITIVE _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_RECEIVE_SHADOWS
+    _MK_SURFACE_TYPE_TRANSPARENT _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -166,7 +166,7 @@ Material:
     - _Mode: 4
     - _NormalMapIntensity: 1
     - _OptionsTab: 1
-    - _ParticlesTab: 0
+    - _ParticlesTab: 1
     - _ReceiveShadows: 1
     - _RenderFace: 2
     - _RenderPriority: 0
@@ -211,7 +211,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: -1, g: 1, b: 0, a: 0}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.11320752, g: 0.036845844, b: 0.036845844, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}

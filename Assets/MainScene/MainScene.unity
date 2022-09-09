@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122641504, g: 0.11165005, b: 0.11165005, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db388ca92fcb244fb62fb3f4d3891b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountDown: 2
+  CountDown: 4
   taptic: 1
   allEnemiesList: []
   _gamestate: 0
@@ -3459,7 +3459,7 @@ MonoBehaviour:
   TapticOn: {fileID: 21300000, guid: eaf1171167b74814492b2f88b58681cf, type: 3}
   TapticOff: {fileID: 21300000, guid: d58827e9282ef4943aae90d2db46c1af, type: 3}
   fillImage: {fileID: 1411190199}
-  _fill: 0
+  _fill: 0.2
 --- !u!1 &1169214777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5169,7 +5169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.18222678, b: 0.18222678, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7625,7 +7625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 42, y: 103.000244}
+  m_AnchoredPosition: {x: 42, y: 103.00037}
   m_SizeDelta: {x: 1540, y: 1555.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7700188747547824411

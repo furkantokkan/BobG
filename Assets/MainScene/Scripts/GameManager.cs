@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 14;
 
-    public float CountDown = 2f;
+    public float CountDown = 3f;
     int asyncSceneIndex = 1;
     public bool taptic = true;
 
@@ -20,7 +20,8 @@ public class GameManager : Singleton<GameManager>
         Start,
         Ingame,
         Finish,
-        GameOver
+        GameOver,
+        Empty
     }
     [OnValueChanged("OnValueChanged")]
     [SerializeField]GAMESTATE _gamestate;
@@ -55,6 +56,8 @@ public class GameManager : Singleton<GameManager>
             case GAMESTATE.GameOver:
                 GameOver();
                 break;
+            case GAMESTATE.Empty: Empty();
+                break;
         }
         if (Input.anyKeyDown && Gamestate == GAMESTATE.Start)
             Gamestate = GAMESTATE.Ingame;
@@ -80,6 +83,13 @@ public class GameManager : Singleton<GameManager>
     void GameOver()
     {
         CountDown -= Time.deltaTime;
+    }
+
+    void Empty()
+    {
+        CountDown -= Time.deltaTime;
+        if (CountDown <= 0)
+            Gamestate = GAMESTATE.GameOver;
     }
     public void RestartButton()
     {

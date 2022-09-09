@@ -23,12 +23,6 @@ public class UIManager : Singleton<UIManager>
             // m_CoinText.text = m_Coin.ToString();
         }
     }
-    void OnEnable()
-    {
-    }
-    void OnDisable()
-    {
-    }
     void Start()
     {
         m_LevelText = InGameP.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
