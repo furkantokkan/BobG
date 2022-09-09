@@ -30,11 +30,22 @@ public class PlayerAnim : MonoBehaviour
             anim.SetBool("IsRunning",false);
             IdleAnim();
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetBool("IsFire",true);
+            if(anim.GetBool("IsRunning"))
+                anim.SetLayerWeight(1,1);
+            else anim.SetLayerWeight(1,0);
+        }
+        else if(Input.GetKeyDown(KeyCode.S))    
+            anim.SetBool("IsFire",false);
     }
 
     void DanceAnim()
     {
         anim.SetFloat("DanceState",Random.Range(0,2));
+        anim.SetTrigger("Dance");
     }
     void DeathAnim()
     {
@@ -63,6 +74,19 @@ public class PlayerAnim : MonoBehaviour
                 break;
             case GunState.RunRifle:
                 anim.SetFloat("RunState", 1);
+                break;
+        }
+    }
+
+    void FireAnim()
+    {
+        switch (gunState)
+        {
+            case GunState.RunPistol:
+                anim.SetFloat("FireState", 0.1f);
+                break;
+            case GunState.RunRifle:
+                anim.SetFloat("FireState", 1);
                 break;
         }
     }
