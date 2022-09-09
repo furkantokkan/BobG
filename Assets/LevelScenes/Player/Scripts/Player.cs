@@ -78,6 +78,7 @@ public class Player : Humanoid
         {
             Destroy(other.gameObject);
             healthBar.fillAmount -= 0.05f;
+            healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
                 Destroy(gameObject);
