@@ -106,15 +106,15 @@ public class ProgressController : Singleton<ProgressController>
                 PlayerPrefs.SetInt("PowerLevel", newLevel);
                 break;
             case Stat.ARMOR:
-                powerLevel = newLevel;
+                armorLevel = newLevel;
                 PlayerPrefs.SetInt("ArmorLevel", newLevel);
                 break;
             case Stat.SPEED:
-                powerLevel = newLevel;
+                speedLevel = newLevel;
                 PlayerPrefs.SetInt("SpeedLevel", newLevel);
                 break;
             case Stat.HEALTH:
-                powerLevel = newLevel;
+                healthLevel = newLevel;
                 PlayerPrefs.SetInt("HealthLevel", newLevel);
                 break;
         }
