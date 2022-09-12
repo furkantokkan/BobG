@@ -127,7 +127,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     void Start()
     {
-        UIManager.Instance.Coin = 200;
         MoneyCost = PlayerPrefs.GetInt("MoneyCost", 50);
         AirDropCost = PlayerPrefs.GetInt("AirDropCost", 50);
         DamageCost = PlayerPrefs.GetInt("DamageCost", 50);

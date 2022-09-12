@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8361584870720490151}
   - component: {fileID: 4780888059895450283}
   m_Layer: 0
-  m_Name: Silah_4
+  m_Name: Shutgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3598344562740498387
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -173.993, y: 92.111, z: -109.40399}
 --- !u!33 &8361584870720490151
 MeshFilter:
@@ -94,12 +94,12 @@ GameObject:
   - component: {fileID: 5009241148644804895}
   - component: {fileID: 3361119232195594048}
   m_Layer: 0
-  m_Name: Assult Rifle 2
+  m_Name: Aug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8749740372938736858
 Transform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -173.925, y: 92.135, z: -109.407}
 --- !u!33 &5009241148644804895
 MeshFilter:
@@ -177,12 +177,12 @@ GameObject:
   - component: {fileID: 2373288179312201272}
   - component: {fileID: 9079974874833313427}
   m_Layer: 7
-  m_Name: Silah_1
+  m_Name: AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8787909127771595576
 Transform:
   m_ObjectHideFlags: 0
@@ -272,12 +272,12 @@ GameObject:
   - component: {fileID: 2180826551165506998}
   - component: {fileID: 512436645604183455}
   m_Layer: 0
-  m_Name: Smg 1
+  m_Name: Smg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8111385654244007275
 Transform:
   m_ObjectHideFlags: 0
@@ -355,12 +355,12 @@ GameObject:
   - component: {fileID: 4436375050687502151}
   - component: {fileID: 543329551453285263}
   m_Layer: 7
-  m_Name: Silah_2
+  m_Name: Deagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6045846959141107735
 Transform:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ Transform:
   m_LocalScale: {x: 199.99998, y: 249.99994, z: 200.00003}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -176.802, y: 101.756, z: 249.001}
 --- !u!33 &6793326674581875947
 MeshFilter:
@@ -467,14 +467,14 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4620619827068832986}
-  - {fileID: 8749740372938736858}
-  - {fileID: 8111385654244007275}
-  - {fileID: 6003284464316432850}
-  - {fileID: 8787909127771595576}
   - {fileID: 6045846959141107735}
+  - {fileID: 6003284464316432850}
+  - {fileID: 8111385654244007275}
   - {fileID: 6095832481302143663}
+  - {fileID: 8787909127771595576}
+  - {fileID: 8749740372938736858}
   - {fileID: 3598344562740498387}
+  - {fileID: 4620619827068832986}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -502,12 +502,12 @@ GameObject:
   - component: {fileID: 5266644204508333022}
   - component: {fileID: 4764628723693385900}
   m_Layer: 0
-  m_Name: Smg2
+  m_Name: Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6003284464316432850
 Transform:
   m_ObjectHideFlags: 0
@@ -520,7 +520,7 @@ Transform:
   m_LocalScale: {x: 1.1299999, y: 1.1300001, z: 1.1299999}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -180, y: 90, z: -109.293}
 --- !u!33 &5266644204508333022
 MeshFilter:
@@ -584,12 +584,12 @@ GameObject:
   - component: {fileID: 3418758014368323372}
   - component: {fileID: 2326163245966839634}
   m_Layer: 0
-  m_Name: Assult Rifle 1
+  m_Name: ShutGun 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4620619827068832986
 Transform:
   m_ObjectHideFlags: 0
@@ -598,11 +598,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7753234020092313345}
   m_LocalRotation: {x: -0.42799258, y: -0.5488617, z: 0.3893828, w: 0.6032862}
-  m_LocalPosition: {x: -23.769604, y: 0.5045967, z: 0.07924037}
+  m_LocalPosition: {x: -23.769, y: 0.504, z: -0.102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -174.896, y: 91.792, z: -109.373}
 --- !u!33 &3418758014368323372
 MeshFilter:
@@ -667,12 +667,12 @@ GameObject:
   - component: {fileID: 6233753810242053773}
   - component: {fileID: 377602921012320679}
   m_Layer: 7
-  m_Name: Silah_3
+  m_Name: M4A1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6095832481302143663
 Transform:
   m_ObjectHideFlags: 0
@@ -685,7 +685,7 @@ Transform:
   m_LocalScale: {x: 449.99997, y: 499.99994, z: 450.00003}
   m_Children: []
   m_Father: {fileID: 6179834732473820240}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -176.802, y: 101.756, z: -110.99899}
 --- !u!33 &2690998162004399773
 MeshFilter:

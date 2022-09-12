@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 1.2
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: ShapeModule.radiusThickness
@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -228,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19824104, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.46467167
+      value: 0.016392907
       objectReference: {fileID: 0}
     - target: {fileID: 19876530, guid: d8ac9950df006754ea1bf8311f5c97bc, type: 3}
       propertyPath: ShapeModule.type

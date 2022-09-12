@@ -91,6 +91,7 @@ public class Player : Humanoid
     {
         if (other.CompareTag("Lava"))
         {
+            transform.GetChild(1).gameObject.SetActive(true);
             healthBar.fillAmount -= 0.3f * Time.deltaTime;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
@@ -98,6 +99,13 @@ public class Player : Humanoid
                 healthBar.transform.parent.gameObject.SetActive(false); 
                 transform.GetChild(0).GetComponent<PlayerAnim>().DeathAnim();
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Lava"))
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 }

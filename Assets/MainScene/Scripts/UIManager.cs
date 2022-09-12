@@ -20,7 +20,7 @@ public class UIManager : Singleton<UIManager>
         set
         {
             m_Coin += value;
-            // m_CoinText.text = m_Coin.ToString();
+            m_CoinText.text = m_Coin.ToString();
         }
     }
     void Start()
