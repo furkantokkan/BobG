@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
-    public const int MAX_LEVEL_INDEX = 14;
+    public const int MAX_LEVEL_INDEX = 15;
 
     public float CountDown = 3f;
     int asyncSceneIndex = 1;
@@ -125,5 +125,11 @@ public class GameManager : Singleton<GameManager>
     void OnValueChanged()
     {
         Gamestate = _gamestate;
+    }
+
+    [ContextMenu("DeleteALLKeys")]
+    public void DeleteAllKeys()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

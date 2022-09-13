@@ -7,8 +7,14 @@ public class Progression : ScriptableObject
 {
     [SerializeField] private ProgressionCharacterClass[] characterClasses = null;
 
+    private struct KeyValues
+    {
+       public int levelID;
+       public Stat statID;
+    }
+
     Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
-    Dictionary<CharacterClass, Dictionary<int, int[]>> prefabLookupTable = null;
+    Dictionary<CharacterClass, Dictionary<KeyValues, int[]>> prefabLookupTable = null;
 
     public float GetStat(Stat newStat, CharacterClass newCharacterClass, int level)
     {
@@ -46,10 +52,15 @@ public class Progression : ScriptableObject
 
         return levels[level - 1];
     }
-    public int GetWeaponID(int level, CharacterClass newCharacterClass)
+    public int GetPrefabID(int level, CharacterClass newCharacterClass, Stat newStat)
     {
         BuildLookup();
-        int[] prefabs = prefabLookupTable[newCharacterClass][level];
+
+        KeyValues key = new KeyValues();
+        key.levelID = level;
+        key.statID = newStat;
+
+        int[] prefabs = prefabLookupTable[newCharacterClass][key];
         if (prefabs.Length < level)
         {
             Debug.LogWarning("Object is null");
@@ -67,25 +78,30 @@ public class Progression : ScriptableObject
 
     private void BuildLookup()
     {
-        if (lookupTable != null && prefabLookupTable != null)
+        if (lookupTable != null || prefabLookupTable != null)
         {
             return;
         }
 
         lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
-        prefabLookupTable = new Dictionary<CharacterClass, Dictionary<int, int[]>>();
+        prefabLookupTable = new Dictionary<CharacterClass, Dictionary<KeyValues, int[]>>();
 
         foreach (ProgressionCharacterClass progressionClass in characterClasses)
         {
             var statLookupTable = new Dictionary<Stat, float[]>();
-            var levelLookupTable = new Dictionary<int, int[]>();
+            var levelLookupTable = new Dictionary<KeyValues, int[]>();
 
             foreach (ProgressionStat progressionStat in progressionClass.stats)
             {
                 statLookupTable[progressionStat.stat] = progressionStat.levels;
-                for (int i = 0; i < progressionStat.levels.Length; i++)
+                for (int i = 0; i < progressionStat.weaponID.Length; i++)
                 {
-                    levelLookupTable[i] = progressionStat.weaponID;
+                    KeyValues newKey = new KeyValues();
+                    newKey.levelID = i;
+                    newKey.statID = progressionStat.stat;
+
+                    levelLookupTable[newKey] = progressionStat.weaponID;
+                    Debug.Log("Index: " + i + " / WeaponID: " + progressionStat.weaponID[i]);
                 }
             }
 

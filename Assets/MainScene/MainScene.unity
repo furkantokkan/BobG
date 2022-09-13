@@ -3460,6 +3460,12 @@ MonoBehaviour:
   TapticOff: {fileID: 21300000, guid: d58827e9282ef4943aae90d2db46c1af, type: 3}
   fillImage: {fileID: 1411190199}
   _fill: 0.2
+  upgradePanel: {fileID: 1192570545}
+  powerCost: 0
+  incomeCost: 0
+  armorCost: 0
+  speedCost: 0
+  healthCost: 0
 --- !u!1 &1169214777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3603,6 +3609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1192570546}
+  - component: {fileID: 1192570547}
   m_Layer: 5
   m_Name: Upgraders
   m_TagString: Untagged
@@ -3630,6 +3637,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1192570547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192570545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e808c1ca7cd534ca5652f2aee84af3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incomeLevel: {fileID: 1987063881}
+  powerLevel: {fileID: 1731293772}
+  armorLevel: {fileID: 1744691877}
+  speedLevel: {fileID: 963794380}
+  healthLevel: {fileID: 1169214779}
+  incomeAmount: {fileID: 2126378091}
+  powerAmount: {fileID: 1899603744}
+  armorAmount: {fileID: 700961780}
+  speedAmount: {fileID: 1994553094}
+  healthAmount: {fileID: 1813894994}
+  incomeButton: {fileID: 73747314}
+  powerButton: {fileID: 2034612997}
+  armorButton: {fileID: 1274841621}
+  speedButton: {fileID: 805851386}
+  healthButton: {fileID: 148256593}
 --- !u!1 &1214788084
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,7 +4879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1737582057
 RectTransform:
   m_ObjectHideFlags: 0

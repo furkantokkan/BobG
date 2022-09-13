@@ -23,6 +23,15 @@ public class UIManager : Singleton<UIManager>
             m_CoinText.text = m_Coin.ToString();
         }
     }
+
+    [SerializeField] GameObject upgradePanel;
+
+    [SerializeField] private int powerCost;
+    [SerializeField] private int incomeCost;
+    [SerializeField] private int armorCost;
+    [SerializeField] private int speedCost;
+    [SerializeField] private int healthCost;
+
     void Start()
     {
         m_LevelText = InGameP.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -30,6 +39,76 @@ public class UIManager : Singleton<UIManager>
         m_Settings = InGameP.transform.GetChild(2).GetChild(0).gameObject;
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
+        UpdateUpgradeUI();
+    }
+    public void UpdateUpgradeUI()
+    {
+        ProgressController progress = GameObject.FindGameObjectWithTag("Player").GetComponent<ProgressController>();
+        UpgradePanel panel = upgradePanel.GetComponent<UpgradePanel>();
+
+        panel.incomeLevel.text = progress.incomeLevel.ToString();
+        panel.powerLevel.text = progress.powerLevel.ToString();
+        panel.armorLevel.text = progress.armorLevel.ToString();
+        panel.speedLevel.text = progress.speedLevel.ToString();
+        panel.healthLevel.text = progress.healthLevel.ToString();
+
+        incomeCost = 50 * progress.incomeLevel;
+        powerCost = 50 * progress.powerLevel;
+        armorCost = 50 * progress.armorLevel;
+        speedCost = 50 * progress.speedLevel;
+        healthCost = 50 * progress.healthLevel;
+
+        panel.incomeAmount.text = incomeCost.ToString();
+        panel.powerAmount.text = powerCost.ToString();
+        panel.armorAmount.text = armorCost.ToString();
+        panel.speedAmount.text = speedCost.ToString();
+        panel.healthAmount.text = healthCost.ToString();
+
+        if (m_Coin < incomeCost)
+        {
+            panel.incomeButton.interactable = false;
+        }
+        else
+        {
+            panel.incomeButton.interactable = true;
+        }
+
+        if (m_Coin < powerCost)
+        {
+            panel.powerButton.interactable = false;
+        }
+        else
+        {
+            panel.powerButton.interactable = true;
+        }
+
+        if (m_Coin < armorCost)
+        {
+            panel.armorButton.interactable = false;
+        }
+        else
+        {
+            panel.armorButton.interactable = true;
+        }
+
+        if (m_Coin < speedCost)
+        {
+            panel.speedButton.interactable = false;
+        }
+        else
+        {
+            panel.powerButton.interactable = true;
+        }
+
+        if (m_Coin < healthCost)
+        {
+            panel.healthButton.interactable = false;
+        }
+        else
+        {
+            panel.powerButton.interactable = true;
+        }
+
     }
     public void PanelController(GameManager.GAMESTATE currentPanel)
     {
@@ -89,27 +168,29 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickUpgradeButton(string name)
     {
+        ProgressController progress = GameObject.FindGameObjectWithTag("Player").GetComponent<ProgressController>();
+
         switch (name)
         {
             case "Income":
-                ProgressController.Instance.UpdateLevel(
-                    ProgressController.Instance.incomeLevel += 1, Stat.INCOME);
+                progress.UpdateLevel(
+                    progress.incomeLevel + 1, Stat.INCOME);
                 break;
             case "Power":
-                ProgressController.Instance.UpdateLevel(
-                     ProgressController.Instance.powerLevel += 1, Stat.POWER);
+                progress.UpdateLevel(
+                     progress.powerLevel + 1, Stat.POWER);
                 break;
             case "Armor":
-                ProgressController.Instance.UpdateLevel(
-                    ProgressController.Instance.armorLevel += 1, Stat.ARMOR);
+                progress.UpdateLevel(
+                    progress.armorLevel + 1, Stat.ARMOR);
                 break;
             case "Speed":
-                ProgressController.Instance.UpdateLevel(
-                     ProgressController.Instance.speedLevel += 1, Stat.SPEED);
+                progress.UpdateLevel(
+                     progress.speedLevel + 1, Stat.SPEED);
                 break;
             case "Health":
-                ProgressController.Instance.UpdateLevel(
-                     ProgressController.Instance.healthLevel += 1, Stat.HEALTH);
+                progress.UpdateLevel(
+                    progress.healthLevel + 1, Stat.HEALTH);
                 break;
         }
     }
