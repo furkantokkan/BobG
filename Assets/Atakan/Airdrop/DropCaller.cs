@@ -7,5 +7,6 @@ public class DropCaller : MonoBehaviour
     public void Call()
     {
         FindObjectOfType<AirdropController>().StartCoroutine("RandomSpawn");
+        UIManager.Instance.Coin = 5;
     }
 }

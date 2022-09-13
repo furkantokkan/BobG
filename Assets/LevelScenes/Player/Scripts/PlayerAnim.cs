@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     private Animator anim;
-
     public enum GunState
     {
         RunPistol,
@@ -23,46 +22,43 @@ public class PlayerAnim : MonoBehaviour
         if (Joystick.Instance != null && Joystick.Instance.active)
         {
             anim.SetBool("IsRunning",true);
-            RunAnim();
+            SetState();
         }
         else
         {
             anim.SetBool("IsRunning",false);
-            IdleAnim();
+            SetState();
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetBool("IsFire",true);
+        }
+        else if(Input.GetKeyDown(KeyCode.S))    
+            anim.SetBool("IsFire",false);
     }
 
-    void DanceAnim()
+    public void DanceAnim()
     {
         anim.SetFloat("DanceState",Random.Range(0,2));
+        anim.SetTrigger("Dance");
     }
-    void DeathAnim()
+    public void DeathAnim()
     {
         anim.SetTrigger("Death");
+        GameManager.Instance.Gamestate = GameManager.GAMESTATE.Empty;
     }
-    void IdleAnim()
+    void SetState()
     {
         switch (gunState)
         {
             case GunState.RunPistol:
-                anim.SetFloat("IdleState", 0);
+                anim.SetFloat("GunState", 0);
                 break;
             case GunState.RunRifle:
-                anim.SetFloat("IdleState", 1);
+                anim.SetFloat("GunState", 1);
                 break;
-            default: anim.SetFloat("IdleState", 0.5f);
-                break;
-        }
-    }
-    void RunAnim()
-    {
-        switch (gunState)
-        {
-            case GunState.RunPistol:
-                anim.SetFloat("RunState", 0.1f);
-                break;
-            case GunState.RunRifle:
-                anim.SetFloat("RunState", 1);
+            default: anim.SetFloat("GunState", 0.5f);
                 break;
         }
     }
