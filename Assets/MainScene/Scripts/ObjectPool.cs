@@ -21,6 +21,7 @@ public class ObjectPool : Singleton<ObjectPool>
             {
                 GameObject obj = Instantiate(pools[i].objectPrefab);
                 obj.SetActive(false);
+                obj.transform.SetParent(transform);
                 pools[i].PooledObject.Enqueue(obj);
             }
         }

@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1313215, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3464825039102254534, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -55,9 +59,116 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3464825039102254536, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4829156342400263529, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8f6f08b0c5c5c954c8721c36e0a58778, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 7871233668748597533, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3464825039102254535, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+    - {fileID: 4663691329870991586, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+--- !u!1 &2903854525349156956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3464825039102254536, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+  m_PrefabInstance: {fileID: 1754460236854936980}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4408621011218917830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2699777382177287250, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+  m_PrefabInstance: {fileID: 1754460236854936980}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe0859188d8f443f9c5afacfc9f0e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4408621010515729847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2699777382613800995, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+  m_PrefabInstance: {fileID: 1754460236854936980}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &4408621011232479462 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2699777382182329714, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+  m_PrefabInstance: {fileID: 1754460236854936980}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &6557630887991841887
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903854525349156956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 4.3397512
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.0698757, z: 0}
+--- !u!195 &90037648895902735
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903854525349156956}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 4.18
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5294671131059647868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903854525349156956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdede6a73421a64b9ef12f339ee76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleRadius: 5
+  healthBar: {fileID: 4408621010515729847}
+  bulletPoint: {fileID: 4408621011232479462}
+  fireRate: 4
+  attackRange: 5
+  turnSpeed: 15
+  chaseRange: 20
+  patrolRadius: 34.48
+  patrolWaitTime: 2
+  patrolSpeed: 4
+  chaseSpeed: 5
+  tacticSpeed: 5.5
+  tacticWaitTime: 5
+  damage: 2
+  AnimatorOverrideController: {fileID: 0}
+  meshAnimator: {fileID: 4408621011218917830}
+  currentState: 0

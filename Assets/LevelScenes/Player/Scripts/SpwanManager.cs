@@ -35,7 +35,6 @@ public class SpwanManager : Singleton<SpwanManager>
         GameObject enemy = GetRandomEnemy();
 
         GameObject clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
-
         while (IsCharacterNear(clone) || CharacterOnScreen(clone))
         {
 
@@ -44,7 +43,7 @@ public class SpwanManager : Singleton<SpwanManager>
             yield return null;
         }
 
-        clone.GetComponent<MeshRenderer>().enabled = true;
+        clone.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6);
         onSpawnProcess = false;
     }

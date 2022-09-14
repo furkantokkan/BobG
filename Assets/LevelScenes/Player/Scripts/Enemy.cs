@@ -31,7 +31,7 @@ public class Enemy : Humanoid
     [SerializeField] int damage = 2;
     [SerializeField] AnimatorOverrideController AnimatorOverrideController;
 
-    [SerializeField] private Animator meshAnimator;
+    [SerializeField] private AnimController meshAnimator;
 
     float distanceToTarget = Mathf.Infinity;
 
@@ -53,7 +53,19 @@ public class Enemy : Humanoid
 
     private bool tacticExecute = false;
 
- 
+    private void Awake()
+    {
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        fireRateStorage = fireRate;
+        tacticCounter = tacticWaitTime;
+    }
+
+    private void Update()
+    {
+        StateSelector();
+        StateExecute();
+    }
+
     private void OnEnable()
     {
         GameManager.Instance.allEnemiesList.Add(this);
@@ -114,27 +126,45 @@ public class Enemy : Humanoid
 
     private void StateExecute()
     {
+        if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame)
+        {
+            return;
+        }
         switch (currentState)
         {
             case State.Search:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 SearchNewPlaceToGo();
                 break;
             case State.Chase:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 ChaseTheTarget();
                 break;
             case State.GetBack:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 GetBack();
                 break;
             case State.MoveForward:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 MoveForward();
                 break;
             case State.MoveRight:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 MoveRight();
                 break;
             case State.MoveLeft:
+                meshAnimator.SetRunAnim(true);
+                meshAnimator.SetFireAnimation(false);
                 MoveLeft();
                 break;
             case State.Fire:
+                meshAnimator.SetRunAnim(false);
+                meshAnimator.SetFireAnimation(true);
                 Attack();
                 break;
             default:
@@ -148,7 +178,7 @@ public class Enemy : Humanoid
         {
             fireRate -= Time.deltaTime;
             if (fireRate <= 0)
-            {
+            {      
                 base.Attack(point, parent);
                 fireRate = fireRateStorage;
                 CanAttackPlayer = false;
@@ -211,6 +241,7 @@ public class Enemy : Humanoid
         {
             return;
         }
+
         agent.isStopped = true;
         agent.velocity = agent.velocity * 0.1f;
         LookAtEnemy(target.GetComponent<Collider>());
@@ -304,15 +335,15 @@ public class Enemy : Humanoid
 
         if (number > 50)
         {
-            if (distanceToTarget <= 5f)
+            if (distanceToTarget <= attackRange)
             {
                 return State.GetBack;
             }
-            return State.MoveForward;
+            return State.GetBack;
         }
         else
         {
-            if (distanceToTarget > visibleRadius)
+            if (distanceToTarget >= attackRange)
             {
                 return State.MoveForward;
             }

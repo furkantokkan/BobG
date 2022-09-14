@@ -82,7 +82,7 @@ public class Player : Humanoid
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);
-                GetComponent<PlayerAnim>().DeathAnim();
+                GetComponent<AnimController>().DeathAnim();
             }
         }
     }
@@ -97,7 +97,7 @@ public class Player : Humanoid
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false); 
-                transform.GetChild(0).GetComponent<PlayerAnim>().DeathAnim();
+                transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
             }
         }
     }

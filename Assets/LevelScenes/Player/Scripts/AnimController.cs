@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnim : MonoBehaviour
+public class AnimController : MonoBehaviour
 {
     private Animator anim;
     public enum GunState
@@ -19,25 +19,28 @@ public class PlayerAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.tag != "Player")
+        {
+            return; 
+        }
         if (Joystick.Instance != null && Joystick.Instance.active)
         {
-            anim.SetBool("IsRunning",true);
-            SetState();
+            SetRunAnim(true);
         }
         else
         {
-            anim.SetBool("IsRunning",false);
-            SetState();
+            SetRunAnim(false);
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            anim.SetBool("IsFire",true);
-        }
-        else if(Input.GetKeyDown(KeyCode.S))    
-            anim.SetBool("IsFire",false);
     }
-
+    public void SetFireAnimation(bool isFire)
+    {
+        anim.SetBool("IsFire", isFire);
+    }
+    public void SetRunAnim(bool isRun)
+    {
+        anim.SetBool("IsRunning", isRun);
+        SetState();
+    }
     public void DanceAnim()
     {
         anim.SetFloat("DanceState",Random.Range(0,2));
