@@ -17,4 +17,14 @@ public class DropCaller : MonoBehaviour
         FindObjectOfType<AirdropController>().StartCoroutine("RandomSpawn");
         UIManager.Instance.Coin = 50 * progressController.incomeLevel;
     }
+
+    public void Money()
+    {
+        transform.GetChild(2).GetComponent<ParticleSystem>().Play();
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+    }
 }
