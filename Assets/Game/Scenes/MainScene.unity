@@ -1350,25 +1350,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: MineBiomeBuild
       objectReference: {fileID: 0}
-    - target: {fileID: 572505932188034014, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1409,10 +1393,6 @@ PrefabInstance:
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6563501960811105056, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
@@ -45151,18 +45131,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.90204
       objectReference: {fileID: 0}
@@ -45202,17 +45170,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4257252122413668014, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 4924656458027854318, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_Name
       value: RockBiomeBuild
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924656458027854318, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
@@ -55931,25 +55891,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: MineBiomeBuild (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 572505932188034014, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55990,10 +55934,6 @@ PrefabInstance:
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6563501960811105056, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
@@ -63802,18 +63742,6 @@ PrefabInstance:
       value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.489994
       objectReference: {fileID: 0}
@@ -63856,22 +63784,6 @@ PrefabInstance:
     - target: {fileID: 3741067736640814951, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_Name
       value: GrassBiomeBuild
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741067736640814951, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4884128991245697315, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8045362353130913994, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8045362353130913994, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
