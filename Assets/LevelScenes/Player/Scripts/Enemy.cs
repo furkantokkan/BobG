@@ -53,18 +53,12 @@ public class Enemy : Humanoid
 
     private bool tacticExecute = false;
 
-    private void Awake()
+ 
+    private void OnEnable()
     {
-        agent = gameObject.AddComponent<NavMeshAgent>();
-        fireRateStorage = fireRate;
-        tacticCounter = tacticWaitTime;
+        GameManager.Instance.allEnemiesList.Add(this);
     }
 
-    private void Update()
-    {
-        StateSelector();
-        StateExecute();
-    }
     private void OnDisable()
     {
         GameManager.Instance.allEnemiesList.Remove(this);

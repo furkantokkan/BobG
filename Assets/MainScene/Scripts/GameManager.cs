@@ -38,7 +38,6 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
-        allEnemiesList.AddRange(FindObjectsOfType<Enemy>());
     }
     void Update()
     {
