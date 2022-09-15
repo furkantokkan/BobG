@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657773, g: 0.4964133, b: 0.57481754, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1393,10 +1393,6 @@ PrefabInstance:
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6563501960811105056, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
@@ -46947,7 +46943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.90204
+      value: -55.46
       objectReference: {fileID: 0}
     - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -46955,7 +46951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.610229
+      value: -9.76
       objectReference: {fileID: 0}
     - target: {fileID: 3134200679315893059, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46985,33 +46981,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4257252122413668014, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 4924656458027854318, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
       propertyPath: m_Name
       value: RockBiomeBuild
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924656458027854318, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643139716656706631, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026945634658227259, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026945634658256757, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026945634658291503, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
@@ -66488,7 +66460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.489994
+      value: -52.6
       objectReference: {fileID: 0}
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -66496,7 +66468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.301014
+      value: -15.6
       objectReference: {fileID: 0}
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66526,33 +66498,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3514107775916554542, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514107775916557534, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514107775916592058, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 3741067736640814951, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_Name
       value: GrassBiomeBuild
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741067736640814951, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4884128991245697315, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8522016009697681867, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
