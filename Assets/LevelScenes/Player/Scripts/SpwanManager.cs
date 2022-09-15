@@ -43,6 +43,7 @@ public class SpwanManager : Singleton<SpwanManager>
             yield return null;
         }
 
+        clone.transform.SetParent(this.transform);
         clone.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6);
         onSpawnProcess = false;

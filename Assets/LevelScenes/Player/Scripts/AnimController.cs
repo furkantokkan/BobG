@@ -19,7 +19,7 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.tag != "Player")
+        if (transform.parent.tag != "Player")
         {
             return; 
         }

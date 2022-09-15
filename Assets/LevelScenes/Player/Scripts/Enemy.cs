@@ -108,7 +108,7 @@ public class Enemy : Humanoid
             currentState = GetRandomTactic();
             tacticExecute = true;
         }
-        else if (distanceToTarget <= chaseRange && !DetectEnemy() && tacticCounter > 0)
+        else if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0)
         {
             currentState = State.Chase;
 
@@ -187,18 +187,26 @@ public class Enemy : Humanoid
 
     private bool DetectEnemy()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
-        Debug.DrawRay(transform.position, transform.forward * visibleRadius, Color.red);
-        for (int i = 0; i < colliders.Length; i++)
+        if (distanceToTarget <= attackRange)
         {
-            if (colliders[i].gameObject.layer == 1 << LayerMask.NameToLayer("Enemies"))
-            {
-                CanAttackPlayer = true;
-                PlayerCollider = colliders[i];
-                return true;
-            }
+            return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+        //Debug.DrawRay(transform.position, transform.forward * visibleRadius, Color.red);
+        //for (int i = 0; i < colliders.Length; i++)
+        //{
+        //    if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        //    {
+        //        CanAttackPlayer = true;
+        //        PlayerCollider = colliders[i];
+        //        return true;
+        //    }
+        //}
+        //return false;
     }
 
 
@@ -264,9 +272,9 @@ public class Enemy : Humanoid
         {
             Vector3 agentTarget = new Vector3(agent.destination.x, transform.position.y, agent.destination.z);
 
-            agent.enabled = false;
-            transform.position = agentTarget;
-            agent.enabled = true;
+            //agent.enabled = false;
+            //transform.position = agentTarget;
+            //agent.enabled = true;
             meshAnimator.SetRunAnim(false);
             Invoke("Search", patrolWaitTime);
 
@@ -325,7 +333,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = tacticSpeed;
-        agent.SetDestination(transform.position - transform.forward * 5);
+        agent.SetDestination(transform.position - transform.forward * 15);
         StartCoroutine(CheckIsOnTheTargetPoint());
     }
 
@@ -339,7 +347,7 @@ public class Enemy : Humanoid
             {
                 return State.GetBack;
             }
-            return State.GetBack;
+            return State.MoveForward;
         }
         else
         {
