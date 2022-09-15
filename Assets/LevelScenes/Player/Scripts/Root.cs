@@ -8,6 +8,10 @@ public class Root : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
+            if (transform.GetChild(i).GetComponent<Weapon>() == null)
+            {
+                continue;
+            }
             transform.GetChild(i).GetComponent<Weapon>().id = i;
         }
     }

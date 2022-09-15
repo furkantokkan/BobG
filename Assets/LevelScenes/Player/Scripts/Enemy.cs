@@ -133,7 +133,6 @@ public class Enemy : Humanoid
         switch (currentState)
         {
             case State.Search:
-                meshAnimator.SetRunAnim(true);
                 meshAnimator.SetFireAnimation(false);
                 SearchNewPlaceToGo();
                 break;
@@ -188,11 +187,11 @@ public class Enemy : Humanoid
 
     private bool DetectEnemy()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
         Debug.DrawRay(transform.position, transform.forward * visibleRadius, Color.red);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject.layer == 7)
+            if (colliders[i].gameObject.layer == 1 << LayerMask.NameToLayer("Enemies"))
             {
                 CanAttackPlayer = true;
                 PlayerCollider = colliders[i];
@@ -268,7 +267,7 @@ public class Enemy : Humanoid
             agent.enabled = false;
             transform.position = agentTarget;
             agent.enabled = true;
-
+            meshAnimator.SetRunAnim(false);
             Invoke("Search", patrolWaitTime);
 
             isSearched = true;
@@ -280,6 +279,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = patrolSpeed;
+        meshAnimator.SetRunAnim(true);
         agent.SetDestination(GetRandomPosition());
     }
 
