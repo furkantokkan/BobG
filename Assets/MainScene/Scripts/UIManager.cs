@@ -19,8 +19,9 @@ public class UIManager : Singleton<UIManager>
         }
         set
         {
-            m_Coin += value;
+            m_Coin = value;
             m_CoinText.text = m_Coin.ToString();
+            UpdateUpgradeUI();
         }
     }
 
@@ -40,6 +41,7 @@ public class UIManager : Singleton<UIManager>
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
         UpdateUpgradeUI();
+        Coin = 1000;
     }
     public void UpdateUpgradeUI()
     {
@@ -97,7 +99,7 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            panel.powerButton.interactable = true;
+            panel.speedButton.interactable = true;
         }
 
         if (m_Coin < healthCost)
@@ -106,7 +108,7 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            panel.powerButton.interactable = true;
+            panel.healthButton.interactable = true;
         }
 
     }
@@ -173,22 +175,27 @@ public class UIManager : Singleton<UIManager>
         switch (name)
         {
             case "Income":
+                Coin -= incomeCost;
                 progress.UpdateLevel(
                     progress.incomeLevel + 1, Stat.INCOME);
                 break;
             case "Power":
+                Coin -= powerCost;
                 progress.UpdateLevel(
                      progress.powerLevel + 1, Stat.POWER);
                 break;
             case "Armor":
+                Coin -= armorCost;
                 progress.UpdateLevel(
                     progress.armorLevel + 1, Stat.ARMOR);
                 break;
             case "Speed":
+                Coin -= speedCost;
                 progress.UpdateLevel(
                      progress.speedLevel + 1, Stat.SPEED);
                 break;
             case "Health":
+                Coin -= healthCost;
                 progress.UpdateLevel(
                     progress.healthLevel + 1, Stat.HEALTH);
                 break;
