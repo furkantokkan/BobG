@@ -6,15 +6,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private GameObject asd;
+
+    public GameObject sender;
 
     void Update()
     {
-        transform.Translate(Vector3.forward * (bulletSpeed * Time.deltaTime));
-    }
-
-    private void OnBecameInvisible()
-    {
-        //ObjectPool.Instance.SetPooledObject(gameObject,0);
+        transform.Translate(Vector3.up * (bulletSpeed * Time.deltaTime));
     }
 }

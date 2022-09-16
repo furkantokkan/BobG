@@ -27,7 +27,6 @@ public class Range : MonoBehaviour
         {
             if (colliders[i].gameObject.layer == 8 && colliders[i].gameObject!= gameObject)
             {
-                _player.CanAttack = true;
                 _player.EnemyCollider = colliders[i];
             }
         }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AnimController : MonoBehaviour
 {
-    private Animator anim;
+    public Animator anim;
     public enum GunState
     {
         RunPistol,
         RunRifle
     }
     public GunState gunState;
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
     }

@@ -13,7 +13,6 @@ public class Player : Humanoid
     [SerializeField] private float playerSpeed;
 
     private float fireRateStorage;
-    public bool CanAttack { get; set; } = false;
     public Collider EnemyCollider { get; set; }
     private Vector2 direction => Joystick.Instance.direction;
 
@@ -42,15 +41,11 @@ public class Player : Humanoid
 
     protected override void Attack(Transform point, Transform parent)
     {
-        if (CanAttack)
+        fireRate -= Time.deltaTime;
+        if (fireRate <= 0)
         {
-            fireRate -= Time.deltaTime;
-            if (fireRate <= 0)
-            {
-                base.Attack(point, parent);
-                fireRate = fireRateStorage;
-                CanAttack = false;
-            }
+            base.Attack(point, parent);
+            fireRate = fireRateStorage;
         }
     }
 
@@ -66,7 +61,6 @@ public class Player : Humanoid
         {
             if (colliders[i].gameObject.layer == 8)
             {
-                CanAttack = true;
                 EnemyCollider = colliders[i];
             }
         }
@@ -76,6 +70,10 @@ public class Player : Humanoid
     {
         if (other.CompareTag("Bullet"))
         {
+            if (other.GetComponent<Bullet>().sender == this.gameObject)
+            {
+                return;
+            }
             Destroy(other.gameObject);
             healthBar.fillAmount -= 0.05f;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
@@ -96,14 +94,14 @@ public class Player : Humanoid
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
-                healthBar.transform.parent.gameObject.SetActive(false); 
+                healthBar.transform.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Lava"))
+        if (other.CompareTag("Lava"))
         {
             transform.GetChild(1).gameObject.SetActive(false);
         }

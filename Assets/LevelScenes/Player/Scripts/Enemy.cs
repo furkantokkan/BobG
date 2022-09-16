@@ -40,7 +40,6 @@ public class Enemy : Humanoid
     private bool isSearched = false;
 
     private float fireRateStorage;
-    public bool CanAttackPlayer { get; set; } = false;
     public Collider PlayerCollider { get; set; }
 
     public State currentState = State.Search;
@@ -56,6 +55,7 @@ public class Enemy : Humanoid
     private void Awake()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
+        fireRate =
         fireRateStorage = fireRate;
         tacticCounter = tacticWaitTime;
     }
@@ -79,11 +79,15 @@ public class Enemy : Humanoid
     {
         if (other.CompareTag("Bullet"))
         {
+            if (other.GetComponent<Bullet>().sender == this.gameObject)
+            {
+                return;
+            }
             Destroy(other.gameObject);
             healthBar.fillAmount -= 0.2f;
             if (healthBar.fillAmount <= 0)
             {
-                LootBoxManager.Instance.LootBoxStage();
+                //LootBoxManager.Instance.LootBoxStage();
                 Destroy(gameObject);
             }
         }
@@ -133,38 +137,31 @@ public class Enemy : Humanoid
         switch (currentState)
         {
             case State.Search:
-                meshAnimator.SetFireAnimation(false);
                 SearchNewPlaceToGo();
                 break;
             case State.Chase:
                 meshAnimator.SetRunAnim(true);
-                meshAnimator.SetFireAnimation(false);
                 ChaseTheTarget();
                 break;
             case State.GetBack:
                 meshAnimator.SetRunAnim(true);
-                meshAnimator.SetFireAnimation(false);
                 GetBack();
                 break;
             case State.MoveForward:
                 meshAnimator.SetRunAnim(true);
-                meshAnimator.SetFireAnimation(false);
                 MoveForward();
                 break;
             case State.MoveRight:
                 meshAnimator.SetRunAnim(true);
-                meshAnimator.SetFireAnimation(false);
                 MoveRight();
                 break;
             case State.MoveLeft:
                 meshAnimator.SetRunAnim(true);
-                meshAnimator.SetFireAnimation(false);
                 MoveLeft();
                 break;
             case State.Fire:
                 meshAnimator.SetRunAnim(false);
-                meshAnimator.SetFireAnimation(true);
-                Attack();
+                AttackState();
                 break;
             default:
                 break;
@@ -173,16 +170,20 @@ public class Enemy : Humanoid
 
     protected override void Attack(Transform point, Transform parent)
     {
-        if (CanAttackPlayer)
+        base.Attack(point, parent);
+    }
+
+    private IEnumerator AttackAnimationRoutine(Transform point, Transform parent)
+    {
+        if (meshAnimator.anim.GetBool("IsFire") == true)
         {
-            fireRate -= Time.deltaTime;
-            if (fireRate <= 0)
-            {      
-                base.Attack(point, parent);
-                fireRate = fireRateStorage;
-                CanAttackPlayer = false;
-            }
+            yield break;
         }
+        meshAnimator.SetFireAnimation(true);
+        yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
+        meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+        meshAnimator.SetFireAnimation(false);
+        Attack(point, parent);
     }
 
     private bool DetectEnemy()
@@ -242,17 +243,16 @@ public class Enemy : Humanoid
             }
         }
     }
-    private void Attack()
+    private void AttackState()
     {
         if (target == null)
         {
             return;
         }
-
         agent.isStopped = true;
         agent.velocity = agent.velocity * 0.1f;
         LookAtEnemy(target.GetComponent<Collider>());
-        Attack(bulletPoint, transform);
+        StartCoroutine(AttackAnimationRoutine(bulletPoint, transform));
     }
     private void ChaseTheTarget()
     {
@@ -275,7 +275,10 @@ public class Enemy : Humanoid
             //agent.enabled = false;
             //transform.position = agentTarget;
             //agent.enabled = true;
-            meshAnimator.SetRunAnim(false);
+            if (agent.velocity == Vector3.zero)
+            {
+                meshAnimator.SetRunAnim(false);
+            }
             Invoke("Search", patrolWaitTime);
 
             isSearched = true;
