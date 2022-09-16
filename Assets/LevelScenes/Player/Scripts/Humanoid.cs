@@ -19,7 +19,7 @@ public class Humanoid : MonoBehaviour
         var bullet = ObjectPool.Instance.GetPooledObject(0);
         bullet.transform.position = point.position;
         bullet.GetComponent<Bullet>().sender = parent.gameObject;
-        bullet.transform.rotation = Quaternion.Euler(90f, parent.eulerAngles.y, parent.eulerAngles.z);
+        bullet.transform.localRotation = point.rotation * Quaternion.Euler(90,0,0);
     }
 
     protected void LookAtEnemy(Collider enemy)
@@ -27,7 +27,7 @@ public class Humanoid : MonoBehaviour
         if (enemy != null)
         {
             lockRotation = true;
-            transform.LookAt(enemy.transform);   
+            transform.GetChild(0).LookAt(enemy.transform);   
         }
     }
     
