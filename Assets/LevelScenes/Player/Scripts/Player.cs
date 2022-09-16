@@ -24,7 +24,6 @@ public class Player : Humanoid
 
     private void Update()
     {
-        healthBar.transform.parent.parent.LookAt(Camera.main.transform);
         Attack(bulletPoint, transform);
         DetectEnemy();
         LookAtEnemy(EnemyCollider);
