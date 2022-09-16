@@ -64,6 +64,7 @@ public class Enemy : Humanoid
     {
         StateSelector();
         StateExecute();
+        healthBar.transform.parent.LookAt(Camera.main.transform);
     }
 
     private void OnEnable()
