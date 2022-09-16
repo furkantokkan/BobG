@@ -2344,7 +2344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db388ca92fcb244fb62fb3f4d3891b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountDown: 4
+  CountDown: 5
   taptic: 1
   allEnemiesList: []
   _gamestate: 1

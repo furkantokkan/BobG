@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 15;
 
-    public float CountDown = 3f;
+    public float CountDown = 5;
     int asyncSceneIndex = 1;
     public bool taptic = true;
 
