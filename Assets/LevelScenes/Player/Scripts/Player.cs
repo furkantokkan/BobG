@@ -11,15 +11,15 @@ public class Player : Humanoid
     [SerializeField] private float fireRate;
     [SerializeField] private Transform rotateRoot;
     [SerializeField] private float playerSpeed;
-
+    EffectManager effectManager;
     private float fireRateStorage;
     public Collider EnemyCollider { get; set; }
     private Vector2 direction => Joystick.Instance.direction;
 
     private void Awake()
     {
-        gameObject.tag = "Player";
         fireRateStorage = fireRate;
+        effectManager = transform.GetChild(0).GetComponent<EffectManager>();
     }
 
     private void Update()
@@ -48,12 +48,6 @@ public class Player : Humanoid
             fireRate = fireRateStorage;
         }
     }
-
-    public void UpdateWeapon(int id)
-    {
-
-    }
-
     private void DetectEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);
@@ -70,7 +64,7 @@ public class Player : Humanoid
     {
         if (other.CompareTag("Bullet"))
         {
-            if (other.GetComponent<Bullet>().sender == this.gameObject)
+            if (other.GetComponent<Bullet>().sender == gameObject)
             {
                 return;
             }
@@ -80,7 +74,8 @@ public class Player : Humanoid
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);
-                GetComponent<AnimController>().DeathAnim();
+                transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
+                effectManager.Death.Play();
             }
         }
     }
@@ -89,13 +84,15 @@ public class Player : Humanoid
     {
         if (other.CompareTag("Lava"))
         {
-            transform.GetChild(1).gameObject.SetActive(true);
+            effectManager.Lava.Play();
             healthBar.fillAmount -= 0.3f * Time.deltaTime;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
+                effectManager.Death.Play();
+
             }
         }
     }
@@ -103,7 +100,7 @@ public class Player : Humanoid
     {
         if (other.CompareTag("Lava"))
         {
-            transform.GetChild(1).gameObject.SetActive(false);
+            effectManager.Lava.Stop();
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimController : MonoBehaviour
 {
+    [HideInInspector]
     public Animator anim;
     public enum GunState
     {

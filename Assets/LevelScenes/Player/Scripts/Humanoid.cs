@@ -8,12 +8,7 @@ public class Humanoid : MonoBehaviour
     [SerializeField] protected float visibleRadius;
     [SerializeField] protected Image healthBar;
     protected bool lockRotation;
-
-    public virtual void Start()
-    {
-        
-    }
-
+    
     protected virtual void Attack(Transform point, Transform parent)
     {
         var bullet = ObjectPool.Instance.GetPooledObject(0);
