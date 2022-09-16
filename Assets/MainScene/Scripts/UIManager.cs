@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    [SerializeField] GameObject upgradePanel;
+    public GameObject upgradePanel;
 
     [SerializeField] private int powerCost;
     [SerializeField] private int incomeCost;
@@ -46,11 +46,11 @@ public class UIManager : Singleton<UIManager>
         ProgressController progress = GameObject.FindGameObjectWithTag("Player").GetComponent<ProgressController>();
         UpgradePanel panel = upgradePanel.GetComponent<UpgradePanel>();
 
-        panel.incomeLevel.text = progress.incomeLevel.ToString();
-        panel.powerLevel.text = progress.powerLevel.ToString();
-        panel.armorLevel.text = progress.armorLevel.ToString();
-        panel.speedLevel.text = progress.speedLevel.ToString();
-        panel.healthLevel.text = progress.healthLevel.ToString();
+        panel.incomeLevel.text = "level " + progress.incomeLevel;
+        panel.powerLevel.text = "level " + progress.powerLevel;
+        panel.armorLevel.text = "level " + progress.armorLevel;
+        panel.speedLevel.text = "level " + progress.speedLevel;
+        panel.healthLevel.text = "level " + progress.healthLevel;
 
         incomeCost = 50 * progress.incomeLevel;
         powerCost = 50 * progress.powerLevel;

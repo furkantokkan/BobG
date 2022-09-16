@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 5774702763160051411}
   - component: {fileID: 6335160791231614059}
   - component: {fileID: 2807441409173081301}
+  - component: {fileID: 8013695824001112668}
   m_Layer: 0
   m_Name: AltarGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5774702763160051411
 Transform:
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8013695824001112668
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832632178706562823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5175072696637969592, guid: 8083d90799702364fbfd6ed209189364, type: 3}
 --- !u!1 &3455792880212587673
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,12 +107,13 @@ GameObject:
   - component: {fileID: 5701271263988902856}
   - component: {fileID: 310220831443369119}
   - component: {fileID: 1427861104419008860}
+  - component: {fileID: 6324165343578015513}
   m_Layer: 0
   m_Name: Rail1.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5701271263988902856
 Transform:
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6324165343578015513
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455792880212587673}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6746389426977077230, guid: 8083d90799702364fbfd6ed209189364, type: 3}
 --- !u!1 &6349621206808742846
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +209,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8141279872082789279
 Transform:
@@ -302,12 +332,13 @@ GameObject:
   - component: {fileID: 6351474172499645421}
   - component: {fileID: 8036384914931225483}
   - component: {fileID: 3160973905553843268}
+  - component: {fileID: 5046125059509976201}
   m_Layer: 0
   m_Name: AltarBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6351474172499645421
 Transform:
@@ -372,3 +403,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5046125059509976201
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705109780653652669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8872061028067461932, guid: 8083d90799702364fbfd6ed209189364, type: 3}
