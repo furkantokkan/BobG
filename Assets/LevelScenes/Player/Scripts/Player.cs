@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class Player : Humanoid
 {
-
+    [Header("Stats")]
+    [SerializeField] int currentDamage = 2;
+    [SerializeField] int currentHealth;
+    [SerializeField] int maxHealth;
+    [SerializeField] int currentSpeed;
+    [SerializeField] int maxSpeed;
+    [SerializeField] int currentArmor;
+    [SerializeField] int maxArmor;
+    [SerializeField] int currentIncome;
     [Header("Values")]
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private float fireRate;
@@ -16,10 +24,21 @@ public class Player : Humanoid
     public Collider EnemyCollider { get; set; }
     private Vector2 direction => Joystick.Instance.direction;
 
+    private ProgressController progressController;
+
     private void Awake()
     {
         fireRateStorage = fireRate;
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
+        progressController = GetComponent<ProgressController>();
+    }
+    private void Start()
+    {
+        maxHealth = progressController.GetStat(Stat.HEALTH);
+        maxArmor = progressController.GetStat(Stat.ARMOR);
+        maxSpeed = progressController.GetStat(Stat.SPEED);
+
+        UpdateStats();
     }
 
     private void Update()
@@ -29,7 +48,14 @@ public class Player : Humanoid
         LookAtEnemy(EnemyCollider);
         JoystickMove();
     }
-
+    public void UpdateStats()
+    {
+        currentDamage = progressController.GetStat(Stat.POWER);
+        currentHealth = progressController.GetStat(Stat.HEALTH);
+        currentArmor = progressController.GetStat(Stat.ARMOR);
+        currentSpeed = progressController.GetStat(Stat.SPEED);
+        currentIncome = progressController.GetStat(Stat.INCOME);
+    }
     private void JoystickMove()
     {
         if (Joystick.Instance == null) return;

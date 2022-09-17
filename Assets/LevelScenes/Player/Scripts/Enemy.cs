@@ -17,6 +17,15 @@ public enum State
 
 public class Enemy : Humanoid
 {
+    [Header("Stats")]
+    [SerializeField] int currentDamage = 2;
+    [SerializeField] int currentHealth;
+    [SerializeField] int maxHealth;
+    [SerializeField] int currentSpeed;
+    [SerializeField] int maxSpeed;
+    [SerializeField] int currentArmor;
+    [SerializeField] int maxArmor;
+    [Header("Settings")]
     [SerializeField] private Transform bulletPoint;
     [Range(0, 1f)]
     [SerializeField] private float animationFirePosition = 1f;
@@ -30,10 +39,11 @@ public class Enemy : Humanoid
     [SerializeField] float chaseSpeed = 5f;
     [SerializeField] float tacticSpeed = 5.5f;
     [SerializeField] float tacticWaitTime = 5f;
-    [SerializeField] int damage = 2;
     [SerializeField] AnimatorOverrideController AnimatorOverrideController;
 
     [SerializeField] private AnimController meshAnimator;
+
+    private ProgressController progressController;
 
     float distanceToTarget = Mathf.Infinity;
 
@@ -60,10 +70,16 @@ public class Enemy : Humanoid
 
     private void Awake()
     {
+        progressController = GetComponent<ProgressController>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         animationFirePosition =
         fireRateStorage = animationFirePosition;
         tacticCounter = tacticWaitTime;
+    }
+    private void Start()
+    {
+        UpdateStats();
+        SetStats();
     }
 
     private void Update()
@@ -91,7 +107,7 @@ public class Enemy : Humanoid
                 return;
             }
             Destroy(other.gameObject);
-            healthBar.fillAmount -= damage;
+            healthBar.fillAmount -= currentDamage;
             if (healthBar.fillAmount <= 0)
             {
                 //LootBoxManager.Instance.LootBoxStage();
@@ -99,7 +115,23 @@ public class Enemy : Humanoid
             }
         }
     }
+    public void UpdateStats()
+    {
+        maxHealth = progressController.GetStat(Stat.HEALTH);
+        maxArmor = progressController.GetStat(Stat.ARMOR);
+        maxSpeed = progressController.GetStat(Stat.SPEED);
 
+        currentDamage = progressController.GetStat(Stat.POWER);
+        currentHealth = progressController.GetStat(Stat.HEALTH);
+        currentArmor = progressController.GetStat(Stat.ARMOR);
+        currentSpeed = progressController.GetStat(Stat.SPEED);
+    }
+
+    public void SetStats()
+    {
+        agent.speed = currentSpeed;
+
+    }
     private void StateSelector()
     {
         GetEnemyToAttack();

@@ -11145,8 +11145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRoot: {fileID: 1729091908294133355}
+  armorRoot: {fileID: 4019617222308817141}
   startingLevel: 1
-  characterClass: 0
+  characterClass: 1
   progression: {fileID: 11400000, guid: 267746f48833d674eb9dc04084f149f8, type: 2}
   levelUpParticule: {fileID: 0}
   incomeLevel: 0
@@ -11220,6 +11221,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibleRadius: 8
   healthBar: {fileID: 3641581224154652884}
+  currentDamage: 2
+  currentHealth: 0
+  maxHealth: 0
+  currentSpeed: 0
+  maxSpeed: 0
+  currentArmor: 0
+  maxArmor: 0
   bulletPoint: {fileID: 3641581224795874693}
   animationFirePosition: 0.507
   fireAnimationSpeed: 1
@@ -11232,7 +11240,6 @@ MonoBehaviour:
   chaseSpeed: 5
   tacticSpeed: 5.5
   tacticWaitTime: 15
-  damage: 0
   AnimatorOverrideController: {fileID: 0}
   meshAnimator: {fileID: 3641581224790824101}
   currentState: 0

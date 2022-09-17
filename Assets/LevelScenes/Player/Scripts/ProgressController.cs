@@ -7,6 +7,7 @@ public class ProgressController : MonoBehaviour
 {
     [Header("Attactments")]
     [SerializeField] private GameObject weaponRoot;
+    [SerializeField] private GameObject armorRoot;
     [Range(1, 99)]
     [SerializeField] private int startingLevel = 1;
     [SerializeField] CharacterClass characterClass;
@@ -81,6 +82,7 @@ public class ProgressController : MonoBehaviour
         }
 
         weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(powerLevel, characterClass, Stat.POWER));
+        armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(armorLevel, characterClass, Stat.ARMOR));
     }
     public void UpdateLevel(int newLevel, Stat newStat)
     {
@@ -112,6 +114,7 @@ public class ProgressController : MonoBehaviour
                 break;
             case Stat.ARMOR:
                 armorLevel = newLevel;
+                armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(newLevel, characterClass, newStat));
                 PlayerPrefs.SetInt("ArmorLevel", newLevel);
                 break;
             case Stat.SPEED:
@@ -127,6 +130,32 @@ public class ProgressController : MonoBehaviour
         UIManager.Instance.UpdateUpgradeUI();
         onLevelUp?.Invoke(newStat, newLevel);
         LevelUpEffect();
+    }
+
+    public int GetStat(Stat newStat)
+    {
+        int level = 0;
+
+        switch (newStat)
+        {
+            case Stat.INCOME:
+                level = incomeLevel;
+                break;
+            case Stat.POWER:
+                level = powerLevel;
+                break;
+            case Stat.ARMOR:
+                level = armorLevel;
+                break;
+            case Stat.SPEED:
+                level = speedLevel;
+                break;
+            case Stat.HEALTH:
+                level = healthLevel;
+                break;
+        }
+
+        return (int)progression.GetStat(newStat, characterClass, level);
     }
 
     private void LevelUpEffect()
