@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpwanManager : Singleton<SpwanManager>
+public class SpawnManager : Singleton<SpawnManager>
 {
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private GameObject[] enemys;
 
-    [SerializeField] private int enemySpawnCount = 10;
+    public int enemySpawnCount = 10;
 
     private bool onSpawnProcess = false;
 

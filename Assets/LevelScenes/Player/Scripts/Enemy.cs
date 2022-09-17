@@ -119,6 +119,7 @@ public class Enemy : Humanoid
                 UIManager.Instance.Coin += 5 * progressController.incomeLevel;
                 GetComponent<Enemy>().enabled = false;
                 GetComponent<CapsuleCollider>().enabled = false;
+                GameManager.Instance.deadEnemyCount += 1;
             }
         }
     }

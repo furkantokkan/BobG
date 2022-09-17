@@ -5,6 +5,7 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] GameObject StartP, InGameP, NextP, GameOverP;
     TextMeshProUGUI m_CoinText, m_LevelText;
+    [SerializeField] TextMeshProUGUI m_Enemy_Left;
     [SerializeField] Sprite MuteOn, MuteOff, TapticOn, TapticOff;
     public Image fillImage;
     GameObject m_Settings;
@@ -22,6 +23,7 @@ public class UIManager : Singleton<UIManager>
             m_Coin = value;
             m_CoinText.text = m_Coin.ToString();
             UpdateUpgradeUI();
+            m_Enemy_Left.text = "LEFT: " + (SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount).ToString();
         }
     }
 

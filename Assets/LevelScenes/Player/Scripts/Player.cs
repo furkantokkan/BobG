@@ -56,6 +56,10 @@ public class Player : Humanoid
 
     private void Update()
     {
+        if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame)
+        {
+            return;
+        }
         DetectEnemy();
         JoystickMove();
         if (EnemyCollider != null && Vector3.Distance(EnemyCollider.transform.position, transform.position) <= visibleRadius)

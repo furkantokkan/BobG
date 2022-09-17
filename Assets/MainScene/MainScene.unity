@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5213044, g: 0.8346864, b: 0.9269858, a: 1}
+  m_IndirectSpecularColor: {r: 0.52029264, g: 0.8344376, b: 0.92776936, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2346,6 +2346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CountDown: 5
   taptic: 1
+  deadEnemyCount: 0
   allEnemiesList: []
   _gamestate: 1
 --- !u!4 &911063982
@@ -3323,6 +3324,7 @@ MonoBehaviour:
   InGameP: {fileID: 1737582056}
   NextP: {fileID: 503092206}
   GameOverP: {fileID: 1685802764}
+  m_Enemy_Left: {fileID: 1401745844}
   MuteOn: {fileID: 21300000, guid: 0468e7878e916004d8eed5b3462a5487, type: 3}
   MuteOff: {fileID: 21300000, guid: dbece44421da872488ac60233cc16596, type: 3}
   TapticOn: {fileID: 21300000, guid: eaf1171167b74814492b2f88b58681cf, type: 3}

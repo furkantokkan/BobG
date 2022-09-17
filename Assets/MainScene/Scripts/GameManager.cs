@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     int asyncSceneIndex = 1;
     public bool taptic = true;
 
+    public int deadEnemyCount;
+
 
     public List<Enemy> allEnemiesList = new List<Enemy>();
     
