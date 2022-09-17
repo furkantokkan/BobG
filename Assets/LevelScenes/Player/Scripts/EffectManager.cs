@@ -26,4 +26,9 @@ public class EffectManager : MonoBehaviour
     {
         Skull.Play();
     }
+
+    public void test()
+    {
+        Skull.Play();
+    }
 }
