@@ -11201,7 +11201,7 @@ NavMeshAgent:
   m_AngularSpeed: 400
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 4.18
   m_BaseOffset: 0
@@ -33959,14 +33959,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
---- !u!198 &2184008448589300347 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19864276, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
-  m_PrefabInstance: {fileID: 2184008448607328431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2184008448607669883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480980, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  m_PrefabInstance: {fileID: 2184008448607328431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2184008448589300347 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19864276, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
   m_PrefabInstance: {fileID: 2184008448607328431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3178583058367596238

@@ -56,7 +56,7 @@ public class Player : Humanoid
 
     private void Update()
     {
-        if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame)
+        if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame || UIManager.Instance.upgradePanel.activeInHierarchy)
         {
             return;
         }
@@ -83,7 +83,6 @@ public class Player : Humanoid
             nextAttackTime = 0f;
             meshAnimator.SetFireAnimation(false);
         }
-        print(meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
     public void UpdateStats()
     {

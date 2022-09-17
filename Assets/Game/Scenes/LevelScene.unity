@@ -19082,7 +19082,7 @@ MonoBehaviour:
   spawnPoints: []
   enemys:
   - {fileID: 2876533429497603391, guid: b7c403a11223f814295a35153542766c, type: 3}
-  enemySpawnCount: 25
+  enemySpawnCount: 2
 --- !u!4 &505453046
 Transform:
   m_ObjectHideFlags: 0
@@ -20714,6 +20714,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 972027366}
     m_Modifications:
+    - target: {fileID: 232374161588704173, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 672836727886067346, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680243886925900289, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14000003
+      objectReference: {fileID: 0}
     - target: {fileID: 1832632178706562823, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -20721,6 +20733,10 @@ PrefabInstance:
     - target: {fileID: 3455792880212587673, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774702763160051411, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14000003
       objectReference: {fileID: 0}
     - target: {fileID: 5831506423798575545, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
       propertyPath: m_RootOrder
@@ -20781,6 +20797,10 @@ PrefabInstance:
     - target: {fileID: 6349621206808742846, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351474172499645421, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 6604102923869514499, guid: 910f23601cd7b274cbe6702d68263a32, type: 3}
       propertyPath: m_Name

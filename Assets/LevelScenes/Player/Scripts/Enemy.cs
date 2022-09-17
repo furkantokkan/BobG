@@ -147,6 +147,7 @@ public class Enemy : Humanoid
         if (target != null)
         {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
+            
         }
 
         if (tacticCounter > 0 && currentState == State.Fire)
@@ -181,6 +182,9 @@ public class Enemy : Humanoid
         {
             return;
         }
+
+        LookAtVector(agent.destination);
+
         switch (currentState)
         {
             case State.Search:
@@ -195,6 +199,7 @@ public class Enemy : Humanoid
                 }
                 break;
             case State.Chase:
+                LookAtEnemy(target.GetComponent<Collider>());
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 ChaseTheTarget();
@@ -294,19 +299,25 @@ public class Enemy : Humanoid
 
         Player player = FindObjectOfType<Player>();
 
-        if (player != null)
-        {
-            targetList.Add(player.transform);
-        }
+        float playerdistance = Vector3.Distance(player.transform.position, this.transform.position);
 
         foreach (Transform item in targetList)
         {
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
 
+            Debug.Log("Player Distacnce: " + distanceToEnemy + "EnemyDistance: " + distanceToEnemy);
             if (distanceToEnemy < enemyDistance)
             {
                 enemyDistance = distanceToEnemy;
-                target = item.transform;
+
+                if (playerdistance < distanceToEnemy)
+                {
+                    target = player.transform;
+                }
+                else
+                {
+                    target = item.transform;
+                }
             }
         }
     }
@@ -318,7 +329,6 @@ public class Enemy : Humanoid
         }
         agent.isStopped = true;
         agent.velocity = agent.velocity * 0.1f;
-        LookAtEnemy(target.GetComponent<Collider>());
         StartCoroutine(AttackAnimationRoutine(bulletPoint, transform));
     }
     private void ChaseTheTarget()
