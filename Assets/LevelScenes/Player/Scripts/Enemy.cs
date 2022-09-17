@@ -219,6 +219,7 @@ public class Enemy : Humanoid
                 MoveLeft();
                 break;
             case State.Fire:
+                LookAtEnemy(target.GetComponent<Collider>());
                 meshAnimator.SetFireAnimation(true);
                 meshAnimator.SetRunAnim(false);
                 AttackState();
@@ -337,9 +338,9 @@ public class Enemy : Humanoid
         {
             Vector3 agentTarget = new Vector3(agent.destination.x, transform.position.y, agent.destination.z);
 
-            agent.enabled = false;
-            transform.position = agentTarget;
-            agent.enabled = true;
+            //agent.enabled = false;
+            //transform.position = agentTarget;
+            //agent.enabled = true; 
 
             Invoke("Search", patrolWaitTime);
             isSearched = true;

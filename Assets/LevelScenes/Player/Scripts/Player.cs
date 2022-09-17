@@ -15,16 +15,29 @@ public class Player : Humanoid
     [SerializeField] int maxArmor;
     [SerializeField] int currentIncome;
     [Header("Values")]
+    [Range(0, 1f)]
+    [SerializeField] private float animationFirePosition = 1f;
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private float fireRate;
     [SerializeField] private Transform rotateRoot;
     [SerializeField] private float playerSpeed;
     EffectManager effectManager;
     private float fireRateStorage;
+
+    float distanceToTarget = Mathf.Infinity;
+
+    float enemyDistance;
+
     public Collider EnemyCollider { get; set; }
     private Vector2 direction => Joystick.Instance.direction;
 
+    private bool onAttack = false;
+
     private ProgressController progressController;
+
+    [SerializeField] private AnimController meshAnimator;
+
+    private float nextAttackTime = 0.0f;
 
     private void Awake()
     {
@@ -43,10 +56,30 @@ public class Player : Humanoid
 
     private void Update()
     {
-        Attack(bulletPoint, transform);
         DetectEnemy();
-        LookAtEnemy(EnemyCollider);
         JoystickMove();
+        if (EnemyCollider != null && Vector3.Distance(EnemyCollider.transform.position, transform.position) <= visibleRadius)
+        {
+            if (Joystick.Instance.direction == Vector2.zero)
+            {
+                meshAnimator.SetFireAnimation(true);
+                StartCoroutine(AttackRoutine(bulletPoint, transform));
+                LookAtEnemy(EnemyCollider);
+            }
+            else
+            {
+                onAttack = false;
+                nextAttackTime = 0f;
+                meshAnimator.SetFireAnimation(false);
+            }
+        }
+        else
+        {
+            onAttack = false;
+            nextAttackTime = 0f;
+            meshAnimator.SetFireAnimation(false);
+        }
+        print(meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
     public void UpdateStats()
     {
@@ -55,6 +88,24 @@ public class Player : Humanoid
         currentArmor = progressController.GetStat(Stat.ARMOR);
         currentSpeed = progressController.GetStat(Stat.SPEED);
         currentIncome = progressController.GetStat(Stat.INCOME);
+    }
+    private IEnumerator AttackRoutine(Transform point, Transform parrent)
+    {
+        if (onAttack)
+        {
+            yield break;
+        }
+        onAttack = true;
+        Debug.Log("Process Started Player");
+        
+        yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
+        meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime);
+        nextAttackTime += animationFirePosition;
+        Debug.Log("Is Attacking Player");
+        yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
+            meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
+        Attack(point, transform);
+        onAttack = false;
     }
     private void JoystickMove()
     {
@@ -66,26 +117,47 @@ public class Player : Humanoid
 
     protected override void Attack(Transform point, Transform parent)
     {
-        fireRate -= Time.deltaTime;
-        if (fireRate <= 0)
-        {
-            base.Attack(point, parent);
-            fireRate = fireRateStorage;
-        }
+        base.Attack(point, parent);
+        fireRate = fireRateStorage;
     }
     private void DetectEnemy()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);
-        for (int i = 0; i < colliders.Length; i++)
+        enemyDistance = float.MaxValue;
+
+        List<Transform> targetList = new List<Transform>();
+        foreach (Enemy item in GameManager.Instance.allEnemiesList)
         {
-            if (colliders[i].gameObject.layer == 8)
+            if (item == this)
             {
-                EnemyCollider = colliders[i];
+                continue;
+            }
+            targetList.Add(item.transform);
+        }
+
+
+        foreach (Transform item in targetList)
+        {
+            float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
+
+            if (distanceToEnemy < enemyDistance)
+            {
+                enemyDistance = distanceToEnemy;
+                EnemyCollider = item.GetComponent<Collider>();
             }
         }
-        if(EnemyCollider == null) return;
+
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);
+        //Debug.DrawRay(transform.position, visibleRadius * transform.forward, Color.red);
+        //for (int i = 0; i < colliders.Length; i++)
+        //{
+        //    if (colliders[i].gameObject.layer == 8)
+        //    {
+        //        EnemyCollider = colliders[i];
+        //    }
+        //}
+        if (EnemyCollider == null) return;
         var Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
-        //Circle.SetActive(true);
+        Circle.SetActive(true);
         Circle.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
