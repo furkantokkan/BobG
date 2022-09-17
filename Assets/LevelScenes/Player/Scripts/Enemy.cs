@@ -109,13 +109,16 @@ public class Enemy : Humanoid
                 return;
             }
             Destroy(other.gameObject);
-            healthBar.fillAmount -= currentDamage;
+            healthBar.fillAmount -= (float)currentDamage / maxHealth;
+            healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
                 effectManager.Death.Play();
                 UIManager.Instance.Coin += 5 * progressController.incomeLevel;
+                GetComponent<Enemy>().enabled = false;
+                GetComponent<CapsuleCollider>().enabled = false;
             }
         }
     }

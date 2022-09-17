@@ -4,7 +4,7 @@ public class EffectManager : MonoBehaviour
 {
     public ParticleSystem Lava, Death, Skull, Heal, Upgrade;
     public ParticleSystem[] Conffettis, Muzzles;
-
+    public GameObject Circle;
     public void FireEffect()
     {
         foreach (ParticleSystem muzzle in Muzzles)

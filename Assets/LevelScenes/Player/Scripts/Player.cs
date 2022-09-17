@@ -83,6 +83,10 @@ public class Player : Humanoid
                 EnemyCollider = colliders[i];
             }
         }
+        if(EnemyCollider == null) return;
+        var Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
+        //Circle.SetActive(true);
+        Circle.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,7 +98,7 @@ public class Player : Humanoid
                 return;
             }
             Destroy(other.gameObject);
-            healthBar.fillAmount -= 0.05f;
+            healthBar.fillAmount -= (float)currentDamage / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
