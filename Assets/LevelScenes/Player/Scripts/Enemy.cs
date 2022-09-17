@@ -67,14 +67,16 @@ public class Enemy : Humanoid
     private bool onAttackProcess = false;
 
     private float nextAttackTime = 0.0f;
+    
+    EffectManager effectManager;
 
     private void Awake()
     {
         progressController = GetComponent<ProgressController>();
         agent = gameObject.GetComponent<NavMeshAgent>();
-        animationFirePosition =
         fireRateStorage = animationFirePosition;
         tacticCounter = tacticWaitTime;
+        effectManager = transform.GetChild(0).GetComponent<EffectManager>();
     }
     private void Start()
     {
@@ -102,7 +104,7 @@ public class Enemy : Humanoid
     {
         if (other.CompareTag("Bullet"))
         {
-            if (other.GetComponent<Bullet>().sender == this.gameObject)
+            if (other.GetComponent<Bullet>().sender == gameObject)
             {
                 return;
             }
@@ -110,8 +112,10 @@ public class Enemy : Humanoid
             healthBar.fillAmount -= currentDamage;
             if (healthBar.fillAmount <= 0)
             {
-                //LootBoxManager.Instance.LootBoxStage();
-                Destroy(gameObject);
+                healthBar.transform.parent.gameObject.SetActive(false);
+                transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
+                effectManager.Death.Play();
+                UIManager.Instance.Coin += 5 * progressController.incomeLevel;
             }
         }
     }

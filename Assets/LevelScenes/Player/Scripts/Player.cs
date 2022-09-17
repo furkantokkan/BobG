@@ -117,7 +117,6 @@ public class Player : Humanoid
                 healthBar.transform.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
                 effectManager.Death.Play();
-
             }
         }
     }
