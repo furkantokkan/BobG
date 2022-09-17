@@ -18,7 +18,9 @@ public enum State
 public class Enemy : Humanoid
 {
     [SerializeField] private Transform bulletPoint;
-    [SerializeField] private float fireRate;
+    [Range(0, 1f)]
+    [SerializeField] private float animationFirePosition = 1f;
+    [SerializeField] private float fireAnimationSpeed = 1f;
     [SerializeField] float attackRange = 8f;
     [SerializeField] float turnSpeed = 15f;
     [SerializeField] float chaseRange = 5f;
@@ -52,11 +54,15 @@ public class Enemy : Humanoid
 
     private bool tacticExecute = false;
 
+    private bool onAttackProcess = false;
+
+    private float nextAttackTime = 0.0f;
+
     private void Awake()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-        fireRate =
-        fireRateStorage = fireRate;
+        animationFirePosition =
+        fireRateStorage = animationFirePosition;
         tacticCounter = tacticWaitTime;
     }
 
@@ -85,7 +91,7 @@ public class Enemy : Humanoid
                 return;
             }
             Destroy(other.gameObject);
-            healthBar.fillAmount -= 0.2f;
+            healthBar.fillAmount -= damage;
             if (healthBar.fillAmount <= 0)
             {
                 //LootBoxManager.Instance.LootBoxStage();
@@ -139,28 +145,42 @@ public class Enemy : Humanoid
         {
             case State.Search:
                 SearchNewPlaceToGo();
+                if (agent.velocity == Vector3.zero)
+                {
+                    meshAnimator.SetRunAnim(false);
+                }
+                else
+                {
+                    meshAnimator.SetRunAnim(true);
+                }
                 break;
             case State.Chase:
+                meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 ChaseTheTarget();
                 break;
             case State.GetBack:
+                meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 GetBack();
                 break;
             case State.MoveForward:
+                meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 MoveForward();
                 break;
             case State.MoveRight:
+                meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 MoveRight();
                 break;
             case State.MoveLeft:
+                meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 MoveLeft();
                 break;
             case State.Fire:
+                meshAnimator.SetFireAnimation(true);
                 meshAnimator.SetRunAnim(false);
                 AttackState();
                 break;
@@ -176,15 +196,20 @@ public class Enemy : Humanoid
 
     private IEnumerator AttackAnimationRoutine(Transform point, Transform parent)
     {
-        if (meshAnimator.anim.GetBool("IsFire") == true)
+        if (onAttackProcess)
         {
             yield break;
         }
-        meshAnimator.SetFireAnimation(true);
+        onAttackProcess = true;
+        Debug.Log("Process Started");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
-        meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
-        meshAnimator.SetFireAnimation(false);
+        meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime);
+        nextAttackTime += animationFirePosition;
+        Debug.Log("Is Attacking");
+        yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
+            meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
         Attack(point, parent);
+        onAttackProcess = false;
     }
 
     private bool DetectEnemy()
@@ -273,15 +298,11 @@ public class Enemy : Humanoid
         {
             Vector3 agentTarget = new Vector3(agent.destination.x, transform.position.y, agent.destination.z);
 
-            //agent.enabled = false;
-            //transform.position = agentTarget;
-            //agent.enabled = true;
-            if (agent.velocity == Vector3.zero)
-            {
-                meshAnimator.SetRunAnim(false);
-            }
-            Invoke("Search", patrolWaitTime);
+            agent.enabled = false;
+            transform.position = agentTarget;
+            agent.enabled = true;
 
+            Invoke("Search", patrolWaitTime);
             isSearched = true;
         }
     }
@@ -291,7 +312,6 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = patrolSpeed;
-        meshAnimator.SetRunAnim(true);
         agent.SetDestination(GetRandomPosition());
     }
 
