@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 1680243886925900289}
   - component: {fileID: 4421168362033515346}
   - component: {fileID: 4278348732265317381}
-  - component: {fileID: 8409837067797538468}
+  - component: {fileID: 7589902761442637931}
   m_Layer: 0
   m_Name: PurpleRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1680243886925900289
 Transform:
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50640549843597364}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.35355353, y: -0.6123724, z: -0.6123724, w: 0.3535535}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5831506423798575545}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -120}
 --- !u!33 &4421168362033515346
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8409837067797538468
-MeshCollider:
+--- !u!65 &7589902761442637931
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,10 +92,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4410128165811437485, guid: 8083d90799702364fbfd6ed209189364, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5344067, y: 60.602863, z: 0.35909015}
+  m_Center: {x: -0.000008898257, y: 32.53309, z: 0.17194967}
 --- !u!1 &1832632178706562823
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,13 +202,13 @@ GameObject:
   - component: {fileID: 232374161588704173}
   - component: {fileID: 1781518989406833423}
   - component: {fileID: 6120935995243239768}
-  - component: {fileID: 8390402697916200679}
+  - component: {fileID: 5955278541607011505}
   m_Layer: 0
   m_Name: GreenRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &232374161588704173
 Transform:
@@ -218,13 +217,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5016546237015069734}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0.00000008940696, z: 0.00000020841505, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5831506423798575545}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1781518989406833423
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -274,8 +273,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8390402697916200679
-MeshCollider:
+--- !u!65 &5955278541607011505
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -284,10 +283,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6227432129865837899, guid: 8083d90799702364fbfd6ed209189364, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5343893, y: 60.602833, z: 0.35908064}
+  m_Center: {x: 0.00000008940697, y: 32.533073, z: 0.17195465}
 --- !u!1 &6604102923869514499
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +435,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2726470030400273580
 Transform:
@@ -526,13 +524,13 @@ GameObject:
   - component: {fileID: 672836727886067346}
   - component: {fileID: 5536996923870390510}
   - component: {fileID: 7137567361612931603}
-  - component: {fileID: 7356558485022783182}
+  - component: {fileID: 6653896904389495503}
   m_Layer: 0
   m_Name: DirtRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &672836727886067346
 Transform:
@@ -541,13 +539,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8675661728006356328}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.35355344, y: 0.61237246, z: 0.61237246, w: 0.35355335}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5831506423798575545}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 120}
 --- !u!33 &5536996923870390510
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -597,8 +595,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7356558485022783182
-MeshCollider:
+--- !u!65 &6653896904389495503
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -607,7 +605,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 27135316157141544, guid: 8083d90799702364fbfd6ed209189364, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5343997, y: 60.602856, z: 0.35908532}
+  m_Center: {x: -0.0000011239999, y: 32.533085, z: 0.17195219}
