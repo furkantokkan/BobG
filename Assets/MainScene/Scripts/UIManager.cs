@@ -24,6 +24,10 @@ public class UIManager : Singleton<UIManager>
             m_CoinText.text = m_Coin.ToString();
             UpdateUpgradeUI();
             m_Enemy_Left.text = "LEFT: " + (SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount).ToString();
+            if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
+            {
+                GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+            }
         }
     }
 
