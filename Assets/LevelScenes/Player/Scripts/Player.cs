@@ -100,13 +100,18 @@ public class Player : Humanoid
         }
         onAttack = true;
         Debug.Log("Process Started Player");
-        
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
         meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime);
         nextAttackTime += animationFirePosition;
         Debug.Log("Is Attacking Player");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
+        if (EnemyCollider.enabled == false)
+        {
+            EnemyCollider = null;
+            onAttack = false;
+            yield break;
+        }
         Attack(point, transform, currentDamage);
         onAttack = false;
     }
@@ -145,7 +150,27 @@ public class Player : Humanoid
             if (distanceToEnemy < enemyDistance)
             {
                 enemyDistance = distanceToEnemy;
-                EnemyCollider = item.GetComponent<Collider>();
+
+                RaycastHit hit;
+                Vector3 fromPosition = transform.position + Vector3.up * 2;
+                Vector3 toPosition = item.transform.position + Vector3.up * 2;
+                Vector3 direction = toPosition - fromPosition;
+
+                Debug.DrawRay(fromPosition, direction, Color.red);
+
+                if (Physics.Raycast(fromPosition, direction, out hit))
+                {
+                    if (hit.collider.gameObject.tag != "Enemy")
+                    {
+                        print("Not Enemy");
+                        continue;
+                    }
+                    else
+                    {
+                        EnemyCollider = item.GetComponent<Collider>();
+                    }
+                }
+
             }
         }
 
@@ -172,7 +197,7 @@ public class Player : Humanoid
             {
                 return;
             }
-            healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor  < 5 ? 5 :
+            healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor < 5 ? 5 :
                 other.GetComponent<Bullet>().bulletDamage - currentArmor) / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             Destroy(other.gameObject);

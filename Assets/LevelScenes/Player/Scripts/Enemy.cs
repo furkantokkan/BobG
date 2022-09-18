@@ -118,9 +118,12 @@ public class Enemy : Humanoid
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
                 effectManager.Death.Play();
                 UIManager.Instance.Coin += 5 * progressController.incomeLevel;
-                GetComponent<Enemy>().enabled = false;
+                CancelInvoke("Search");
+                agent.isStopped = true;
+                agent.speed = 0f;
                 GetComponent<CapsuleCollider>().enabled = false;
                 GameManager.Instance.deadEnemyCount += 1;
+                enabled = false;
             }
         }
     }
@@ -311,13 +314,31 @@ public class Enemy : Humanoid
             {
                 enemyDistance = distanceToEnemy;
 
-                if (playerdistance < distanceToEnemy)
+                RaycastHit hit;
+                Vector3 fromPosition = transform.position + Vector3.up * 2;
+                Vector3 toPosition = item.transform.position + Vector3.up * 2;
+                Vector3 direction = toPosition - fromPosition;
+
+                Debug.DrawRay(fromPosition, direction, Color.red);
+
+                if (Physics.Raycast(fromPosition, direction, out hit))
                 {
-                    target = player.transform;
-                }
-                else
-                {
-                    target = item.transform;
+                    if (hit.collider.gameObject.tag != "Enemy")
+                    {
+                        print("Not Enemy");
+                        continue;
+                    }
+                    else
+                    {
+                        if (playerdistance < distanceToEnemy)
+                        {
+                            target = player.transform;
+                        }
+                        else
+                        {
+                            target = item.transform;
+                        }
+                    }
                 }
             }
         }
