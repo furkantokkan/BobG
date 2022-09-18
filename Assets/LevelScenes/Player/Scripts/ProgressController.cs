@@ -84,6 +84,11 @@ public class ProgressController : MonoBehaviour
         weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(powerLevel, characterClass, Stat.POWER));
         armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(armorLevel, characterClass, Stat.ARMOR));
     }
+
+    public void SetRandomStartingLevel()
+    {
+        startingLevel = UnityEngine.Random.Range(1, GameManager.MAX_LEVEL_INDEX);
+    }
     public void UpdateLevel(int newLevel, Stat newStat)
     {
         if (gameObject.tag != "Player")

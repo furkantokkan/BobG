@@ -77,6 +77,7 @@ public class Enemy : Humanoid
         fireRateStorage = animationFirePosition;
         tacticCounter = tacticWaitTime;
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
+        progressController.SetRandomStartingLevel();
     }
     private void Start()
     {
