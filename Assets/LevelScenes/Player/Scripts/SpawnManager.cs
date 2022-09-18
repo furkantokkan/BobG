@@ -45,6 +45,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
         clone.transform.SetParent(this.transform);
         clone.transform.GetChild(0).gameObject.SetActive(true);
+        clone.GetComponent<Enemy>().enabled = true;
         yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6);
         onSpawnProcess = false;
     }

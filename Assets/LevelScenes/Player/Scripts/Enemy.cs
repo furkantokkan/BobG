@@ -109,7 +109,8 @@ public class Enemy : Humanoid
                 return;
             }
             Destroy(other.gameObject);
-            healthBar.fillAmount -= (float)currentDamage / maxHealth;
+            healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor < 5 ? 5 :
+                other.GetComponent<Bullet>().bulletDamage - currentArmor) / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
@@ -235,9 +236,9 @@ public class Enemy : Humanoid
         }
     }
 
-    protected override void Attack(Transform point, Transform parent)
+    protected override void Attack(Transform point, Transform parent, int newDamage)
     {
-        base.Attack(point, parent);
+        base.Attack(point, parent, newDamage);
     }
 
     private IEnumerator AttackAnimationRoutine(Transform point, Transform parent)
@@ -254,7 +255,7 @@ public class Enemy : Humanoid
         Debug.Log("Is Attacking");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
-        Attack(point, parent);
+        Attack(point, parent, currentDamage);
         onAttackProcess = false;
     }
 

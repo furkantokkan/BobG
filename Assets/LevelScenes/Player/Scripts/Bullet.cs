@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
 
     public GameObject sender;
 
+    public int bulletDamage = 0;
+
     void Update()
     {
         transform.localPosition += transform.up * (bulletSpeed * Time.deltaTime);

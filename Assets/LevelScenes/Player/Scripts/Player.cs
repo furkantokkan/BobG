@@ -107,7 +107,7 @@ public class Player : Humanoid
         Debug.Log("Is Attacking Player");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
-        Attack(point, transform);
+        Attack(point, transform, currentDamage);
         onAttack = false;
     }
     private void JoystickMove()
@@ -118,9 +118,9 @@ public class Player : Humanoid
             rotateRoot.forward = new Vector3(Joystick.Instance.direction.x, 0f, Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
     }
 
-    protected override void Attack(Transform point, Transform parent)
+    protected override void Attack(Transform point, Transform parent, int newDamage)
     {
-        base.Attack(point, parent);
+        base.Attack(point, parent, newDamage);
         fireRate = fireRateStorage;
     }
     private void DetectEnemy()
@@ -172,9 +172,10 @@ public class Player : Humanoid
             {
                 return;
             }
-            Destroy(other.gameObject);
-            healthBar.fillAmount -= (float)currentDamage / maxHealth;
+            healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor  < 5 ? 5 :
+                other.GetComponent<Bullet>().bulletDamage - currentArmor) / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
+            Destroy(other.gameObject);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);

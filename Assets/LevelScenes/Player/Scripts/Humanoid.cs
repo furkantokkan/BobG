@@ -9,11 +9,12 @@ public class Humanoid : MonoBehaviour
     [SerializeField] protected Image healthBar;
     protected bool lockRotation;
 
-    protected virtual void Attack(Transform point, Transform parent)
+    protected virtual void Attack(Transform point, Transform parent, int damage)
     {
         var bullet = ObjectPool.Instance.GetPooledObject(0);
         bullet.transform.position = point.position;
         bullet.GetComponent<Bullet>().sender = parent.gameObject;
+        bullet.GetComponent<Bullet>().bulletDamage = damage;
         bullet.transform.localRotation = point.rotation * Quaternion.Euler(90, 0, 0);
     }
 
