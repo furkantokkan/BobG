@@ -32455,7 +32455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.067489386, g: 1, b: 0, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -33427,7 +33427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8181098854289423184
 Transform:
   m_ObjectHideFlags: 0
@@ -33959,14 +33959,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
---- !u!4 &2184008448607669883 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 480980, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
-  m_PrefabInstance: {fileID: 2184008448607328431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2184008448589300347 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19864276, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  m_PrefabInstance: {fileID: 2184008448607328431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2184008448607669883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 480980, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
   m_PrefabInstance: {fileID: 2184008448607328431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3178583058367596238
