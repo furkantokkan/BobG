@@ -47,7 +47,6 @@ public class UIManager : Singleton<UIManager>
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
         UpdateUpgradeUI();
-        Coin = 1000;
     }
     public void UpdateUpgradeUI()
     {

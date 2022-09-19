@@ -54,16 +54,9 @@ public class AnimController : MonoBehaviour
     }
     void SetState()
     {
-        switch (gunState)
-        {
-            case GunState.RunPistol:
-                anim.SetFloat("GunState", 0);
-                break;
-            case GunState.RunRifle:
-                anim.SetFloat("GunState", 1);
-                break;
-            default: anim.SetFloat("GunState", 0.5f);
-                break;
-        }
+        if (PlayerPrefs.GetInt("PowerLevel", 0) <= 6)
+            anim.SetFloat("GunState", 0);        
+        else anim.SetFloat("GunState", 1);;
+ 
     }
 }

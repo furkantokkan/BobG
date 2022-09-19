@@ -62,6 +62,8 @@ public class Player : Humanoid
         }
         DetectEnemy();
         JoystickMove();
+        if(EnemyCollider == null) return;
+        var Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
         if (EnemyCollider != null && Vector3.Distance(EnemyCollider.transform.position, transform.position) <= visibleRadius)
         {
             if (Joystick.Instance.direction == Vector2.zero)
@@ -76,12 +78,15 @@ public class Player : Humanoid
                 nextAttackTime = 0f;
                 meshAnimator.SetFireAnimation(false);
             }
+            Circle.SetActive(true);
+            Circle.GetComponent<MeshRenderer>().material.color = Color.red;
         }
         else
         {
             onAttack = false;
             nextAttackTime = 0f;
             meshAnimator.SetFireAnimation(false);
+            Circle.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
     public void UpdateStats()
@@ -173,20 +178,6 @@ public class Player : Humanoid
 
             }
         }
-
-        //Collider[] colliders = Physics.OverlapSphere(transform.position, visibleRadius);
-        //Debug.DrawRay(transform.position, visibleRadius * transform.forward, Color.red);
-        //for (int i = 0; i < colliders.Length; i++)
-        //{
-        //    if (colliders[i].gameObject.layer == 8)
-        //    {
-        //        EnemyCollider = colliders[i];
-        //    }
-        //}
-        if (EnemyCollider == null) return;
-        var Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
-        Circle.SetActive(true);
-        Circle.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     private void OnTriggerEnter(Collider other)

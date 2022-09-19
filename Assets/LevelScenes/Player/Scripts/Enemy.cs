@@ -115,9 +115,10 @@ public class Enemy : Humanoid
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
-                healthBar.transform.parent.gameObject.SetActive(false);
+                healthBar.transform.parent.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
                 effectManager.Death.Play();
+                effectManager.Circle.SetActive(false);
                 UIManager.Instance.Coin += 5 * progressController.incomeLevel;
                 CancelInvoke("Search");
                 agent.isStopped = true;
