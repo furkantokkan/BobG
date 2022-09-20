@@ -72,15 +72,9 @@ public class ProgressController : MonoBehaviour
             }
 
         }
-        else
-        {
-            incomeLevel = startingLevel;
-            powerLevel = startingLevel;
-            armorLevel = startingLevel;
-            speedLevel = startingLevel;
-            healthLevel = startingLevel;
-        }
-
+    }
+    private void Start()
+    {
         weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(powerLevel, characterClass, Stat.POWER));
         armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(armorLevel, characterClass, Stat.ARMOR));
     }
@@ -88,6 +82,13 @@ public class ProgressController : MonoBehaviour
     public void SetRandomStartingLevel()
     {
         startingLevel = UnityEngine.Random.Range(1, GameManager.MAX_LEVEL_INDEX);
+        incomeLevel = startingLevel;
+        powerLevel = startingLevel;
+        armorLevel = startingLevel;
+        speedLevel = startingLevel;
+        healthLevel = startingLevel;
+        weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(powerLevel, characterClass, Stat.POWER));
+        armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(armorLevel, characterClass, Stat.ARMOR));
     }
     public void UpdateLevel(int newLevel, Stat newStat)
     {

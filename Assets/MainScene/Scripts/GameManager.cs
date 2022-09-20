@@ -40,6 +40,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
+        OnGameStart();
     }
     void Update()
     {
@@ -64,7 +65,30 @@ public class GameManager : Singleton<GameManager>
             Gamestate = GAMESTATE.Ingame;
     }
     #region States
-    
+    private void OnGameStart()
+    {
+        switch (_gamestate)
+        {
+            case GAMESTATE.Start:
+                StartCoroutine(SpawnManager.Instance.SetSpawner());
+                deadEnemyCount = 0;
+                GameStart();
+                break;
+            case GAMESTATE.Ingame:
+                GameIngame();
+                break;
+            case GAMESTATE.Finish:
+                GameFinish();
+                break;
+            case GAMESTATE.GameOver:
+                GameOver();
+                break;
+            case GAMESTATE.Empty:
+                Empty();
+                break;
+        }
+
+    }
     void GameStart()
     {
         asyncSceneIndex = PlayerPrefs.GetInt("SaveScene",asyncSceneIndex);
@@ -98,6 +122,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
+        OnGameStart();
     }
     public void NextLevelButton()
     {
@@ -121,6 +146,7 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("SaveScene",asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
+        OnGameStart(); 
     }
     #endregion
     void OnValueChanged()

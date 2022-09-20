@@ -1356,15 +1356,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.81
+      value: 26.105082
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86000013
+      value: -0.6370265
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.96
+      value: 29.700653
       objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10715,6 +10715,10 @@ PrefabInstance:
       value: Flower03
       objectReference: {fileID: 0}
     - target: {fileID: 1911959503264934, guid: 69a615b518bb16941b5e849f52f50731, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911959503264934, guid: 69a615b518bb16941b5e849f52f50731, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -18762,53 +18766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4838038023361216, guid: 06f787df46997ab4dba391e08deaa9c0, type: 3}
   m_PrefabInstance: {fileID: 503683230}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &505453044
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 505453046}
-  - component: {fileID: 505453045}
-  m_Layer: 0
-  m_Name: SpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &505453045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505453044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 259876cfda5270240bcd4985106e9131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints: []
-  enemys:
-  - {fileID: 2876533429497603391, guid: b7c403a11223f814295a35153542766c, type: 3}
-  enemySpawnCount: 2
---- !u!4 &505453046
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505453044}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &506412848
 GameObject:
   m_ObjectHideFlags: 0
@@ -27642,7 +27599,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &717326970
 MonoBehaviour:

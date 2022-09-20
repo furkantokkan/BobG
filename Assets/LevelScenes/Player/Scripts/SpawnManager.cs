@@ -20,11 +20,16 @@ public class SpawnManager : Singleton<SpawnManager>
     Camera cam;
     Plane[] planes;
 
-    private IEnumerator Start()
+    public IEnumerator SetSpawner()
     {
+        yield return new WaitUntil(() => GeometryUtility.CalculateFrustumPlanes(Camera.main) != null);
         for (int i = 0; i < enemySpawnCount; i++)
         {
             yield return new WaitUntil(() => !onSpawnProcess);
+            if (GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish)
+            {
+                yield break;
+            }
             yield return SpawnEnemy();
         }
     }
@@ -43,10 +48,10 @@ public class SpawnManager : Singleton<SpawnManager>
             yield return null;
         }
 
-        clone.transform.SetParent(this.transform);
+        clone.transform.SetParent(ObjectPool.Instance.transform);
         clone.transform.GetChild(0).gameObject.SetActive(true);
         clone.GetComponent<Enemy>().enabled = true;
-        yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6);
+        yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6 || GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish);
         onSpawnProcess = false;
     }
     private bool IsCharacterNear(GameObject sender)

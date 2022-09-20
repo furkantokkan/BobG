@@ -23,11 +23,6 @@ public class UIManager : Singleton<UIManager>
             m_Coin = value;
             m_CoinText.text = m_Coin.ToString();
             UpdateUpgradeUI();
-            m_Enemy_Left.text = "LEFT: " + (SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount).ToString();
-            if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
-            {
-                GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
-            }
         }
     }
 
@@ -47,6 +42,14 @@ public class UIManager : Singleton<UIManager>
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
         UpdateUpgradeUI();
+    }
+    private void Update()
+    {
+        m_Enemy_Left.text = "LEFT: " + (SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount).ToString();
+        if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
+        {
+            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+        }
     }
     public void UpdateUpgradeUI()
     {

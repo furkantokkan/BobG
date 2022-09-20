@@ -67,8 +67,10 @@ public class Enemy : Humanoid
     private bool onAttackProcess = false;
 
     private float nextAttackTime = 0.0f;
-    
+
     EffectManager effectManager;
+
+    [SerializeField] List<Transform> targetList = new List<Transform>(); 
 
     private void Awake()
     {
@@ -79,16 +81,19 @@ public class Enemy : Humanoid
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
         progressController.SetRandomStartingLevel();
     }
-    private void Start()
+    IEnumerator Start()
     {
         UpdateStats();
         SetStats();
+        yield return new WaitUntil(() => GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame);
+        agent.SetDestination(GetRandomPosition());
     }
 
     private void Update()
     {
         StateSelector();
         StateExecute();
+        //meshAnimator.transform.localRotation = Quaternion.identity;
         healthBar.transform.parent.LookAt(Camera.main.transform);
     }
 
@@ -109,12 +114,15 @@ public class Enemy : Humanoid
             {
                 return;
             }
-            Destroy(other.gameObject);
             healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor < 5 ? 5 :
                 other.GetComponent<Bullet>().bulletDamage - currentArmor) / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
+                if (other.GetComponent<Bullet>().sender.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    enemy.target = null;
+                }
                 healthBar.transform.parent.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
                 effectManager.Death.Play();
@@ -127,6 +135,7 @@ public class Enemy : Humanoid
                 GameManager.Instance.deadEnemyCount += 1;
                 enabled = false;
             }
+            Destroy(other.gameObject);
         }
     }
     public void UpdateStats()
@@ -153,14 +162,13 @@ public class Enemy : Humanoid
         if (target != null)
         {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
-            
+
         }
 
         if (tacticCounter > 0 && currentState == State.Fire)
         {
             tacticCounter -= Time.deltaTime;
         }
-
         if (tacticCounter <= 0 && currentState == State.Fire && !tacticExecute)
         {
             currentState = GetRandomTactic();
@@ -175,8 +183,7 @@ public class Enemy : Humanoid
         {
             currentState = State.Fire;
         }
-        else if (currentState != State.MoveForward || currentState != State.GetBack || currentState != State.MoveLeft
-            || currentState != State.MoveRight)
+        else if (distanceToTarget >= chaseRange || !DetectEnemy())
         {
             currentState = State.Search;
         }
@@ -189,7 +196,10 @@ public class Enemy : Humanoid
             return;
         }
 
-        LookAtVector(agent.destination);
+        if (currentState != State.Fire)
+        {
+            LookAtVector(agent.destination);
+        }
 
         switch (currentState)
         {
@@ -203,38 +213,53 @@ public class Enemy : Humanoid
                 {
                     meshAnimator.SetRunAnim(true);
                 }
+                meshAnimator.SetFireAnimation(false);
+                onAttackProcess = false;
+                nextAttackTime = 0f;
                 break;
             case State.Chase:
-                LookAtEnemy(target.GetComponent<Collider>());
+                if (target != null)
+                {
+                    LookAtEnemy(target.GetComponent<Collider>());
+                }
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 ChaseTheTarget();
+                nextAttackTime = 0f;
                 break;
             case State.GetBack:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
+                nextAttackTime = 0f;
                 GetBack();
                 break;
             case State.MoveForward:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
+                nextAttackTime = 0f;
                 MoveForward();
                 break;
             case State.MoveRight:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
+                nextAttackTime = 0f;
                 MoveRight();
                 break;
             case State.MoveLeft:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
+                nextAttackTime = 0f;
                 MoveLeft();
                 break;
             case State.Fire:
-                LookAtEnemy(target.GetComponent<Collider>());
+                if (target != null)
+                {
+                    LookAtEnemy(target.GetComponent<Collider>());
+                }
                 meshAnimator.SetFireAnimation(true);
                 meshAnimator.SetRunAnim(false);
                 AttackState();
+                isSearched = false;
                 break;
             default:
                 break;
@@ -266,6 +291,11 @@ public class Enemy : Humanoid
 
     private bool DetectEnemy()
     {
+        if (target == null)
+        {
+            return false;
+        }
+
         if (distanceToTarget <= attackRange)
         {
             return true;
@@ -293,7 +323,7 @@ public class Enemy : Humanoid
     {
         enemyDistance = float.MaxValue;
 
-        List<Transform> targetList = new List<Transform>();
+        targetList = new List<Transform>();
         foreach (Enemy item in GameManager.Instance.allEnemiesList)
         {
             if (item == this)
@@ -304,6 +334,8 @@ public class Enemy : Humanoid
         }
 
         Player player = FindObjectOfType<Player>();
+
+        targetList.Add(player.transform);
 
         float playerdistance = Vector3.Distance(player.transform.position, this.transform.position);
 
@@ -325,19 +357,17 @@ public class Enemy : Humanoid
 
                 if (Physics.Raycast(fromPosition, direction, out hit))
                 {
-                    if (hit.collider.gameObject.tag != "Enemy")
+                    Debug.LogWarning("Tag:" + hit.collider.gameObject.tag);
+                    if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player"))
                     {
-                        print("Not Enemy");
-                        continue;
-                    }
-                    else
-                    {
+                        Debug.LogWarning("Waiting For Select");
                         if (playerdistance < distanceToEnemy)
                         {
                             target = player.transform;
                         }
                         else
                         {
+                            Debug.LogWarning("Selected: " + item.transform.name);
                             target = item.transform;
                         }
                     }
@@ -351,6 +381,7 @@ public class Enemy : Humanoid
         {
             return;
         }
+        agent.SetDestination(transform.position);
         agent.isStopped = true;
         agent.velocity = agent.velocity * 0.1f;
         StartCoroutine(AttackAnimationRoutine(bulletPoint, transform));
@@ -368,15 +399,13 @@ public class Enemy : Humanoid
 
     private void SearchNewPlaceToGo()
     {
-        if (agent.remainingDistance <= 0.1f && !isSearched ||
-                            !agent.hasPath && !isSearched)
+        if (agent.remainingDistance <= agent.stoppingDistance + 0.1f && !isSearched)
         {
             Vector3 agentTarget = new Vector3(agent.destination.x, transform.position.y, agent.destination.z);
 
             //agent.enabled = false;
             //transform.position = agentTarget;
-            //agent.enabled = true; 
-
+            //agent.enabled = true;
             Invoke("Search", patrolWaitTime);
             isSearched = true;
         }

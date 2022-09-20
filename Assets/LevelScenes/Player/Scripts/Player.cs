@@ -117,7 +117,7 @@ public class Player : Humanoid
             onAttack = false;
             yield break;
         }
-        Attack(point, transform, currentDamage);
+        Attack(point, parrent, currentDamage);
         onAttack = false;
     }
     private void JoystickMove()
@@ -165,12 +165,7 @@ public class Player : Humanoid
 
                 if (Physics.Raycast(fromPosition, direction, out hit))
                 {
-                    if (hit.collider.gameObject.tag != "Enemy")
-                    {
-                        print("Not Enemy");
-                        continue;
-                    }
-                    else
+                    if (hit.collider.CompareTag("Enemy"))
                     {
                         EnemyCollider = item.GetComponent<Collider>();
                     }

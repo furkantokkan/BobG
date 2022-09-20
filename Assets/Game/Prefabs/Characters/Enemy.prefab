@@ -11222,7 +11222,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 3
 --- !u!136 &6099717963987249468
 CapsuleCollider:
@@ -11252,7 +11252,7 @@ NavMeshAgent:
   m_Acceleration: 9
   avoidancePriority: 50
   m_AngularSpeed: 400
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -34014,14 +34014,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
---- !u!4 &2184008448607669883 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 480980, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
-  m_PrefabInstance: {fileID: 2184008448607328431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2184008448589300347 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19864276, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  m_PrefabInstance: {fileID: 2184008448607328431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2184008448607669883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 480980, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
   m_PrefabInstance: {fileID: 2184008448607328431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3178583058367596238
@@ -34577,13 +34577,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 685c97d007af49549b239b56b6d2000a, type: 3}
---- !u!4 &9149275175073677444 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 465406, guid: 685c97d007af49549b239b56b6d2000a, type: 3}
-  m_PrefabInstance: {fileID: 9149275175074011514}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &9149275175093043934 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19831716, guid: 685c97d007af49549b239b56b6d2000a, type: 3}
+  m_PrefabInstance: {fileID: 9149275175074011514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9149275175073677444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 465406, guid: 685c97d007af49549b239b56b6d2000a, type: 3}
   m_PrefabInstance: {fileID: 9149275175074011514}
   m_PrefabAsset: {fileID: 0}
