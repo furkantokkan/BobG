@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     public int bulletDamage = 0;
 
-    void Update()
+    void FixedUpdate()
     {
         transform.localPosition += transform.up * (bulletSpeed * Time.deltaTime);
     }

@@ -11234,7 +11234,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 4.3397512
   m_Direction: 1
   m_Center: {x: 0, y: 2.0698757, z: 0}
@@ -11296,6 +11296,7 @@ MonoBehaviour:
   AnimatorOverrideController: {fileID: 0}
   meshAnimator: {fileID: 3641581224790824101}
   currentState: 0
+  targetList: []
 --- !u!1 &2986136422886495553
 GameObject:
   m_ObjectHideFlags: 0
