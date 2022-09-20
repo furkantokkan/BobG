@@ -40,7 +40,27 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
-        OnGameStart();
+
+        switch (_gamestate)
+        {
+            case GAMESTATE.Start:
+                StartCoroutine(SpawnManager.Instance.SetSpawner());
+                deadEnemyCount = 0;
+                GameStart();
+                break;
+            case GAMESTATE.Ingame:
+                GameIngame();
+                break;
+            case GAMESTATE.Finish:
+                GameFinish();
+                break;
+            case GAMESTATE.GameOver:
+                GameOver();
+                break;
+            case GAMESTATE.Empty:
+                Empty();
+                break;
+        }
     }
     void Update()
     {
@@ -65,14 +85,17 @@ public class GameManager : Singleton<GameManager>
             Gamestate = GAMESTATE.Ingame;
     }
     #region States
-    private void OnGameStart()
+    private IEnumerator OnGameStart()
     {
+        yield return SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
+
         switch (_gamestate)
         {
             case GAMESTATE.Start:
                 StartCoroutine(SpawnManager.Instance.SetSpawner());
                 deadEnemyCount = 0;
                 GameStart();
+               Joystick.Instance.UseOnStart();
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
@@ -118,11 +141,10 @@ public class GameManager : Singleton<GameManager>
     }
     public void RestartButton()
     {
-        SceneManager.UnloadSceneAsync(asyncSceneIndex);
-        SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        OnGameStart();
+        SceneManager.UnloadSceneAsync(asyncSceneIndex);
+        StartCoroutine(OnGameStart());
     }
     public void NextLevelButton()
     {
@@ -130,7 +152,7 @@ public class GameManager : Singleton<GameManager>
         {
             SceneManager.UnloadSceneAsync(asyncSceneIndex);
             asyncSceneIndex = 1;
-            SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
+            StartCoroutine(OnGameStart());
         }
         else
         {
@@ -140,13 +162,12 @@ public class GameManager : Singleton<GameManager>
                 asyncSceneIndex += 1;                
             }
 
-            SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
+            StartCoroutine(OnGameStart());
         }
         UIManager.Instance.SetLevel();
         PlayerPrefs.SetInt("SaveScene",asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        OnGameStart(); 
     }
     #endregion
     void OnValueChanged()

@@ -142,11 +142,6 @@ public class Enemy : Humanoid
     }
     public void UpdateStats()
     {
-        currentDamage = 0;
-        currentHealth = 100000;
-        maxHealth = 100000000;
-        maxArmor = 100000000;
-        return;
         maxHealth = progressController.GetStat(Stat.HEALTH);
         maxArmor = progressController.GetStat(Stat.ARMOR);
         maxSpeed = progressController.GetStat(Stat.SPEED);

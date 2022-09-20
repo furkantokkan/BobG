@@ -22,7 +22,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
-        yield return new WaitUntil(() => GeometryUtility.CalculateFrustumPlanes(Camera.main) != null);
+       
         for (int i = 0; i < enemySpawnCount; i++)
         {
             yield return new WaitUntil(() => !onSpawnProcess);
@@ -38,7 +38,6 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         onSpawnProcess = true;
         GameObject enemy = GetRandomEnemy();
-
         GameObject clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
         while (IsCharacterNear(clone) || CharacterOnScreen(clone))
         {

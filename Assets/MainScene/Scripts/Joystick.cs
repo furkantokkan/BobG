@@ -12,8 +12,8 @@ public class Joystick : SingletonPersistent<Joystick> {
     public bool active;
 
     void Start(){
-        ShowHide(false);
-        active = false;
+
+        UseOnStart();
         EventManager.Instance.OnMoved += JoystickInput;
     }
 
@@ -21,7 +21,11 @@ public class Joystick : SingletonPersistent<Joystick> {
     {
         EventManager.Instance.OnMoved -= JoystickInput;
     }
-
+    public void UseOnStart()
+    {
+        ShowHide(false);
+        active = false;
+    }
     void JoystickInput(){
         Vector2 pos = Input.mousePosition;
 		
