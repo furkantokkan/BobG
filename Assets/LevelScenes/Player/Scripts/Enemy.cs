@@ -13,6 +13,7 @@ public enum State
     MoveRight,
     MoveLeft,
     Fire,
+    Tactic
 }
 
 public class Enemy : Humanoid
@@ -77,15 +78,16 @@ public class Enemy : Humanoid
         progressController = GetComponent<ProgressController>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         fireRateStorage = animationFirePosition;
+        tacticWaitTime = UnityEngine.Random.Range(5, 15f);
         tacticCounter = tacticWaitTime;
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
         progressController.SetRandomStartingLevel();
     }
     IEnumerator Start()
     {
+        yield return new WaitUntil(() => GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame);
         UpdateStats();
         SetStats();
-        yield return new WaitUntil(() => GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame);
         agent.SetDestination(GetRandomPosition());
     }
 
@@ -140,6 +142,11 @@ public class Enemy : Humanoid
     }
     public void UpdateStats()
     {
+        currentDamage = 0;
+        currentHealth = 100000;
+        maxHealth = 100000000;
+        maxArmor = 100000000;
+        return;
         maxHealth = progressController.GetStat(Stat.HEALTH);
         maxArmor = progressController.GetStat(Stat.ARMOR);
         maxSpeed = progressController.GetStat(Stat.SPEED);
@@ -153,7 +160,6 @@ public class Enemy : Humanoid
     public void SetStats()
     {
         agent.speed = currentSpeed;
-
     }
     private void StateSelector()
     {
@@ -174,6 +180,12 @@ public class Enemy : Humanoid
             currentState = GetRandomTactic();
             tacticExecute = true;
         }
+
+        if (tacticExecute)
+        {
+            return;
+        }
+
         else if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0)
         {
             currentState = State.Chase;
@@ -226,11 +238,13 @@ public class Enemy : Humanoid
                 meshAnimator.SetRunAnim(true);
                 ChaseTheTarget();
                 nextAttackTime = 0f;
+                onAttackProcess = false;
                 break;
             case State.GetBack:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 nextAttackTime = 0f;
+                onAttackProcess = false;
                 GetBack();
                 break;
             case State.MoveForward:
@@ -238,17 +252,20 @@ public class Enemy : Humanoid
                 meshAnimator.SetRunAnim(true);
                 nextAttackTime = 0f;
                 MoveForward();
+                onAttackProcess = false;
                 break;
             case State.MoveRight:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 nextAttackTime = 0f;
+                onAttackProcess = false;
                 MoveRight();
                 break;
             case State.MoveLeft:
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
                 nextAttackTime = 0f;
+                onAttackProcess = false;
                 MoveLeft();
                 break;
             case State.Fire:
@@ -434,8 +451,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = tacticSpeed;
-        agent.SetDestination(transform.position - transform.right * 5);
-        StartCoroutine(CheckIsOnTheTargetPoint());
+        StartCoroutine(CheckIsOnTheTargetPoint(transform.position - transform.right * 15));
     }
 
     private void MoveRight()
@@ -443,8 +459,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = tacticSpeed;
-        agent.SetDestination(transform.position + transform.right * 5);
-        StartCoroutine(CheckIsOnTheTargetPoint());
+        StartCoroutine(CheckIsOnTheTargetPoint(transform.position + transform.right * 15));
     }
 
     public void MoveForward()
@@ -452,8 +467,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = tacticSpeed;
-        agent.SetDestination(transform.position + transform.forward * 5);
-        StartCoroutine(CheckIsOnTheTargetPoint());
+        StartCoroutine(CheckIsOnTheTargetPoint(transform.position + transform.forward * 15));
     }
 
     public void GetBack()
@@ -461,8 +475,7 @@ public class Enemy : Humanoid
         agent.isStopped = false;
         isSearched = false;
         agent.speed = tacticSpeed;
-        agent.SetDestination(transform.position - transform.forward * 15);
-        StartCoroutine(CheckIsOnTheTargetPoint());
+        StartCoroutine(CheckIsOnTheTargetPoint(transform.position - transform.forward * 15));
     }
 
     public State GetRandomTactic()
@@ -487,9 +500,14 @@ public class Enemy : Humanoid
         }
     }
 
-    public IEnumerator CheckIsOnTheTargetPoint()
+    public IEnumerator CheckIsOnTheTargetPoint(Vector3 dest)
     {
-        yield return new WaitUntil(() => agent.remainingDistance <= 0.1f);
+        currentState = State.Tactic;
+        do
+        {
+            agent.SetDestination(dest);
+            yield return null;
+        } while (agent.remainingDistance > agent.stoppingDistance + 0.1f);
         tacticExecute = false;
         tacticCounter = tacticWaitTime;
     }
