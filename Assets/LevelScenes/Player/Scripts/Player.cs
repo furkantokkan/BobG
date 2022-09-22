@@ -103,11 +103,9 @@ public class Player : Humanoid
             yield break;
         }
         onAttack = true;
-        Debug.Log("Process Started Player");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
         meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime);
         nextAttackTime += animationFirePosition;
-        Debug.Log("Is Attacking Player");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
         if (EnemyCollider.enabled == false)

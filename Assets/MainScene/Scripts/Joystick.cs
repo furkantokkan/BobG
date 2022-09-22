@@ -14,6 +14,10 @@ public class Joystick : SingletonPersistent<Joystick> {
     void Start(){
 
         UseOnStart();
+    }
+
+    private void OnEnable()
+    {
         EventManager.Instance.OnMoved += JoystickInput;
     }
 
@@ -28,8 +32,9 @@ public class Joystick : SingletonPersistent<Joystick> {
     }
     void JoystickInput(){
         Vector2 pos = Input.mousePosition;
-		
+      
         if(Input.GetMouseButtonDown(0)){
+            Debug.Log("Tıkladı");
             ShowHide(true);
             active = true;
             knob.position = pos;

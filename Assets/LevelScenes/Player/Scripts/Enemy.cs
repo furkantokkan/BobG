@@ -290,11 +290,9 @@ public class Enemy : Humanoid
             yield break;
         }
         onAttackProcess = true;
-        Debug.Log("Process Started");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
         meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime);
         nextAttackTime += animationFirePosition;
-        Debug.Log("Is Attacking");
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
         Attack(point, parent, currentDamage);

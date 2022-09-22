@@ -80,12 +80,10 @@ public class SpawnManager : Singleton<SpawnManager>
         objCollider = sender.GetComponent<Collider>();
         if (GeometryUtility.TestPlanesAABB(planes, objCollider.bounds))
         {
-            Debug.Log(" has been detected!");
             return true;
         }
         else
         {
-            Debug.Log("Nothing has been detected");
             return false;
         }
     }
