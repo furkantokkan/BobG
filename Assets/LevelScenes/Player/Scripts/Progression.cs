@@ -101,7 +101,6 @@ public class Progression : ScriptableObject
                     newKey.statID = progressionStat.stat;
 
                     levelLookupTable[newKey] = progressionStat.weaponID;
-                    Debug.Log("Index: " + i + " / WeaponID: " + progressionStat.weaponID[i]);
                 }
             }
 

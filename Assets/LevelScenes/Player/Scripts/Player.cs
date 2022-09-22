@@ -29,7 +29,6 @@ public class Player : Humanoid
     float enemyDistance;
 
     public Collider EnemyCollider { get; set; }
-    private Vector2 direction => Joystick.Instance.direction;
 
     private bool onAttack = false;
 
@@ -122,10 +121,8 @@ public class Player : Humanoid
     }
     private void JoystickMove()
     {
-        Debug.LogWarning("Check Null");
         if (Joystick.Instance == null) return;
         transform.position += (Vector3.right * Joystick.Instance.direction.x + Vector3.forward * Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
-        Debug.LogWarning("Not Null");
         if (Joystick.Instance.active)
             rotateRoot.forward = new Vector3(Joystick.Instance.direction.x, 0f, Joystick.Instance.direction.y) * (Time.deltaTime * playerSpeed);
     }

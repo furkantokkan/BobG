@@ -354,8 +354,6 @@ public class Enemy : Humanoid
         foreach (Transform item in targetList)
         {
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
-
-            Debug.Log("Player Distacnce: " + distanceToEnemy + "EnemyDistance: " + distanceToEnemy);
             if (distanceToEnemy < enemyDistance)
             {
                 enemyDistance = distanceToEnemy;
@@ -369,17 +367,14 @@ public class Enemy : Humanoid
 
                 if (Physics.Raycast(fromPosition, direction, out hit))
                 {
-                    Debug.LogWarning("Tag:" + hit.collider.gameObject.tag);
                     if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player"))
                     {
-                        Debug.LogWarning("Waiting For Select");
                         if (playerdistance < distanceToEnemy)
                         {
                             target = player.transform;
                         }
                         else
                         {
-                            Debug.LogWarning("Selected: " + item.transform.name);
                             target = item.transform;
                         }
                     }

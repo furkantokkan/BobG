@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Image = UnityEngine.UI.Image;
-
+using UnityEngine.UI;
 public class Humanoid : MonoBehaviour
 {
     [SerializeField] protected float visibleRadius;
@@ -30,9 +29,5 @@ public class Humanoid : MonoBehaviour
     {
         lockRotation = true;
         transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
-    }
-    protected void Move()
-    {
-
     }
 }

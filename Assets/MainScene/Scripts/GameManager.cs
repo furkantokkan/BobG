@@ -148,26 +148,16 @@ public class GameManager : Singleton<GameManager>
     }
     public void NextLevelButton()
     {
-        if (SceneManager.sceneCountInBuildSettings == asyncSceneIndex + 1)
+        if (SceneManager.sceneCount > 1)
         {
             SceneManager.UnloadSceneAsync(asyncSceneIndex);
             asyncSceneIndex = 1;
-            StartCoroutine(OnGameStart());
-        }
-        else
-        {
-            if (SceneManager.sceneCount > 1)
-            {
-                SceneManager.UnloadSceneAsync(asyncSceneIndex);
-                asyncSceneIndex += 1;                
-            }
-
-            StartCoroutine(OnGameStart());
         }
         UIManager.Instance.SetLevel();
         PlayerPrefs.SetInt("SaveScene",asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
+        StartCoroutine(OnGameStart());
     }
     #endregion
     void OnValueChanged()
