@@ -107,6 +107,10 @@ public class Enemy : Humanoid
     private void OnDisable()
     {
         GameManager.Instance.allEnemiesList.Remove(this);
+        if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
+        {
+            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
