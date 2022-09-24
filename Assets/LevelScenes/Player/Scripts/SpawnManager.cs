@@ -20,6 +20,14 @@ public class SpawnManager : Singleton<SpawnManager>
     Camera cam;
     Plane[] planes;
 
+    private int level;
+
+    private void Awake()
+    {
+       level = PlayerPrefs.GetInt("Level", 1);
+        enemySpawnCount = level * 2;
+    }
+
     public IEnumerator SetSpawner()
     {
        

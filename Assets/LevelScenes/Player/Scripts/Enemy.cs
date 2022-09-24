@@ -71,23 +71,27 @@ public class Enemy : Humanoid
 
     EffectManager effectManager;
 
-    [SerializeField] List<Transform> targetList = new List<Transform>(); 
+    [SerializeField] List<Transform> targetList = new List<Transform>();
+
+    private Player player;
 
     private void Awake()
     {
         progressController = GetComponent<ProgressController>();
+        player = FindObjectOfType<Player>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         fireRateStorage = animationFirePosition;
         tacticWaitTime = UnityEngine.Random.Range(5, 15f);
         tacticCounter = tacticWaitTime;
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
-        progressController.SetRandomStartingLevel();
     }
     IEnumerator Start()
     {
         yield return new WaitUntil(() => GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame);
+        progressController.SetRandomStartingLevel();
         UpdateStats();
         SetStats();
+        progressController.SetPrefabs();
         agent.SetDestination(GetRandomPosition());
     }
 
@@ -347,7 +351,7 @@ public class Enemy : Humanoid
             targetList.Add(item.transform);
         }
 
-        Player player = FindObjectOfType<Player>();
+        
 
         targetList.Add(player.transform);
 

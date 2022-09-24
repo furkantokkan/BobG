@@ -13,9 +13,8 @@ public class GameManager : Singleton<GameManager>
 
     public int deadEnemyCount;
 
-
     public List<Enemy> allEnemiesList = new List<Enemy>();
-    
+
     #region GameState
     public enum GAMESTATE
     {
