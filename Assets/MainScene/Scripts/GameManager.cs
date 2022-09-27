@@ -67,6 +67,7 @@ public class GameManager : Singleton<GameManager>
         {
             case GAMESTATE.Start:
                 GameStart();
+                deadEnemyCount = 0;
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
