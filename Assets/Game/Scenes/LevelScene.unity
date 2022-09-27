@@ -1542,6 +1542,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MineBiomeBuild
       objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -38192,6 +38208,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1029609935324600108, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029609935324600108, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029609935324600108, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029609935324600108, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509960717608859257, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509960717608859257, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509960717608859257, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509960717608859257, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3464825039102254534, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -38240,9 +38288,169 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3529371066526258811, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529371066526258811, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529371066526258811, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529371066526258811, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475739744673288471, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475739744673288471, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475739744673288471, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475739744673288471, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6439549425933525773, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946218535, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946218535, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946218535, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946218535, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946235351, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946235351, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946235351, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439549425946235351, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546291463163176113, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546291463163176113, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546291463163176113, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546291463163176113, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730129700265679444, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730129700265679444, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730129700265679444, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730129700265679444, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022021230, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022021230, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022021230, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022021230, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022053656, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022053656, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022053656, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844379888022053656, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962186699, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962186699, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962186699, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962186699, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962203975, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962203975, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962203975, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730030538962203975, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21a7a58ab3b840b8b4994aa37549c48, type: 3}
@@ -52663,6 +52871,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockBiomeBuild
       objectReference: {fileID: 0}
+    - target: {fileID: 7026945634644758845, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026945634644758845, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026945634644758845, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026945634644758845, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf52a4a9f5154374cb3db3b904933d2a, type: 3}
 --- !u!1001 &1263089145
@@ -65391,6 +65615,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MineBiomeBuild (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383677266206561368, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2386662816995153071, guid: 4489d751779ea8d42bdfd9078ebf078a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -74641,6 +74881,22 @@ PrefabInstance:
     - target: {fileID: 549811730308844827, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514107775896575320, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514107775896575320, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514107775896575320, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514107775896575320, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3741067736640814951, guid: ad8279256aebc5449a0a58d0b82a38dd, type: 3}
       propertyPath: m_Name
@@ -91074,9 +91330,137 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131100, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131100, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131100, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131100, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131848, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131848, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131848, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262131848, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262150518, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262150518, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262150518, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262150518, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262568994, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262568994, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262568994, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262568994, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262572066, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262572066, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262572066, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765987915262572066, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8065587315049711171, guid: df5826734877d428e80557b3832d3f5a, type: 3}
       propertyPath: m_Name
       value: Drop
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688107770, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688107770, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688107770, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688107770, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688112156, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688112156, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688112156, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033688112156, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033689343352, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033689343352, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033689343352, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318802033689343352, guid: df5826734877d428e80557b3832d3f5a, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5826734877d428e80557b3832d3f5a, type: 3}
