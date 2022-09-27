@@ -30,7 +30,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
-       
+        yield return new WaitForEndOfFrame();
         for (int i = 0; i < enemySpawnCount; i++)
         {
             yield return new WaitUntil(() => !onSpawnProcess);

@@ -71,6 +71,8 @@ public class ProgressController : MonoBehaviour
                 healthLevel = startingLevel;
             }
 
+            weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(powerLevel, characterClass, Stat.POWER));
+            armorRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(armorLevel, characterClass, Stat.ARMOR));
         }
     }
     public void SetRandomStartingLevel()
