@@ -22,14 +22,10 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private int level;
 
-    private void Awake()
-    {
-       level = PlayerPrefs.GetInt("Level", 1);
-        enemySpawnCount = level * 2;
-    }
-
     public IEnumerator SetSpawner()
     {
+        level = PlayerPrefs.GetInt("Level", 1);
+        enemySpawnCount = level * 2;
         yield return new WaitForEndOfFrame();
         for (int i = 0; i < enemySpawnCount; i++)
         {
@@ -85,6 +81,10 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         cam = Camera.main;
         planes = GeometryUtility.CalculateFrustumPlanes(cam);
+        if (planes == null)
+        {
+            return false;
+        }
         objCollider = sender.GetComponent<Collider>();
         if (GeometryUtility.TestPlanesAABB(planes, objCollider.bounds))
         {
