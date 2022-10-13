@@ -27,20 +27,26 @@ MonoBehaviour:
   CustomArea: 
   gameKey:
   - 257ba85029fbbd2f331a286795ccef45
+  - 257ba85029fbbd2f331a286795ccef45
   secretKey:
+  - 9606a36e98c850f8a92e439fef1bbba799ed62ea
   - 9606a36e98c850f8a92e439fef1bbba799ed62ea
   Build:
   - 0.1
+  - 0.1
   SelectedPlatformOrganization:
   - Aztech Games
+  - 
   SelectedPlatformStudio:
   - Aztech Games
+  - 
   SelectedPlatformGame:
   - BOBG
-  SelectedPlatformGameID: db620300
-  SelectedOrganization: 01000000
-  SelectedStudio: 01000000
-  SelectedGame: 01000000
+  - 
+  SelectedPlatformGameID: db620300ffffffff
+  SelectedOrganization: 0100000000000000
+  SelectedStudio: 0100000000000000
+  SelectedGame: 0100000000000000
   NewVersion: 7.3.24
   Changes: '7.3.24
 
@@ -58,13 +64,73 @@ MonoBehaviour:
   UseManualSessionHandling: 0
   SendExampleGameDataToMyGame: 0
   InternetConnectivity: 0
-  CustomDimensions01: []
-  CustomDimensions02: []
-  CustomDimensions03: []
+  CustomDimensions01:
+  - 001
+  - 002
+  - 003
+  - 004
+  - 005
+  - 006
+  - 007
+  - 008
+  - 009
+  - 010
+  - 011
+  - 012
+  - 013
+  - 014
+  - 015
+  - 016
+  - 017
+  - 018
+  - 019
+  - 020
+  CustomDimensions02:
+  - Z
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  CustomDimensions03:
+  - V1
+  - V2
+  - V3
+  - V4
+  - V5
+  - V6
+  - V7
+  - V8
+  - V9
+  - V10
+  - V11
+  - V12
+  - V13
+  - V14
+  - V15
+  - V16
+  - V17
+  - V18
+  - V19
+  - V20
   ResourceItemTypes: []
   ResourceCurrencies: []
   LastCreatedGamePlatform: 1
-  Platforms: 08000000
+  Platforms: 080000000b000000
   CurrentInspectorState: 1
   ClosedHints: 
   DisplayHints: 0
@@ -83,7 +149,7 @@ MonoBehaviour:
   iosIcon: {fileID: 0}
   macIcon: {fileID: 0}
   windowsPhoneIcon: {fileID: 0}
-  UsePlayerSettingsBuildNumber: 0
+  UsePlayerSettingsBuildNumber: 1
   SubmitErrors: 1
   NativeErrorReporting: 0
   MaxErrorCount: 10
@@ -92,7 +158,7 @@ MonoBehaviour:
   IncludeGooglePlay: 1
   FpsCriticalThreshold: 20
   FpsCirticalSubmitInterval: 1
-  PlatformFoldOut: 01
+  PlatformFoldOut: 0101
   CustomDimensions01FoldOut: 0
   CustomDimensions02FoldOut: 0
   CustomDimensions03FoldOut: 0

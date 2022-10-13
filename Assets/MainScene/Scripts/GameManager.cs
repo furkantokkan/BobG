@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Collections;
+using HomaGames.HomaBelly;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
@@ -8,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     public const int MAX_LEVEL_INDEX = 15;
 
     public float CountDown = 5;
-    int asyncSceneIndex = 1;
+    int asyncSceneIndex = 2;
     public bool taptic = true;
 
     public int deadEnemyCount;
@@ -33,6 +34,24 @@ public class GameManager : Singleton<GameManager>
         {
             _gamestate = value;
             UIManager.Instance.PanelController(_gamestate);
+            StateEvents();
+        }
+    }
+
+    void StateEvents()
+    {
+        switch (_gamestate)
+        {
+            case GAMESTATE.Start: DefaultAnalytics.LevelStarted(PlayerPrefs.GetInt("Level", 1));
+                break;
+            case GAMESTATE.Ingame: DefaultAnalytics.GameplayStarted();
+                break;
+            case GAMESTATE.Finish: DefaultAnalytics.LevelCompleted();
+                break;
+            case GAMESTATE.GameOver: DefaultAnalytics.LevelFailed();
+                break;
+            case GAMESTATE.Empty:
+                break;
         }
     }
     #endregion
@@ -151,7 +170,7 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.sceneCount > 1)
         {
             SceneManager.UnloadSceneAsync(asyncSceneIndex);
-            asyncSceneIndex = 1;
+            asyncSceneIndex = 2;
         }
         UIManager.Instance.SetLevel();
         PlayerPrefs.SetInt("SaveScene",asyncSceneIndex);
