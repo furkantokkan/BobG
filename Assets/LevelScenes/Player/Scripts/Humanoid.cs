@@ -14,7 +14,7 @@ public class Humanoid : MonoBehaviour
         bullet.transform.position = point.position;
         bullet.GetComponent<Bullet>().sender = parent.gameObject;
         bullet.GetComponent<Bullet>().bulletDamage = damage;
-        bullet.transform.localRotation = point.rotation * Quaternion.Euler(90, 0, 0);
+        bullet.transform.forward = parent.transform.GetChild(0).transform.forward;
     }
 
     protected void LookAtEnemy(Collider enemy)

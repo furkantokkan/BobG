@@ -24,4 +24,9 @@ public class UpgradePanel : MonoBehaviour
     public Button speedButton;
     public Button healthButton;
 
+    private void OnEnable()
+    {
+        UIManager.Instance.UpdateUpgradeUI();
+    }
+
 }

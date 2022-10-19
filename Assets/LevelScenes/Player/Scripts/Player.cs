@@ -14,6 +14,7 @@ public class Player : Humanoid
     [SerializeField] int currentArmor;
     [SerializeField] int maxArmor;
     [SerializeField] int currentIncome;
+    [SerializeField] Weapon currentWeapon;
     [Header("Values")]
     [Range(0, 1f)]
     [SerializeField] private float animationFirePosition = 1f;
@@ -29,6 +30,8 @@ public class Player : Humanoid
     float enemyDistance;
 
     public Collider EnemyCollider { get; set; }
+
+    public Enemy target;
 
     private bool onAttack = false;
 
@@ -95,6 +98,7 @@ public class Player : Humanoid
         currentArmor = progressController.GetStat(Stat.ARMOR);
         currentSpeed = progressController.GetStat(Stat.SPEED);
         currentIncome = progressController.GetStat(Stat.INCOME);
+        bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
     }
     private IEnumerator AttackRoutine(Transform point, Transform parrent)
     {
@@ -114,7 +118,11 @@ public class Player : Humanoid
             onAttack = false;
             yield break;
         }
-        Attack(point, parrent, currentDamage);
+        if (Joystick.Instance.direction == Vector2.zero)
+        {
+            Attack(point, parrent, currentDamage);
+            target = EnemyCollider.GetComponent<Enemy>();
+        }
         onAttack = false;
     }
     private void JoystickMove()

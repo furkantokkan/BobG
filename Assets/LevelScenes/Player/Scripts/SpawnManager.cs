@@ -24,6 +24,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
+        GameManager.Instance.allEnemiesList.Clear();
         level = PlayerPrefs.GetInt("Level", 1);
         enemySpawnCount = level * 2;
         yield return new WaitForEndOfFrame();

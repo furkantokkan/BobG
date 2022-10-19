@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
+    public Weapon currentWeapon;
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -13,6 +14,11 @@ public class Root : MonoBehaviour
                 continue;
             }
             transform.GetChild(i).GetComponent<Weapon>().id = i;
+
+            if (transform.GetChild(i).gameObject.activeInHierarchy)
+            {
+                currentWeapon = transform.GetChild(i).GetComponent<Weapon>();
+            }
         }
     }
     public void ActivateObject(int index)
@@ -22,6 +28,7 @@ public class Root : MonoBehaviour
             if (i == index)
             {
                 transform.GetChild(i).gameObject.SetActive(true);
+                currentWeapon = transform.GetChild(i).GetComponent<Weapon>();
             }
             else
             {

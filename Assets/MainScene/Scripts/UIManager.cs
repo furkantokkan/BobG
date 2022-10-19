@@ -41,7 +41,6 @@ public class UIManager : Singleton<UIManager>
         m_Settings = InGameP.transform.GetChild(2).GetChild(0).gameObject;
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
-        UpdateUpgradeUI();
     }
     private void Update()
     {

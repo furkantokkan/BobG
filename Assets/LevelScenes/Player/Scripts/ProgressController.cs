@@ -144,6 +144,11 @@ public class ProgressController : MonoBehaviour
         LevelUpEffect();
     }
 
+    public Weapon GetCurrentWeapon()
+    {
+       return weaponRoot.GetComponent<Root>().currentWeapon;
+    }
+
     public int GetStat(Stat newStat)
     {
         int level = 0;

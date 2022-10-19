@@ -93,6 +93,7 @@ public class Enemy : Humanoid
         SetStats();
         progressController.SetPrefabs();
         agent.SetDestination(GetRandomPosition());
+        bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
     }
 
     private void Update()
@@ -188,8 +189,7 @@ public class Enemy : Humanoid
         {
             return;
         }
-
-        else if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0)
+        else if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0 || target == player && tacticCounter > 0 && distanceToTarget > attackRange)
         {
             currentState = State.Chase;
 
@@ -198,8 +198,16 @@ public class Enemy : Humanoid
         {
             currentState = State.Fire;
         }
-        else if (distanceToTarget >= chaseRange || !DetectEnemy())
+        else if (distanceToTarget >= chaseRange || !DetectEnemy() )
         {
+            if (player != null && target != null)
+            {
+                if (target.transform == player.transform)
+                {
+                    currentState = State.Chase;
+                    return;
+                }
+            }
             currentState = State.Search;
         }
     }
@@ -213,7 +221,7 @@ public class Enemy : Humanoid
 
         if (currentState != State.Fire)
         {
-            LookAtVector(agent.destination);
+            LookAtVector(transform.GetChild(0).forward);
         }
 
         switch (currentState)
@@ -303,7 +311,11 @@ public class Enemy : Humanoid
         nextAttackTime += animationFirePosition;
         yield return new WaitUntil(() => !meshAnimator.anim.IsInTransition(0) &&
             meshAnimator.anim.GetCurrentAnimatorStateInfo(0).IsTag("AttackAnim") && meshAnimator.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= nextAttackTime + (nextAttackTime - 1f));
-        Attack(point, parent, currentDamage);
+
+        if (agent.isStopped)
+        {
+            Attack(point, parent, currentDamage);
+        }
         onAttackProcess = false;
     }
 
@@ -339,6 +351,17 @@ public class Enemy : Humanoid
 
     private void GetEnemyToAttack()
     {
+        if (player.target == this)
+        {
+            target = player.transform;
+            if (!DetectEnemy())
+            {
+                currentState = State.Chase;
+            }
+            return;
+        }
+
+
         enemyDistance = float.MaxValue;
 
         targetList = new List<Transform>();
