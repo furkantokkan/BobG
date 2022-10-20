@@ -1534,6 +1534,7 @@ MonoBehaviour:
   enemys:
   - {fileID: 2876533429497603391, guid: b7c403a11223f814295a35153542766c, type: 3}
   enemySpawnCount: 2
+  onSpawnProcess: 0
 --- !u!4 &505453046
 Transform:
   m_ObjectHideFlags: 0
