@@ -11044,7 +11044,7 @@ MonoBehaviour:
   fireAnimationSpeed: 1
   attackRange: 8
   turnSpeed: 15
-  chaseRange: 20
+  chaseRange: 40
   patrolRadius: 34.48
   patrolWaitTime: 2
   patrolSpeed: 4

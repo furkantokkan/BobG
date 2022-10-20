@@ -11,7 +11,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public int enemySpawnCount = 10;
 
-    private bool onSpawnProcess = false;
+    public bool onSpawnProcess = false;
 
 
     GameObject obj;

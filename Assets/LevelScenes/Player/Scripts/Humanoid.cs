@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Humanoid : MonoBehaviour
 {
-    [SerializeField] protected float visibleRadius;
+    public float visibleRadius;
     [SerializeField] protected Image healthBar;
     protected bool lockRotation;
 
@@ -22,12 +22,18 @@ public class Humanoid : MonoBehaviour
         if (enemy != null)
         {
             lockRotation = true;
-            transform.GetChild(0).LookAt(enemy.transform);
+            Vector3 dir = enemy.transform.position - transform.position;
+            dir.y = 0f;
+            transform.GetChild(0).transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.LookRotation(dir), Time.time * 10f);
         }
     }
     protected void LookAtVector(Vector3 target)
     {
         lockRotation = true;
-        transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
+        Vector3 dir = target - transform.position;
+        dir.y = 0f;
+        transform.GetChild(0).transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(dir), Time.time * 10f);
     }
 }

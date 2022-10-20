@@ -63,7 +63,9 @@ public class GameManager : Singleton<GameManager>
         {
             case GAMESTATE.Start:
                 StartCoroutine(SpawnManager.Instance.SetSpawner());
+                SpawnManager.Instance.onSpawnProcess = false;
                 deadEnemyCount = 0;
+                GameManager.Instance.allEnemiesList.Clear();
                 GameStart();
                 break;
             case GAMESTATE.Ingame:
@@ -112,7 +114,9 @@ public class GameManager : Singleton<GameManager>
         {
             case GAMESTATE.Start:
                 StartCoroutine(SpawnManager.Instance.SetSpawner());
+                SpawnManager.Instance.onSpawnProcess = false;
                 deadEnemyCount = 0;
+                GameManager.Instance.allEnemiesList.Clear();
                 GameStart();
                Joystick.Instance.UseOnStart();
                 break;

@@ -94,6 +94,7 @@ public class Enemy : Humanoid
         progressController.SetPrefabs();
         agent.SetDestination(GetRandomPosition());
         bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
+        chaseRange = player.visibleRadius;
     }
 
     private void Update()
@@ -198,16 +199,16 @@ public class Enemy : Humanoid
         {
             currentState = State.Fire;
         }
-        else if (distanceToTarget >= chaseRange || !DetectEnemy() )
+        else if (distanceToTarget >= chaseRange)
         {
-            if (player != null && target != null)
-            {
-                if (target.transform == player.transform)
-                {
-                    currentState = State.Chase;
-                    return;
-                }
-            }
+            //if (player != null && target != null)
+            //{
+            //    if (target.transform == player.transform)
+            //    {
+            //        currentState = State.Chase;
+            //        return;
+            //    }
+            //}
             currentState = State.Search;
         }
     }
@@ -216,12 +217,14 @@ public class Enemy : Humanoid
     {
         if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame)
         {
+            meshAnimator.SetRunAnim(false);
+            meshAnimator.SetFireAnimation(false);
             return;
         }
 
-        if (currentState != State.Fire)
+        if (currentState != State.Fire || currentState != State.Chase)
         {
-            LookAtVector(transform.GetChild(0).forward);
+            LookAtVector(agent.destination);
         }
 
         switch (currentState)
@@ -243,7 +246,11 @@ public class Enemy : Humanoid
             case State.Chase:
                 if (target != null)
                 {
-                    LookAtEnemy(target.GetComponent<Collider>());
+                    if (currentState != State.GetBack ||
+                        currentState != State.MoveForward)
+                    {
+                        LookAtEnemy(target.GetComponent<Collider>());
+                    }
                 }
                 meshAnimator.SetFireAnimation(false);
                 meshAnimator.SetRunAnim(true);
@@ -521,12 +528,19 @@ public class Enemy : Humanoid
 
     public IEnumerator CheckIsOnTheTargetPoint(Vector3 dest)
     {
-        currentState = State.Tactic;
         do
         {
+            if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame)
+            {
+                agent.isStopped = true;
+                agent.speed = 0f;
+                break;
+            }
+            currentState = State.Tactic;
             agent.SetDestination(dest);
+            LookAtVector(agent.destination);
             yield return null;
-        } while (agent.remainingDistance > agent.stoppingDistance + 0.1f);
+        } while (agent.remainingDistance > agent.stoppingDistance);
         tacticExecute = false;
         tacticCounter = tacticWaitTime;
     }
