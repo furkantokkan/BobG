@@ -115,8 +115,13 @@ public class Enemy : Humanoid
         GameManager.Instance.allEnemiesList.Remove(this);
         if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
         {
-            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+            Invoke("Timer",3f);
         }
+    }
+
+    void Timer()
+    {
+        GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
     }
     private void OnTriggerEnter(Collider other)
     {
