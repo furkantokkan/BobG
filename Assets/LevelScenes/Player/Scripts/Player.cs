@@ -60,6 +60,7 @@ public class Player : Humanoid
     {
         if (GameManager.Instance.Gamestate != GameManager.GAMESTATE.Ingame || UIManager.Instance.upgradePanel.activeInHierarchy)
         {
+            meshAnimator.SetFireAnimation(false);
             return;
         }
         DetectEnemy();

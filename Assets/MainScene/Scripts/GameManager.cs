@@ -26,10 +26,10 @@ public class GameManager : Singleton<GameManager>
         Empty
     }
     [OnValueChanged("OnValueChanged")]
-    [SerializeField]GAMESTATE _gamestate;
+    [SerializeField] GAMESTATE _gamestate;
     public GAMESTATE Gamestate
     {
-        get { return _gamestate;}
+        get { return _gamestate; }
         set
         {
             _gamestate = value;
@@ -42,13 +42,17 @@ public class GameManager : Singleton<GameManager>
     {
         switch (_gamestate)
         {
-            case GAMESTATE.Start: DefaultAnalytics.LevelStarted(PlayerPrefs.GetInt("Level", 1));
+            case GAMESTATE.Start:
+                DefaultAnalytics.LevelStarted(PlayerPrefs.GetInt("Level", 1));
                 break;
-            case GAMESTATE.Ingame: DefaultAnalytics.GameplayStarted();
+            case GAMESTATE.Ingame:
+                DefaultAnalytics.GameplayStarted();
                 break;
-            case GAMESTATE.Finish: DefaultAnalytics.LevelCompleted();
+            case GAMESTATE.Finish:
+                DefaultAnalytics.LevelCompleted();
                 break;
-            case GAMESTATE.GameOver: DefaultAnalytics.LevelFailed();
+            case GAMESTATE.GameOver:
+                DefaultAnalytics.LevelFailed();
                 break;
             case GAMESTATE.Empty:
                 break;
@@ -62,11 +66,7 @@ public class GameManager : Singleton<GameManager>
         switch (_gamestate)
         {
             case GAMESTATE.Start:
-                StartCoroutine(SpawnManager.Instance.SetSpawner());
-                SpawnManager.Instance.onSpawnProcess = false;
-                deadEnemyCount = 0;
-                GameManager.Instance.allEnemiesList.Clear();
-                GameStart();
+                StartCoroutine(OnGameStart());
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
@@ -87,8 +87,6 @@ public class GameManager : Singleton<GameManager>
         switch (_gamestate)
         {
             case GAMESTATE.Start:
-                GameStart();
-                deadEnemyCount = 0;
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
@@ -99,7 +97,8 @@ public class GameManager : Singleton<GameManager>
             case GAMESTATE.GameOver:
                 GameOver();
                 break;
-            case GAMESTATE.Empty: Empty();
+            case GAMESTATE.Empty:
+                Empty();
                 break;
         }
         if (Input.anyKeyDown && Gamestate == GAMESTATE.Start)
@@ -108,17 +107,21 @@ public class GameManager : Singleton<GameManager>
     #region States
     private IEnumerator OnGameStart()
     {
+        asyncSceneIndex = PlayerPrefs.GetInt("SaveScene", asyncSceneIndex);
+
+        if (SceneManager.sceneCount > 2)
+        {
+            yield break;
+        }
+
         yield return SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
 
         switch (_gamestate)
         {
             case GAMESTATE.Start:
                 StartCoroutine(SpawnManager.Instance.SetSpawner());
-                SpawnManager.Instance.onSpawnProcess = false;
                 deadEnemyCount = 0;
-                GameManager.Instance.allEnemiesList.Clear();
-                GameStart();
-               Joystick.Instance.UseOnStart();
+                Joystick.Instance.UseOnStart();
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
@@ -135,21 +138,16 @@ public class GameManager : Singleton<GameManager>
         }
 
     }
-    void GameStart()
-    {
-        asyncSceneIndex = PlayerPrefs.GetInt("SaveScene",asyncSceneIndex);
-        if(SceneManager.sceneCount < 2)
-            SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
-    }
+
     void GameIngame()
     {
-   
+
     }
     void GameFinish()
     {
         CountDown -= Time.deltaTime;
         UIManager.Instance.fillImage.fillAmount = Mathf.Lerp(UIManager.Instance.fillImage.fillAmount,
-            UIManager.Instance._fill, Time.deltaTime*.9f);
+            UIManager.Instance._fill, Time.deltaTime * .9f);
     }
     void GameOver()
     {
@@ -177,7 +175,7 @@ public class GameManager : Singleton<GameManager>
             asyncSceneIndex = 2;
         }
         UIManager.Instance.SetLevel();
-        PlayerPrefs.SetInt("SaveScene",asyncSceneIndex);
+        PlayerPrefs.SetInt("SaveScene", asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
         StartCoroutine(OnGameStart());
