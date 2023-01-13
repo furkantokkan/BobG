@@ -34,30 +34,9 @@ public class GameManager : Singleton<GameManager>
         {
             _gamestate = value;
             UIManager.Instance.PanelController(_gamestate);
-            StateEvents();
         }
     }
 
-    void StateEvents()
-    {
-        switch (_gamestate)
-        {
-            case GAMESTATE.Start:
-                DefaultAnalytics.LevelStarted(PlayerPrefs.GetInt("Level", 1));
-                break;
-            case GAMESTATE.Ingame:
-                DefaultAnalytics.GameplayStarted();
-                break;
-            case GAMESTATE.Finish:
-                DefaultAnalytics.LevelCompleted();
-                break;
-            case GAMESTATE.GameOver:
-                DefaultAnalytics.LevelFailed();
-                break;
-            case GAMESTATE.Empty:
-                break;
-        }
-    }
     #endregion
     void Start()
     {
