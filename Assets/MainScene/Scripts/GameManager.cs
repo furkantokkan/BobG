@@ -1,7 +1,6 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Collections;
-using HomaGames.HomaBelly;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
@@ -9,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     public const int MAX_LEVEL_INDEX = 15;
 
     public float CountDown = 5;
-    int asyncSceneIndex = 2;
+    int asyncSceneIndex = 1;
     public bool taptic = true;
 
     public int deadEnemyCount;
@@ -100,7 +99,10 @@ public class GameManager : Singleton<GameManager>
             case GAMESTATE.Start:
                 StartCoroutine(SpawnManager.Instance.SetSpawner());
                 deadEnemyCount = 0;
-                Joystick.Instance.UseOnStart();
+                if (Joystick.Instance != null)
+                {
+                    Joystick.Instance.UseOnStart();
+                }
                 break;
             case GAMESTATE.Ingame:
                 GameIngame();
