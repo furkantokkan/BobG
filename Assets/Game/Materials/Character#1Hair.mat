@@ -9,8 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Character#1Hair
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
-  m_ShaderKeywords: _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_ALBEDO
-    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_CEL _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS
+  m_ShaderKeywords: _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
+    _MK_EMISSION _MK_EMISSION_MAP _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_BANDED
+    _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_RIM_DEFAULT _MK_SPECULAR_ISOTROPIC
     _MK_THRESHOLD_MAP _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -60,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3c4bc07d8aca55643a762b284f882686, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GoochRamp:
@@ -155,12 +156,12 @@ Material:
     - _BlendSrc: 1
     - _Brightness: 1.02
     - _BumpScale: 1
-    - _ColorGrading: 1
+    - _ColorGrading: 0
     - _Contrast: 0.93
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DiffuseSmoothness: 0.108
-    - _DiffuseThresholdOffset: 0.408
+    - _DiffuseThresholdOffset: 0
     - _Dissolve: 0
     - _DissolveAmount: 0.5
     - _DissolveBorderSize: 0.25
@@ -181,10 +182,10 @@ Material:
     - _IridescenceSize: 1.19
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
-    - _Light: 1
-    - _LightBands: 4
-    - _LightBandsScale: 0.5
-    - _LightThreshold: 0.392
+    - _Light: 2
+    - _LightBands: 3
+    - _LightBandsScale: 0
+    - _LightThreshold: 0
     - _Metallic: 0
     - _Mode: 0
     - _NormalMapIntensity: 1
@@ -196,20 +197,20 @@ Material:
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0.23
     - _OutlineSize: 50
-    - _OutlineTab: 1
+    - _OutlineTab: 0
     - _Parallax: 0.02
     - _ReceiveShadows: 1
     - _RenderFace: 2
     - _RenderPriority: 0
-    - _Rim: 0
-    - _RimSize: 1.39
+    - _Rim: 1
+    - _RimSize: 1.29
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.355
     - _Saturation: 0.94
     - _SketchMapScale: 1
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
-    - _Specular: 0
+    - _Specular: 1
     - _SpecularHighlights: 1
     - _SpecularIntensity: 1
     - _SpecularSmoothness: 0
@@ -223,9 +224,9 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 0
-    - _ThresholdMapScale: 1
+    - _ThresholdMapScale: 0
     - _UVSec: 0
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0.05
@@ -237,14 +238,14 @@ Material:
     - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+    - _GoochBrightColor: {r: 1, g: 0.9935048, b: 0.9009434, a: 1}
+    - _GoochDarkColor: {r: 0.3573048, g: 0.25, b: 0.5, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.375, g: 0.45666417, b: 0.5, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
     - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}
   m_BuildTextureStacks: []
