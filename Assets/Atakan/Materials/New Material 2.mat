@@ -10,7 +10,7 @@ Material:
   m_Name: New Material 2
   m_Shader: {fileID: 4800000, guid: 733fefdcde0d35f4b822d2935d5a22f4, type: 3}
   m_ShaderKeywords: _MK_ARTISTIC_ANIMATION_STUTTER _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
-    _MK_LIGHT_CEL
+    _MK_LIGHT_CEL _MK_RIM_DEFAULT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -185,7 +185,7 @@ Material:
     - _ReceiveShadows: 0
     - _RenderFace: 2
     - _RenderPriority: 0
-    - _Rim: 0
+    - _Rim: 1
     - _RimSize: 0.72
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
@@ -218,15 +218,15 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 0.72136825, b: 0.0039215684, a: 1}
-    - _Color: {r: 1, g: 0.72136825, b: 0.0039215684, a: 1}
+    - _AlbedoColor: {r: 1, g: 0.8333334, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.8333334, b: 0, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0.17749566, g: 0.12775901, b: 0.31132078, a: 1}
+    - _GoochDarkColor: {r: 0.71062344, g: 0.6084906, b: 1, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 1, g: 0.3310715, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 0.9160186, b: 0, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}
