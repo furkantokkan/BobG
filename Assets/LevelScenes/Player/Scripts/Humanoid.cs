@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Humanoid : MonoBehaviour
 {
     public float visibleRadius;
-    [SerializeField] protected Image healthBar;
+    [SerializeField] public Image healthBar;
     protected bool lockRotation;
 
     protected virtual void Attack(Transform point, Transform parent, int damage)

@@ -7,7 +7,10 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/MainScene/MainScene.unity
-    guid: a2e8d3e0a9d7e904985f11ad48fae30a
+    guid: 8f3d0faaa8cd15d4aa1d1c5e6bd6fa11
+  - enabled: 1
+    path: Assets/Game/Scenes/ZombieScene.unity
+    guid: b9ced70426a8d0944bda88a9d85c6c94
   - enabled: 1
     path: Assets/Game/Scenes/PvpScene.unity
     guid: 76800b5eb1d4f2149abd70f765912c1a

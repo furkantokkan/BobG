@@ -24,6 +24,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
+        /*
         GameManager.Instance.allEnemiesList.Clear();
         onSpawnProcess = false;
         level = PlayerPrefs.GetInt("Level", 1);
@@ -38,6 +39,8 @@ public class SpawnManager : Singleton<SpawnManager>
             }
             yield return SpawnEnemy();
         }
+        */
+        yield return null;
     }
 
     private IEnumerator SpawnEnemy()
