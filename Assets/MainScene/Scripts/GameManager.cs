@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     public int deadEnemyCount;
 
-    public List<Enemy> allEnemiesList = new List<Enemy>();
+    public List<GameObject> allEnemiesList = new List<GameObject>();
 
     #region GameState
     public enum GAMESTATE

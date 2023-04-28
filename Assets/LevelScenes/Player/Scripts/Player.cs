@@ -32,7 +32,7 @@ public class Player : Humanoid
 
     public Collider EnemyCollider { get; set; }
 
-    public Zombie target;
+    public GameObject target;
 
     private bool onAttack = false;
 
@@ -43,7 +43,6 @@ public class Player : Humanoid
     private float nextAttackTime = 0.0f;
 
     List<Zombie> allZombies = new List<Zombie>();
-
 
     private void Awake()
     {
@@ -70,7 +69,11 @@ public class Player : Humanoid
         DetectEnemy();
         JoystickMove();
         if(EnemyCollider == null) return;
-        //var Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
+        GameObject Circle = null;
+        if (EnemyCollider.GetComponentInChildren<EffectManager>() != null)
+        {
+             Circle = EnemyCollider.GetComponentInChildren<EffectManager>().Circle;
+        }
         if (EnemyCollider != null && Vector3.Distance(EnemyCollider.transform.position, transform.position) <= visibleRadius)
         {
             if (Joystick.Instance.direction == Vector2.zero)
@@ -85,15 +88,21 @@ public class Player : Humanoid
                 nextAttackTime = 0f;
                 meshAnimator.SetFireAnimation(false);
             }
-            //Circle.SetActive(true);
-            //Circle.GetComponent<MeshRenderer>().material.color = Color.red;
+            if (Circle != null)
+            {
+                Circle.SetActive(true);
+                Circle.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
         }
         else
         {
             onAttack = false;
             nextAttackTime = 0f;
             meshAnimator.SetFireAnimation(false);
-            //Circle.GetComponent<MeshRenderer>().material.color = Color.white;
+            if (Circle != null)
+            {
+                Circle.GetComponent<MeshRenderer>().material.color = Color.white;
+            }
         }
     }
     public void UpdateStats()
@@ -126,7 +135,7 @@ public class Player : Humanoid
         if (Joystick.Instance.direction == Vector2.zero)
         {
             Attack(point, parrent, currentDamage);
-            target = EnemyCollider.GetComponent<Zombie>();
+            target = EnemyCollider.gameObject;
         }
         onAttack = false;
     }
@@ -147,64 +156,54 @@ public class Player : Humanoid
     {
         #region zombie
 
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, visibleRadius, transform.forward, 2f, LayerMask.GetMask("Enemies"));
-        foreach (RaycastHit item in hits)
-        {
-            enemyDistance = float.MaxValue;
-
-            float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
-
-            if (distanceToEnemy < enemyDistance)
-            {
-                enemyDistance = distanceToEnemy;
-
-                EnemyCollider = item.transform.GetComponent<Collider>();
-                target = item.transform.GetComponent<Zombie>();
-            }
-        }
-        if (hits.Length <= 0)
-        {
-            return;
-        }
-        #endregion
-        //enemyDistance = float.MaxValue;
-
-        //List<Transform> targetList = new List<Transform>();
-        //foreach (Enemy item in GameManager.Instance.allEnemiesList)
+        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, visibleRadius, transform.forward, 2f, LayerMask.GetMask("Enemies"));
+        //foreach (RaycastHit item in hits)
         //{
-        //    if (item == this)
-        //    {
-        //        continue;
-        //    }
-        //    targetList.Add(item.transform);
-        //}
+        //    enemyDistance = float.MaxValue;
 
-
-        //foreach (Transform item in targetList)
-        //{
         //    float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
 
         //    if (distanceToEnemy < enemyDistance)
         //    {
         //        enemyDistance = distanceToEnemy;
 
-        //        RaycastHit hit;
-        //        Vector3 fromPosition = transform.position + Vector3.up * 2;
-        //        Vector3 toPosition = item.transform.position + Vector3.up * 2;
-        //        Vector3 direction = toPosition - fromPosition;
-
-        //        Debug.DrawRay(fromPosition, direction, Color.red);
-
-        //        if (Physics.Raycast(fromPosition, direction, out hit))
-        //        {
-        //            if (hit.collider.CompareTag("Enemy"))
-        //            {
-        //                EnemyCollider = item.GetComponent<Collider>();
-        //            }
-        //        }
-
+        //        EnemyCollider = item.transform.GetComponent<Collider>();
+        //        target = item.ga;
         //    }
         //}
+        //if (hits.Length <= 0)
+        //{
+        //    return;
+        //}
+        #endregion
+        enemyDistance = float.MaxValue;
+
+
+        foreach (GameObject item in GameManager.Instance.allEnemiesList)
+        {
+            float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
+
+            if (distanceToEnemy < enemyDistance)
+            {
+                enemyDistance = distanceToEnemy;
+
+                RaycastHit hit;
+                Vector3 fromPosition = transform.position + Vector3.up * 2;
+                Vector3 toPosition = item.transform.position + Vector3.up * 2;
+                Vector3 direction = toPosition - fromPosition;
+
+                Debug.DrawRay(fromPosition, direction, Color.red);
+
+                if (Physics.Raycast(fromPosition, direction, out hit))
+                {
+                    if (hit.collider.CompareTag("Enemy"))
+                    {
+                        EnemyCollider = item.GetComponent<Collider>();
+                    }
+                }
+
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

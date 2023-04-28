@@ -7,11 +7,16 @@ public class SpawnManager : Singleton<SpawnManager>
 {
     [SerializeField] private Transform[] spawnPoints;
 
-    [SerializeField] private GameObject[] enemys;
+    [SerializeField] private GameObject gunner;
+    [SerializeField] private GameObject zombie;
 
     public int enemySpawnCount = 10;
 
     public bool onSpawnProcess = false;
+
+    public bool spawnEnemies = true;
+    public bool spawnZombies = false;
+    public bool spawnGuners = false;
 
 
     GameObject obj;
@@ -24,7 +29,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
-        /*
+        
         GameManager.Instance.allEnemiesList.Clear();
         onSpawnProcess = false;
         level = PlayerPrefs.GetInt("Level", 1);
@@ -39,12 +44,16 @@ public class SpawnManager : Singleton<SpawnManager>
             }
             yield return SpawnEnemy();
         }
-        */
+        
         yield return null;
     }
 
     private IEnumerator SpawnEnemy()
     {
+        if (spawnEnemies)
+        {
+            yield break;
+        }
         onSpawnProcess = true;
         GameObject enemy = GetRandomEnemy();
         GameObject clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
@@ -64,11 +73,11 @@ public class SpawnManager : Singleton<SpawnManager>
     }
     private bool IsCharacterNear(GameObject sender)
     {
-        List<Enemy> lookUp = new List<Enemy>();
+        List<GameObject> lookUp = new List<GameObject>();
         lookUp.AddRange(GameManager.Instance.allEnemiesList);
-        lookUp.Remove(sender.GetComponent<Enemy>());
+        lookUp.Remove(sender.gameObject);
 
-        foreach (Enemy item in lookUp)
+        foreach (GameObject item in lookUp)
         {
             if (Vector3.Distance(sender.transform.position, item.transform.position) < 20f)
             {
@@ -110,7 +119,30 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private GameObject GetRandomEnemy()
     {
-        int index = Random.Range(0, enemys.Length);
-        return enemys[index];
+        int index = Random.Range(0, 10);
+        if (index <= 5)
+        {
+            if (spawnGuners)
+            {
+                return gunner;
+            }
+            else if(spawnZombies)
+            {
+                return zombie;
+            }
+        }
+        else
+        {
+            if (spawnZombies)
+            {
+                return zombie;
+            }
+            else if(spawnGuners)
+            {
+                return gunner;
+            }
+        }
+
+        return null;
     }
 }

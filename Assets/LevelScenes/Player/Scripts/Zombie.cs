@@ -14,6 +14,7 @@ public class Zombie : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         player = FindObjectOfType<Player>();
         getnim = transform.GetChild(0).GetComponent<Animator>();
+        GameManager.Instance.allEnemiesList.Add(gameObject);
     }
 
     // Update is called once per frame
@@ -39,6 +40,10 @@ public class Zombie : MonoBehaviour
         if (maxHealth <= 0)
         {
             getnim.SetTrigger("Dead");
+            if (GameManager.Instance.allEnemiesList.Contains(gameObject))
+            {
+                GameManager.Instance.allEnemiesList.Remove(gameObject);
+            }
             agent.isStopped = true;
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<CapsuleCollider>().isTrigger = true;

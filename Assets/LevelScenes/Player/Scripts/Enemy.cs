@@ -107,12 +107,12 @@ public class Enemy : Humanoid
 
     private void OnEnable()
     {
-        GameManager.Instance.allEnemiesList.Add(this);
+        GameManager.Instance.allEnemiesList.Add(gameObject);
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.allEnemiesList.Remove(this);
+        GameManager.Instance.allEnemiesList.Remove(gameObject);
         if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
         {
             Invoke("Timer",3f);
@@ -373,26 +373,11 @@ public class Enemy : Humanoid
             return;
         }
 
-
         enemyDistance = float.MaxValue;
-
-        targetList = new List<Transform>();
-        foreach (Enemy item in GameManager.Instance.allEnemiesList)
-        {
-            if (item == this)
-            {
-                continue;
-            }
-            targetList.Add(item.transform);
-        }
-
-        
-
-        targetList.Add(player.transform);
 
         float playerdistance = Vector3.Distance(player.transform.position, this.transform.position);
 
-        foreach (Transform item in targetList)
+        foreach (GameObject item in GameManager.Instance.allEnemiesList)
         {
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
             if (distanceToEnemy < enemyDistance)
