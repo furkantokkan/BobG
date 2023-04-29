@@ -79,8 +79,6 @@ public class GameManager : Singleton<GameManager>
                 Empty();
                 break;
         }
-        if (Input.anyKeyDown && Gamestate == GAMESTATE.Start)
-            Gamestate = GAMESTATE.Ingame;
     }
     #region States
     private IEnumerator OnGameStart()
@@ -162,6 +160,10 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(OnGameStart());
     }
     #endregion
+    public void setIngame()
+    {
+        Gamestate = GAMESTATE.Ingame;
+    }
     void OnValueChanged()
     {
         Gamestate = _gamestate;
