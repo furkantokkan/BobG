@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 public class GameManager : Singleton<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 15;
@@ -13,7 +14,7 @@ public class GameManager : Singleton<GameManager>
 
     public int deadEnemyCount;
 
-    public List<GameObject> allEnemiesList = new List<GameObject>();
+    public static List<GameObject> allEnemiesList = new List<GameObject>();
 
     #region GameState
     public enum GAMESTATE
@@ -35,7 +36,6 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.PanelController(_gamestate);
         }
     }
-
     #endregion
     void Start()
     {
@@ -62,6 +62,11 @@ public class GameManager : Singleton<GameManager>
     }
     void Update()
     {
+        if (allEnemiesList.Count <= 0)
+        {
+            allEnemiesList.AddRange(FindObjectsOfType<Enemy>().Select(x => x.gameObject).ToList());
+            allEnemiesList.AddRange(FindObjectsOfType<Zombie>().Select(x => x.gameObject).ToList());
+        }
         switch (_gamestate)
         {
             case GAMESTATE.Start:

@@ -29,8 +29,6 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public IEnumerator SetSpawner()
     {
-        
-        GameManager.Instance.allEnemiesList.Clear();
         onSpawnProcess = false;
         level = PlayerPrefs.GetInt("Level", 1);
         enemySpawnCount = level * 2 > 25 ? 25 : level * 2;
@@ -47,10 +45,10 @@ public class SpawnManager : Singleton<SpawnManager>
         
         yield return null;
     }
-
+    int index;
     private IEnumerator SpawnEnemy()
     {
-        if (spawnEnemies)
+        if (!spawnEnemies)
         {
             yield break;
         }
@@ -59,22 +57,22 @@ public class SpawnManager : Singleton<SpawnManager>
         GameObject clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
         while (IsCharacterNear(clone) || CharacterOnScreen(clone))
         {
-
             Destroy(clone);
             clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
             yield return null;
         }
-
+        index++;
+        clone.gameObject.name = index.ToString();
         clone.transform.SetParent(ObjectPool.Instance.transform);
         clone.transform.GetChild(0).gameObject.SetActive(true);
         clone.GetComponent<Enemy>().enabled = true;
-        yield return new WaitUntil(() => GameManager.Instance.allEnemiesList.Count < 6 || GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish);
+        yield return new WaitUntil(() => GameManager.allEnemiesList.Count < 6 || GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish);
         onSpawnProcess = false;
     }
     private bool IsCharacterNear(GameObject sender)
     {
         List<GameObject> lookUp = new List<GameObject>();
-        lookUp.AddRange(GameManager.Instance.allEnemiesList);
+        lookUp.AddRange(GameManager.allEnemiesList);
         lookUp.Remove(sender.gameObject);
 
         foreach (GameObject item in lookUp)

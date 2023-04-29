@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -69,6 +70,8 @@ public class Enemy : Humanoid
 
     private float nextAttackTime = 0.0f;
 
+    private bool sawTarget = false;
+
     EffectManager effectManager;
 
     [SerializeField] List<Transform> targetList = new List<Transform>();
@@ -95,24 +98,24 @@ public class Enemy : Humanoid
         agent.SetDestination(GetRandomPosition());
         bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
         chaseRange = player.visibleRadius;
+        GameManager.allEnemiesList.Add(this.gameObject);
     }
 
     private void Update()
     {
+        if (targetList.Count <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
+        {
+            targetList = GameManager.allEnemiesList.Select(x => x.transform).ToList();
+        }
+        GetEnemyToAttack();
         StateSelector();
         StateExecute();
         //meshAnimator.transform.localRotation = Quaternion.identity;
         healthBar.transform.parent.LookAt(Camera.main.transform);
     }
 
-    private void OnEnable()
-    {
-        GameManager.Instance.allEnemiesList.Add(gameObject);
-    }
-
     private void OnDisable()
     {
-        GameManager.Instance.allEnemiesList.Remove(gameObject);
         if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
         {
             Invoke("Timer",3f);
@@ -142,6 +145,10 @@ public class Enemy : Humanoid
                 }
                 healthBar.transform.parent.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
+                if (GameManager.allEnemiesList.Contains(gameObject))
+                {
+                    GameManager.allEnemiesList.Remove(gameObject);
+                }
                 effectManager.Death.Play();
                 effectManager.Circle.SetActive(false);
                 UIManager.Instance.Coin += 5 * progressController.incomeLevel;
@@ -173,12 +180,10 @@ public class Enemy : Humanoid
     }
     private void StateSelector()
     {
-        GetEnemyToAttack();
 
         if (target != null)
         {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
-
         }
 
         if (tacticCounter > 0 && currentState == State.Fire)
@@ -195,7 +200,7 @@ public class Enemy : Humanoid
         {
             return;
         }
-        else if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0 || target == player && tacticCounter > 0 && distanceToTarget > attackRange)
+        if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0 || target == player && tacticCounter > 0 && distanceToTarget > attackRange)
         {
             currentState = State.Chase;
 
@@ -204,7 +209,7 @@ public class Enemy : Humanoid
         {
             currentState = State.Fire;
         }
-        else if (distanceToTarget >= chaseRange)
+        else if (distanceToTarget > chaseRange && distanceToTarget > attackRange)
         {
             //if (player != null && target != null)
             //{
@@ -308,6 +313,10 @@ public class Enemy : Humanoid
 
     protected override void Attack(Transform point, Transform parent, int newDamage)
     {
+        if (!sawTarget)
+        {
+            return;
+        }
         base.Attack(point, parent, newDamage);
     }
 
@@ -363,7 +372,7 @@ public class Enemy : Humanoid
 
     private void GetEnemyToAttack()
     {
-        if (player.target == this)
+        if (player.target == this && Vector3.Distance(transform.position, player.transform.position) < 10f)
         {
             target = player.transform;
             if (!DetectEnemy())
@@ -377,7 +386,18 @@ public class Enemy : Humanoid
 
         float playerdistance = Vector3.Distance(player.transform.position, this.transform.position);
 
-        foreach (GameObject item in GameManager.Instance.allEnemiesList)
+
+
+        if (targetList.Contains(this.transform))
+        {
+            targetList.Remove(this.transform);
+        }
+        if (targetList.Contains(player.transform))
+        {
+            targetList.Add(player.transform);
+        }
+
+        foreach (Transform item in targetList)
         {
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
             if (distanceToEnemy < enemyDistance)
@@ -391,18 +411,25 @@ public class Enemy : Humanoid
 
                 Debug.DrawRay(fromPosition, direction, Color.red);
 
+                if (playerdistance < enemyDistance)
+                {
+                    target = player.transform;
+                }
+                else
+                {
+                    target = item.transform;
+                    Debug.Log("sender: " + gameObject.name + " target: " + item.gameObject.name);
+                }
+
                 if (Physics.Raycast(fromPosition, direction, out hit))
                 {
                     if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player"))
                     {
-                        if (playerdistance < distanceToEnemy)
-                        {
-                            target = player.transform;
-                        }
-                        else
-                        {
-                            target = item.transform;
-                        }
+                        sawTarget = true;
+                    }
+                    else
+                    {
+                        sawTarget = false;
                     }
                 }
             }

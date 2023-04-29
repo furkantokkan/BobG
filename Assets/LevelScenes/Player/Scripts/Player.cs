@@ -178,8 +178,12 @@ public class Player : Humanoid
         #endregion
         enemyDistance = float.MaxValue;
 
+        if (GameManager.allEnemiesList.Count < 0)
+        {
+            return;
+        }
 
-        foreach (GameObject item in GameManager.Instance.allEnemiesList)
+        foreach (GameObject item in GameManager.allEnemiesList)
         {
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
 
