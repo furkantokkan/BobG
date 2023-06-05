@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
 
     public static List<GameObject> allEnemiesList = new List<GameObject>();
 
+    public bool ZombieMode;
+
     #region GameState
     public enum GAMESTATE
     {
@@ -40,25 +42,6 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
-
-        switch (_gamestate)
-        {
-            case GAMESTATE.Start:
-                StartCoroutine(OnGameStart());
-                break;
-            case GAMESTATE.Ingame:
-                GameIngame();
-                break;
-            case GAMESTATE.Finish:
-                GameFinish();
-                break;
-            case GAMESTATE.GameOver:
-                GameOver();
-                break;
-            case GAMESTATE.Empty:
-                Empty();
-                break;
-        }
     }
     void Update()
     {
@@ -86,41 +69,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #region States
-    private IEnumerator OnGameStart()
+    public void OnGameStart()
     {
-        asyncSceneIndex = PlayerPrefs.GetInt("SaveScene", asyncSceneIndex);
-
-        if (SceneManager.sceneCount > 2)
+        if (SceneManager.sceneCount > 2) return;
+        SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
+        StartCoroutine(SpawnManager.Instance.SetSpawner());
+        deadEnemyCount = 0;
+        if (Joystick.Instance != null)
         {
-            yield break;
+            Joystick.Instance.UseOnStart();
         }
-
-        yield return SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
-
-        switch (_gamestate)
-        {
-            case GAMESTATE.Start:
-                StartCoroutine(SpawnManager.Instance.SetSpawner());
-                deadEnemyCount = 0;
-                if (Joystick.Instance != null)
-                {
-                    Joystick.Instance.UseOnStart();
-                }
-                break;
-            case GAMESTATE.Ingame:
-                GameIngame();
-                break;
-            case GAMESTATE.Finish:
-                GameFinish();
-                break;
-            case GAMESTATE.GameOver:
-                GameOver();
-                break;
-            case GAMESTATE.Empty:
-                Empty();
-                break;
-        }
-
+        Gamestate = GAMESTATE.Ingame;
     }
 
     void GameIngame()
@@ -149,7 +108,7 @@ public class GameManager : Singleton<GameManager>
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
         SceneManager.UnloadSceneAsync(asyncSceneIndex);
-        StartCoroutine(OnGameStart());
+        OnGameStart();
     }
     public void NextLevelButton()
     {
@@ -162,21 +121,22 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("SaveScene", asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        StartCoroutine(OnGameStart());
+        OnGameStart();
     }
     #endregion
-    public void setIngame()
-    {
-        Gamestate = GAMESTATE.Ingame;
-    }
     void OnValueChanged()
     {
         Gamestate = _gamestate;
     }
 
-    [ContextMenu("DeleteALLKeys")]
-    public void DeleteAllKeys()
+    public void Zombie()
     {
-        PlayerPrefs.DeleteAll();
+        ZombieMode = true;
+        OnGameStart();
+    }
+    public  void Normal()
+    {
+        ZombieMode = false;
+        OnGameStart();
     }
 }

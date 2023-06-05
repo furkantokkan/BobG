@@ -15,9 +15,6 @@ public class SpawnManager : Singleton<SpawnManager>
     public bool onSpawnProcess = false;
 
     public bool spawnEnemies = true;
-    public bool spawnZombies = false;
-    public bool spawnGuners = false;
-
 
     GameObject obj;
     Collider objCollider;
@@ -81,10 +78,6 @@ public class SpawnManager : Singleton<SpawnManager>
             {
                 return true;
             }
-            else
-            {
-                continue;
-            }
         }
 
         return false;
@@ -117,30 +110,8 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private GameObject GetRandomEnemy()
     {
-        int index = Random.Range(0, 10);
-        if (index <= 5)
-        {
-            if (spawnGuners)
-            {
-                return gunner;
-            }
-            else if(spawnZombies)
-            {
-                return zombie;
-            }
-        }
-        else
-        {
-            if (spawnZombies)
-            {
-                return zombie;
-            }
-            else if(spawnGuners)
-            {
-                return gunner;
-            }
-        }
-
-        return null;
+        if (GameManager.Instance.ZombieMode) return zombie;
+        
+        return gunner;
     }
 }
