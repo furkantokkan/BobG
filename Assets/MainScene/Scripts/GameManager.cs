@@ -92,7 +92,7 @@ public class GameManager : Singleton<GameManager>
             yield break;
         }
 
-        yield return SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
+        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
 
         switch (_gamestate)
         {
