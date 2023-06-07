@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
 public class GameManager : Singleton<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 15;
@@ -14,9 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     public int deadEnemyCount;
 
-    public static List<GameObject> allEnemiesList = new List<GameObject>();
-
-    public bool ZombieMode;
+    public List<Enemy> allEnemiesList = new List<Enemy>();
 
     #region GameState
     public enum GAMESTATE
@@ -38,18 +35,33 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.PanelController(_gamestate);
         }
     }
+
     #endregion
     void Start()
     {
         Gamestate = GAMESTATE.Start;
+
+        switch (_gamestate)
+        {
+            case GAMESTATE.Start:
+                StartCoroutine(OnGameStart());
+                break;
+            case GAMESTATE.Ingame:
+                GameIngame();
+                break;
+            case GAMESTATE.Finish:
+                GameFinish();
+                break;
+            case GAMESTATE.GameOver:
+                GameOver();
+                break;
+            case GAMESTATE.Empty:
+                Empty();
+                break;
+        }
     }
     void Update()
     {
-        if (allEnemiesList.Count <= 0)
-        {
-            allEnemiesList.AddRange(FindObjectsOfType<Enemy>().Select(x => x.gameObject).ToList());
-            allEnemiesList.AddRange(FindObjectsOfType<Zombie>().Select(x => x.gameObject).ToList());
-        }
         switch (_gamestate)
         {
             case GAMESTATE.Start:
@@ -67,19 +79,45 @@ public class GameManager : Singleton<GameManager>
                 Empty();
                 break;
         }
+        if (Input.anyKeyDown && Gamestate == GAMESTATE.Start)
+            Gamestate = GAMESTATE.Ingame;
     }
     #region States
-    public void OnGameStart()
+    private IEnumerator OnGameStart()
     {
-        if (SceneManager.sceneCount > 2) return;
-        SceneManager.LoadSceneAsync(asyncSceneIndex, LoadSceneMode.Additive);
-        StartCoroutine(SpawnManager.Instance.SetSpawner());
-        deadEnemyCount = 0;
-        if (Joystick.Instance != null)
+        asyncSceneIndex = PlayerPrefs.GetInt("SaveScene", asyncSceneIndex);
+
+        if (SceneManager.sceneCount > 2)
         {
-            Joystick.Instance.UseOnStart();
+            yield break;
         }
-        Gamestate = GAMESTATE.Ingame;
+
+        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+
+        switch (_gamestate)
+        {
+            case GAMESTATE.Start:
+                StartCoroutine(SpawnManager.Instance.SetSpawner());
+                deadEnemyCount = 0;
+                if (Joystick.Instance != null)
+                {
+                    Joystick.Instance.UseOnStart();
+                }
+                break;
+            case GAMESTATE.Ingame:
+                GameIngame();
+                break;
+            case GAMESTATE.Finish:
+                GameFinish();
+                break;
+            case GAMESTATE.GameOver:
+                GameOver();
+                break;
+            case GAMESTATE.Empty:
+                Empty();
+                break;
+        }
+
     }
 
     void GameIngame()
@@ -108,7 +146,7 @@ public class GameManager : Singleton<GameManager>
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
         SceneManager.UnloadSceneAsync(asyncSceneIndex);
-        OnGameStart();
+        StartCoroutine(OnGameStart());
     }
     public void NextLevelButton()
     {
@@ -121,7 +159,7 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("SaveScene", asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        OnGameStart();
+        StartCoroutine(OnGameStart());
     }
     #endregion
     void OnValueChanged()
@@ -129,14 +167,9 @@ public class GameManager : Singleton<GameManager>
         Gamestate = _gamestate;
     }
 
-    public void Zombie()
+    [ContextMenu("DeleteALLKeys")]
+    public void DeleteAllKeys()
     {
-        ZombieMode = true;
-        OnGameStart();
-    }
-    public  void Normal()
-    {
-        ZombieMode = false;
-        OnGameStart();
+        PlayerPrefs.DeleteAll();
     }
 }
