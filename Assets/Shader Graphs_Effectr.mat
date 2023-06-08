@@ -41,11 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1443ebdd1c1b499bb30a114e92da5495: 1
+    - Vector1_5e61ef4a37c94290867791f8ebf4e94d: 0
     - Vector1_606524f276f94c5d8a28b3f80831e36f: 0.2
     - Vector1_a4b78fad73104520b3a15fa4cbe4a23d: 0.9
     - Vector1_aedeb461264d40ae99a0befac2971953: 1
     - Vector1_d6f9c417bc7544868bb22a53301d2785: 2
     - Vector1_e37241144f1a4a9eb34448342a1c8fc6: 0.5
     m_Colors:
-    - _PlayerPosition: {r: -5.547634, g: 3.7933183, b: -64.74675, a: 0}
+    - _PlayerPosition: {r: 25.641964, g: -0.56763244, b: -18.146, a: 0}
   m_BuildTextureStacks: []

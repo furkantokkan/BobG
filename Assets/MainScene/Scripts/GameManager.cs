@@ -13,7 +13,9 @@ public class GameManager : Singleton<GameManager>
 
     public int deadEnemyCount;
 
-    public List<Enemy> allEnemiesList = new List<Enemy>();
+    public static List<GameObject> allEnemiesList = new List<GameObject>();
+
+    public bool ZombieMode = false;
 
     #region GameState
     public enum GAMESTATE
