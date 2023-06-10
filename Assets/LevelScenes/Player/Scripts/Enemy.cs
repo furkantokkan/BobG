@@ -117,9 +117,9 @@ public class Enemy : Humanoid
 
     private void OnDisable()
     {
-        if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0)
+        if ((SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount) <= 0 && GameManager.Instance.ZombieMode == false && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
         {
-            Invoke("Timer",3f);
+            Invoke("Timer",2f);
         }
     }
 

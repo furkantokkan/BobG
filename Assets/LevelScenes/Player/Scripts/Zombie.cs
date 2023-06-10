@@ -9,6 +9,8 @@ public class Zombie : MonoBehaviour
     private NavMeshAgent agent;
     Animator getnim;
     private Player player;
+
+    bool isDead = false;
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -44,8 +46,9 @@ public class Zombie : MonoBehaviour
             player.transform.GetChild(0).GetComponent<AnimController>().DeathAnim();
             player.transform.GetChild(0).GetComponent<EffectManager>().Death.Play();
         }
-        if (maxHealth <= 0)
+        if (maxHealth <= 0 && isDead == false)
         {
+            GameManager.Instance.deadEnemyCount += 1;
             getnim.SetTrigger("Dead");
             if (GameManager.allEnemiesList.Contains(gameObject))
             {
@@ -54,6 +57,7 @@ public class Zombie : MonoBehaviour
             agent.isStopped = true;
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<CapsuleCollider>().isTrigger = true;
+            isDead = true;
         }
     }
     private void OnTriggerEnter(Collider other)

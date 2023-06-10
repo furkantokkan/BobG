@@ -124,7 +124,7 @@ public class UIManager : Singleton<UIManager>
         switch (currentPanel)
         {
             case GameManager.GAMESTATE.Start:
-                StartP.SetActive(true);
+                StartP.SetActive(false);
                 break;
             case GameManager.GAMESTATE.Ingame:
                 InGameP.SetActive(true);

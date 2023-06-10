@@ -65,11 +65,6 @@ public class GameManager : Singleton<GameManager>
     private async void Update()
     {
         await  System.Threading.Tasks.Task.Delay(500);
-        if (allEnemiesList.Count <= 0 && Gamestate == GAMESTATE.Ingame && GameManager.Instance.ZombieMode == true)
-        {
-            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
-        }
-
         switch (_gamestate)
         {
             case GAMESTATE.Start:
@@ -128,8 +123,13 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    void GameIngame()
+     async void GameIngame()
     {
+        await System.Threading.Tasks.Task.Delay(3000);
+        if (allEnemiesList.Count <= 0 && GameManager.Instance.ZombieMode == true && SpawnManager.Instance.waitForSpawn == false)
+        {
+            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+        }
 
     }
     void GameFinish()

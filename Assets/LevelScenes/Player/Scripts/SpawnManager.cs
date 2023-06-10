@@ -16,6 +16,8 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public bool spawnEnemies = true;
 
+    public bool waitForSpawn = true;
+
     GameObject obj;
     Collider objCollider;
 
@@ -49,6 +51,7 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             yield break;
         }
+        yield return new WaitUntil(() => waitForSpawn == false);
         onSpawnProcess = true;
         GameObject enemy = GetRandomEnemy();
         GameObject clone = Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
@@ -65,6 +68,10 @@ public class SpawnManager : Singleton<SpawnManager>
         if (clone.GetComponent<Enemy>() != null)
         {
             clone.GetComponent<Enemy>().enabled = true;
+        }
+        if (clone.GetComponent<Zombie>() != null)
+        {
+            clone.GetComponent<Zombie>().enabled = true;
         }
         yield return new WaitUntil(() => GameManager.Instance != null);
         yield return new WaitUntil(() => GameManager.allEnemiesList.Count < 6 || GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish);
