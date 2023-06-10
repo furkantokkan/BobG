@@ -62,8 +62,14 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
     }
-    void Update()
+    private async void Update()
     {
+        await  System.Threading.Tasks.Task.Delay(500);
+        if (allEnemiesList.Count <= 0 && Gamestate == GAMESTATE.Ingame && GameManager.Instance.ZombieMode == true)
+        {
+            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
+        }
+
         switch (_gamestate)
         {
             case GAMESTATE.Start:
@@ -147,14 +153,14 @@ public class GameManager : Singleton<GameManager>
     {
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        SceneManager.UnloadSceneAsync(asyncSceneIndex);
+        SceneManager.UnloadSceneAsync(1);
         StartCoroutine(OnGameStart());
     }
     public void NextLevelButton()
     {
         if (SceneManager.sceneCount > 1)
         {
-            SceneManager.UnloadSceneAsync(asyncSceneIndex);
+            SceneManager.UnloadSceneAsync(1);
             asyncSceneIndex = 2;
         }
         UIManager.Instance.SetLevel();

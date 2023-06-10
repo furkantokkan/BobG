@@ -39,7 +39,7 @@ public class SpawnManager : Singleton<SpawnManager>
             }
             yield return SpawnEnemy();
         }
-        
+
         yield return null;
     }
     int index;
@@ -62,7 +62,11 @@ public class SpawnManager : Singleton<SpawnManager>
         clone.gameObject.name = index.ToString();
         clone.transform.SetParent(ObjectPool.Instance.transform);
         clone.transform.GetChild(0).gameObject.SetActive(true);
-        clone.GetComponent<Enemy>().enabled = true;
+        if (clone.GetComponent<Enemy>() != null)
+        {
+            clone.GetComponent<Enemy>().enabled = true;
+        }
+        yield return new WaitUntil(() => GameManager.Instance != null);
         yield return new WaitUntil(() => GameManager.allEnemiesList.Count < 6 || GameManager.Instance.Gamestate == GameManager.GAMESTATE.Finish);
         onSpawnProcess = false;
     }
@@ -111,7 +115,7 @@ public class SpawnManager : Singleton<SpawnManager>
     private GameObject GetRandomEnemy()
     {
         if (GameManager.Instance.ZombieMode) return zombie;
-        
+
         return gunner;
     }
 }

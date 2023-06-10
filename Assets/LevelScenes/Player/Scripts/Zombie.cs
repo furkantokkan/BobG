@@ -15,9 +15,16 @@ public class Zombie : MonoBehaviour
         player = FindObjectOfType<Player>();
         getnim = transform.GetChild(0).GetComponent<Animator>();
     }
-
+    private void OnEnable()
+    {
+        GameManager.allEnemiesList.Add(this.gameObject);
+    }
+    private void OnDisable()
+    {
+        GameManager.allEnemiesList.Remove(this.gameObject);
+    }
     // Update is called once per frame
-    
+
     void Update()
     {
         if (GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
@@ -30,7 +37,7 @@ public class Zombie : MonoBehaviour
 
         agent.SetDestination(player.transform.position);
 
-        if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < attackRange && agent.isStopped == false)
         {
             getnim.SetTrigger("Attack");
             player.healthBar.fillAmount = 0f;

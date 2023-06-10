@@ -185,6 +185,11 @@ public class Player : Humanoid
 
         foreach (GameObject item in GameManager.allEnemiesList)
         {
+            if (item == null)
+            {
+                continue;
+            }
+
             float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
 
             if (distanceToEnemy < enemyDistance)

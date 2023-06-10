@@ -95,6 +95,7 @@ public class Enemy : Humanoid
         UpdateStats();
         SetStats();
         progressController.SetPrefabs();
+        yield return new WaitForEndOfFrame();
         agent.SetDestination(GetRandomPosition());
         bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
         chaseRange = player.visibleRadius;
