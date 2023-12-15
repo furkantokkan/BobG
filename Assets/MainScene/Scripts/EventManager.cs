@@ -1,6 +1,6 @@
 using System;
 
-public class EventManager : Singleton<EventManager>
+public class EventManager : SingletonPersistent<EventManager>
 {
     public event Action OnMoved;
     void Update()

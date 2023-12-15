@@ -9,7 +9,7 @@ public class AirdropPointer : MonoBehaviour
     public Image img;
     public Transform target;
     public Vector3 offset;
-    private void Update()
+    public void Indicator()
     {
         float minX = img.GetPixelAdjustedRect().width / 2;
         float maxX = Screen.width - minX;

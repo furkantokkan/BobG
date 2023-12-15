@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class GameManager : Singleton<GameManager>
+public class GameManager : SingletonPersistent<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 15;
 
     public float CountDown = 5;
-    int asyncSceneIndex = 1;
     public bool taptic = true;
 
     public int deadEnemyCount;
@@ -16,6 +15,8 @@ public class GameManager : Singleton<GameManager>
     public static List<GameObject> allEnemiesList = new List<GameObject>();
 
     public bool ZombieMode = false;
+    
+    public Camera menuCamera;
 
     #region GameState
     public enum GAMESTATE
@@ -24,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         Ingame,
         Finish,
         GameOver,
+        Menu,
         Empty
     }
     [OnValueChanged("OnValueChanged")]
@@ -42,12 +44,14 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Gamestate = GAMESTATE.Start;
+    }
+
+    async void Update()
+    {
+        await System.Threading.Tasks.Task.Delay(500);
 
         switch (_gamestate)
         {
-            case GAMESTATE.Start:
-                StartCoroutine(OnGameStart());
-                break;
             case GAMESTATE.Ingame:
                 GameIngame();
                 break;
@@ -57,119 +61,84 @@ public class GameManager : Singleton<GameManager>
             case GAMESTATE.GameOver:
                 GameOver();
                 break;
-            case GAMESTATE.Empty:
-                Empty();
-                break;
-        }
-    }
-    private async void Update()
-    {
-        await  System.Threading.Tasks.Task.Delay(500);
-        switch (_gamestate)
-        {
-            case GAMESTATE.Start:
-                break;
-            case GAMESTATE.Ingame:
-                GameIngame();
-                break;
-            case GAMESTATE.Finish:
-                GameFinish();
-                break;
-            case GAMESTATE.GameOver:
-                GameOver();
+            case GAMESTATE.Menu:
                 break;
             case GAMESTATE.Empty:
                 Empty();
                 break;
         }
-        if (Input.anyKeyDown && Gamestate == GAMESTATE.Start)
-            Gamestate = GAMESTATE.Ingame;
     }
+
     #region States
-    private IEnumerator OnGameStart()
+    public void OnGameStart()
     {
-        asyncSceneIndex = PlayerPrefs.GetInt("SaveScene", asyncSceneIndex);
-
+        menuCamera.gameObject.SetActive(false);
+        Gamestate = GAMESTATE.Ingame;
         if (SceneManager.sceneCount > 2)
-        {
-            yield break;
-        }
+            return;
 
-        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
 
-        switch (_gamestate)
-        {
-            case GAMESTATE.Start:
-                StartCoroutine(SpawnManager.Instance.SetSpawner());
-                deadEnemyCount = 0;
-                if (Joystick.Instance != null)
-                {
-                    Joystick.Instance.UseOnStart();
-                }
-                break;
-            case GAMESTATE.Ingame:
-                GameIngame();
-                break;
-            case GAMESTATE.Finish:
-                GameFinish();
-                break;
-            case GAMESTATE.GameOver:
-                GameOver();
-                break;
-            case GAMESTATE.Empty:
-                Empty();
-                break;
-        }
+        StartCoroutine(SpawnManager.Instance.SetSpawner());
+        deadEnemyCount = 0;
 
+        Joystick.Instance?.UseOnStart();
     }
 
-     async void GameIngame()
+    async void GameIngame()
     {
         await System.Threading.Tasks.Task.Delay(3000);
-        if (allEnemiesList.Count <= 0 && GameManager.Instance.ZombieMode == true && SpawnManager.Instance.waitForSpawn == false)
-        {
-            GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
-        }
-
+        if (allEnemiesList.Count <= 0 && Instance.ZombieMode && !SpawnManager.Instance.waitForSpawn)
+            Instance.Gamestate = GAMESTATE.Finish;
     }
+
     void GameFinish()
     {
         CountDown -= Time.deltaTime;
         UIManager.Instance.fillImage.fillAmount = Mathf.Lerp(UIManager.Instance.fillImage.fillAmount,
             UIManager.Instance._fill, Time.deltaTime * .9f);
     }
+
     void GameOver()
     {
         CountDown -= Time.deltaTime;
     }
 
+    public void Menu()
+    {
+        Gamestate = GAMESTATE.Menu;
+        menuCamera.gameObject.SetActive(true);
+        CountDown = 2;
+        SceneManager.UnloadSceneAsync(1);
+    }
+    
     void Empty()
     {
         CountDown -= Time.deltaTime;
         if (CountDown <= 0)
             Gamestate = GAMESTATE.GameOver;
     }
+
     public void RestartButton()
     {
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
         SceneManager.UnloadSceneAsync(1);
-        StartCoroutine(OnGameStart());
+        OnGameStart();
     }
+
     public void NextLevelButton()
     {
         if (SceneManager.sceneCount > 1)
-        {
             SceneManager.UnloadSceneAsync(1);
-            asyncSceneIndex = 2;
-        }
+
         UIManager.Instance.SetLevel();
-        PlayerPrefs.SetInt("SaveScene", asyncSceneIndex);
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
-        StartCoroutine(OnGameStart());
+        OnGameStart();
     }
     #endregion
+
     void OnValueChanged()
     {
         Gamestate = _gamestate;

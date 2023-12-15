@@ -1,17 +1,20 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class UIManager : Singleton<UIManager>
+
+public class UIManager : SingletonPersistent<UIManager>
 {
-    [SerializeField] GameObject StartP, InGameP, NextP, GameOverP;
+    [SerializeField] GameObject InGameP, NextP, GameOverP, MenuP, ModeP;
     TextMeshProUGUI m_CoinText, m_LevelText;
     [SerializeField] TextMeshProUGUI m_Enemy_Left;
     [SerializeField] Sprite MuteOn, MuteOff, TapticOn, TapticOff;
     public Image fillImage;
-    GameObject m_Settings;
-    int m_Coin;
-    [HideInInspector]
-    public float _fill = 0;
+    private GameObject m_Settings;
+    private int m_Coin;
+    [HideInInspector] public float _fill = 0;
+    public GameObject upgradePanel;
+    [SerializeField] private UpgradeCosts upgradeCosts;
+    private UpgradeCosts currentCosts = new UpgradeCosts();
     public int Coin
     {
         get
@@ -22,19 +25,15 @@ public class UIManager : Singleton<UIManager>
         {
             m_Coin = value;
             m_CoinText.text = m_Coin.ToString();
-            UpdateUpgradeUI();
         }
     }
 
-    public GameObject upgradePanel;
-
-    [SerializeField] private int powerCost;
-    [SerializeField] private int incomeCost;
-    [SerializeField] private int armorCost;
-    [SerializeField] private int speedCost;
-    [SerializeField] private int healthCost;
-
     void Start()
+    {
+        InitializeUIElements();
+    }
+
+    private void InitializeUIElements()
     {
         m_LevelText = InGameP.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         m_CoinText = InGameP.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
@@ -51,81 +50,49 @@ public class UIManager : Singleton<UIManager>
         ProgressController progress = GameObject.FindGameObjectWithTag("Player").GetComponent<ProgressController>();
         UpgradePanel panel = upgradePanel.GetComponent<UpgradePanel>();
 
+        UpdatePanelTexts(panel, progress);
+        UpdatePanelCosts(panel, progress);
+        UpdatePanelInteractivity(panel);
+    }
+
+    private void UpdatePanelTexts(UpgradePanel panel, ProgressController progress)
+    {
         panel.incomeLevel.text = "level " + progress.incomeLevel;
         panel.powerLevel.text = "level " + progress.powerLevel;
         panel.armorLevel.text = "level " + progress.armorLevel;
         panel.speedLevel.text = "level " + progress.speedLevel;
         panel.healthLevel.text = "level " + progress.healthLevel;
+    }   
+    private void UpdatePanelCosts(UpgradePanel panel, ProgressController progress)
+    {
+        currentCosts.income = upgradeCosts.income * progress.incomeLevel;
+        currentCosts.power = upgradeCosts.power * progress.powerLevel;
+        currentCosts.armor = upgradeCosts.armor * progress.armorLevel;
+        currentCosts.speed = upgradeCosts.speed * progress.speedLevel;
+        currentCosts.health = upgradeCosts.health * progress.healthLevel;
 
-        incomeCost = 50 * progress.incomeLevel;
-        powerCost = 50 * progress.powerLevel;
-        armorCost = 50 * progress.armorLevel;
-        speedCost = 50 * progress.speedLevel;
-        healthCost = 50 * progress.healthLevel;
-
-        panel.incomeAmount.text = incomeCost.ToString();
-        panel.powerAmount.text = powerCost.ToString();
-        panel.armorAmount.text = armorCost.ToString();
-        panel.speedAmount.text = speedCost.ToString();
-        panel.healthAmount.text = healthCost.ToString();
-
-        if (m_Coin < incomeCost)
-        {
-            panel.incomeButton.interactable = false;
-        }
-        else
-        {
-            panel.incomeButton.interactable = true;
-        }
-
-        if (m_Coin < powerCost)
-        {
-            panel.powerButton.interactable = false;
-        }
-        else
-        {
-            panel.powerButton.interactable = true;
-        }
-
-        if (m_Coin < armorCost)
-        {
-            panel.armorButton.interactable = false;
-        }
-        else
-        {
-            panel.armorButton.interactable = true;
-        }
-
-        if (m_Coin < speedCost)
-        {
-            panel.speedButton.interactable = false;
-        }
-        else
-        {
-            panel.speedButton.interactable = true;
-        }
-
-        if (m_Coin < healthCost)
-        {
-            panel.healthButton.interactable = false;
-        }
-        else
-        {
-            panel.healthButton.interactable = true;
-        }
-
+        panel.incomeAmount.text = currentCosts.income.ToString();
+        panel.powerAmount.text = currentCosts.power.ToString();
+        panel.armorAmount.text = currentCosts.armor.ToString();
+        panel.speedAmount.text = currentCosts.speed.ToString();
+        panel.healthAmount.text = currentCosts.health.ToString();
+    }
+    private void UpdatePanelInteractivity(UpgradePanel panel)
+    {
+        panel.incomeButton.interactable = m_Coin >= currentCosts.income;
+        panel.powerButton.interactable = m_Coin >= currentCosts.power;
+        panel.armorButton.interactable = m_Coin >= currentCosts.armor;
+        panel.speedButton.interactable = m_Coin >= currentCosts.speed;
+        panel.healthButton.interactable = m_Coin >= currentCosts.health;
     }
     public void PanelController(GameManager.GAMESTATE currentPanel)
     {
-        StartP.SetActive(false);
         NextP.SetActive(false);
         GameOverP.SetActive(false);
         InGameP.SetActive(false);
+        ModeP.SetActive(false);
         switch (currentPanel)
         {
-            case GameManager.GAMESTATE.Start:
-                StartP.SetActive(false);
-                break;
             case GameManager.GAMESTATE.Ingame:
                 InGameP.SetActive(true);
                 break;
@@ -136,8 +103,18 @@ public class UIManager : Singleton<UIManager>
                 ImageFiller();
                 NextP.SetActive(true);
                 break;
+            case GameManager.GAMESTATE.Menu:
+                MenuP.SetActive(true);
+                break;
         }
     }
+
+    public void ModePanel()
+    {
+        ModeP.SetActive(ModeP.activeInHierarchy ? false : true);
+        MenuP.SetActive(MenuP.activeInHierarchy ? false : true);
+    }
+    
     public void SetLevel()
     {
         PlayerPrefs.SetInt("Coin", m_Coin);
@@ -178,30 +155,39 @@ public class UIManager : Singleton<UIManager>
         switch (name)
         {
             case "Income":
-                Coin -= incomeCost;
+                Coin -= currentCosts.income;
                 progress.UpdateLevel(
                     progress.incomeLevel + 1, Stat.INCOME);
                 break;
             case "Power":
-                Coin -= powerCost;
+                Coin -= currentCosts.power;
                 progress.UpdateLevel(
                      progress.powerLevel + 1, Stat.POWER);
                 break;
             case "Armor":
-                Coin -= armorCost;
+                Coin -= currentCosts.armor;
                 progress.UpdateLevel(
                     progress.armorLevel + 1, Stat.ARMOR);
                 break;
             case "Speed":
-                Coin -= speedCost;
+                Coin -= currentCosts.speed;
                 progress.UpdateLevel(
                      progress.speedLevel + 1, Stat.SPEED);
                 break;
             case "Health":
-                Coin -= healthCost;
+                Coin -= currentCosts.health;
                 progress.UpdateLevel(
                     progress.healthLevel + 1, Stat.HEALTH);
                 break;
         }
     }
+}
+[System.Serializable]
+public class UpgradeCosts
+{
+    public int power;
+    public int income;
+    public int armor;
+    public int speed;
+    public int health;
 }

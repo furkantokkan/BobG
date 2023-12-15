@@ -61,7 +61,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.8
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 9
   avoidancePriority: 50
   m_AngularSpeed: 400
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9bc2340b4596854fa94835423b372a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   attackRange: 3
 --- !u!136 &4078414044772633131
 CapsuleCollider:

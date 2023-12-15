@@ -5,20 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ZombieMode : MonoBehaviour
 {
-    [SerializeField] private GameObject startPanel;
-    private void Start()
-    {
-        startPanel.gameObject.SetActive(false);
-    }
-    public void ZombMode()
+    public void ZombiMode()
     {
         GameManager.Instance.ZombieMode = true;
-        Invoke("OnAnimationFinish", 2f);
     }
     public void PVPMode()
     {
         GameManager.Instance.ZombieMode = false;
-        Invoke("OnAnimationFinish", 2f);
     }
     public void OnAnimationFinish()
     {

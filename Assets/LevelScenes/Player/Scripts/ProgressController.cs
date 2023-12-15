@@ -119,7 +119,6 @@ public class ProgressController : MonoBehaviour
                 PlayerPrefs.SetInt("IncomeLevel", newLevel);
                 break;
             case Stat.POWER:
-                print("After Power" + newLevel);
                 powerLevel = newLevel;
                 weaponRoot.GetComponent<Root>().ActivateObject(progression.GetPrefabID(newLevel, characterClass, newStat));
                 PlayerPrefs.SetInt("PowerLevel", newLevel);
