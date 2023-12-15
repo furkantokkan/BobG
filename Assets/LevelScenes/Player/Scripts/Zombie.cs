@@ -19,13 +19,12 @@ public class Zombie : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameManager.allEnemiesList.Add(this.gameObject);
+        GameManager.Instance.allEnemiesList.Add(gameObject);
     }
     private void OnDisable()
     {
-        GameManager.allEnemiesList.Remove(this.gameObject);
+        GameManager.Instance.allEnemiesList.Remove(gameObject);
     }
-    // Update is called once per frame
 
     void Update()
     {
@@ -50,9 +49,9 @@ public class Zombie : MonoBehaviour
         {
             GameManager.Instance.deadEnemyCount += 1;
             getnim.SetTrigger("Dead");
-            if (GameManager.allEnemiesList.Contains(gameObject))
+            if (GameManager.Instance.allEnemiesList.Contains(gameObject))
             {
-                GameManager.allEnemiesList.Remove(gameObject);
+                GameManager.Instance.allEnemiesList.Remove(gameObject);
             }
             agent.isStopped = true;
             GetComponent<Rigidbody>().isKinematic = true;

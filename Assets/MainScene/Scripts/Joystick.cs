@@ -34,7 +34,6 @@ public class Joystick : SingletonPersistent<Joystick> {
         Vector2 pos = Input.mousePosition;
       
         if(Input.GetMouseButtonDown(0)){
-            Debug.Log("Tıkladı");
             ShowHide(true);
             active = true;
             knob.position = pos;

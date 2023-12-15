@@ -21,19 +21,14 @@ public class Enemy : Humanoid
 {
     [Header("Stats")]
     [SerializeField] int currentDamage = 2;
-    [SerializeField] int currentHealth;
     [SerializeField] int maxHealth;
     [SerializeField] int currentSpeed;
-    [SerializeField] int maxSpeed;
     [SerializeField] int currentArmor;
-    [SerializeField] int maxArmor;
     [Header("Settings")]
-    [SerializeField] private Transform bulletPoint;
+    private Transform bulletPoint;
     [Range(0, 1f)]
     [SerializeField] private float animationFirePosition = 1f;
-    [SerializeField] private float fireAnimationSpeed = 1f;
     [SerializeField] float attackRange = 8f;
-    [SerializeField] float turnSpeed = 15f;
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float patrolRadius = 3f;
     [SerializeField] float patrolWaitTime = 2f;
@@ -41,7 +36,6 @@ public class Enemy : Humanoid
     [SerializeField] float chaseSpeed = 5f;
     [SerializeField] float tacticSpeed = 5.5f;
     [SerializeField] float tacticWaitTime = 5f;
-    [SerializeField] AnimatorOverrideController AnimatorOverrideController;
 
     [SerializeField] private AnimController meshAnimator;
 
@@ -53,7 +47,6 @@ public class Enemy : Humanoid
 
     private bool isSearched = false;
 
-    private float fireRateStorage;
     public Collider PlayerCollider { get; set; }
 
     public State currentState = State.Search;
@@ -83,7 +76,6 @@ public class Enemy : Humanoid
         progressController = GetComponent<ProgressController>();
         player = FindObjectOfType<Player>();
         agent = gameObject.GetComponent<NavMeshAgent>();
-        fireRateStorage = animationFirePosition;
         tacticWaitTime = UnityEngine.Random.Range(5, 15f);
         tacticCounter = tacticWaitTime;
         effectManager = transform.GetChild(0).GetComponent<EffectManager>();
@@ -99,19 +91,18 @@ public class Enemy : Humanoid
         agent.SetDestination(GetRandomPosition());
         bulletPoint = progressController.GetCurrentWeapon().bulletPoint;
         chaseRange = player.visibleRadius;
-        GameManager.allEnemiesList.Add(this.gameObject);
+        GameManager.Instance.allEnemiesList.Add(gameObject);
     }
 
     private void Update()
     {
         if (targetList.Count <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
         {
-            targetList = GameManager.allEnemiesList.Select(x => x.transform).ToList();
+            targetList = GameManager.Instance.allEnemiesList.Select(x => x.transform).ToList();
         }
         GetEnemyToAttack();
         StateSelector();
         StateExecute();
-        //meshAnimator.transform.localRotation = Quaternion.identity;
         healthBar.transform.parent.LookAt(Camera.main.transform);
     }
 
@@ -140,15 +131,15 @@ public class Enemy : Humanoid
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
             if (healthBar.fillAmount <= 0)
             {
-                if (other.GetComponent<Bullet>().sender.TryGetComponent<Enemy>(out Enemy enemy))
+                if (other.GetComponent<Bullet>().sender.TryGetComponent(out Enemy enemy))
                 {
                     enemy.target = null;
                 }
                 healthBar.transform.parent.parent.gameObject.SetActive(false);
                 transform.GetChild(0).GetComponent<AnimController>().anim.SetTrigger("Death");
-                if (GameManager.allEnemiesList.Contains(gameObject))
+                if (GameManager.Instance.allEnemiesList.Contains(gameObject))
                 {
-                    GameManager.allEnemiesList.Remove(gameObject);
+                    GameManager.Instance.allEnemiesList.Remove(gameObject);
                 }
                 effectManager.Death.Play();
                 effectManager.Circle.SetActive(false);
@@ -160,17 +151,14 @@ public class Enemy : Humanoid
                 GameManager.Instance.deadEnemyCount += 1;
                 enabled = false;
             }
-            Destroy(other.gameObject);
+            ObjectPool.Instance.SetPooledObject(other.gameObject, 0);
         }
     }
     public void UpdateStats()
     {
         maxHealth = progressController.GetStat(Stat.HEALTH);
-        maxArmor = progressController.GetStat(Stat.ARMOR);
-        maxSpeed = progressController.GetStat(Stat.SPEED);
 
         currentDamage = progressController.GetStat(Stat.POWER);
-        currentHealth = progressController.GetStat(Stat.HEALTH);
         currentArmor = progressController.GetStat(Stat.ARMOR);
         currentSpeed = progressController.GetStat(Stat.SPEED);
     }
@@ -204,7 +192,6 @@ public class Enemy : Humanoid
         if (distanceToTarget <= chaseRange && distanceToTarget > attackRange && tacticCounter > 0 || target == player && tacticCounter > 0 && distanceToTarget > attackRange)
         {
             currentState = State.Chase;
-
         }
         else if (DetectEnemy() && tacticCounter > 0)
         {
@@ -212,14 +199,6 @@ public class Enemy : Humanoid
         }
         else if (distanceToTarget > chaseRange && distanceToTarget > attackRange)
         {
-            //if (player != null && target != null)
-            //{
-            //    if (target.transform == player.transform)
-            //    {
-            //        currentState = State.Chase;
-            //        return;
-            //    }
-            //}
             currentState = State.Search;
         }
     }
@@ -307,8 +286,6 @@ public class Enemy : Humanoid
                 AttackState();
                 isSearched = false;
                 break;
-            default:
-                break;
         }
     }
 
@@ -356,18 +333,6 @@ public class Enemy : Humanoid
         {
             return false;
         }
-        //Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
-        //Debug.DrawRay(transform.position, transform.forward * visibleRadius, Color.red);
-        //for (int i = 0; i < colliders.Length; i++)
-        //{
-        //    if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Enemies"))
-        //    {
-        //        CanAttackPlayer = true;
-        //        PlayerCollider = colliders[i];
-        //        return true;
-        //    }
-        //}
-        //return false;
     }
 
 
@@ -385,22 +350,20 @@ public class Enemy : Humanoid
 
         enemyDistance = float.MaxValue;
 
-        float playerdistance = Vector3.Distance(player.transform.position, this.transform.position);
+        float playerdistance = Vector3.Distance(player.transform.position, transform.position);
 
-
-
-        if (targetList.Contains(this.transform))
+        if (targetList.Contains(transform))
         {
-            targetList.Remove(this.transform);
+            targetList.Remove(transform);
         }
-        if (targetList.Contains(player.transform))
+        if (!targetList.Contains(player.transform))
         {
             targetList.Add(player.transform);
         }
 
         foreach (Transform item in targetList)
         {
-            float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
+            float distanceToEnemy = Vector3.Distance(item.transform.position, transform.position);
             if (distanceToEnemy < enemyDistance)
             {
                 enemyDistance = distanceToEnemy;
@@ -419,7 +382,6 @@ public class Enemy : Humanoid
                 else
                 {
                     target = item.transform;
-                    Debug.Log("sender: " + gameObject.name + " target: " + item.gameObject.name);
                 }
 
                 if (Physics.Raycast(fromPosition, direction, out hit))
@@ -463,10 +425,7 @@ public class Enemy : Humanoid
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f && !isSearched)
         {
             Vector3 agentTarget = new Vector3(agent.destination.x, transform.position.y, agent.destination.z);
-
-            //agent.enabled = false;
-            //transform.position = agentTarget;
-            //agent.enabled = true;
+            
             Invoke("Search", patrolWaitTime);
             isSearched = true;
         }
@@ -562,9 +521,4 @@ public class Enemy : Humanoid
         tacticExecute = false;
         tacticCounter = tacticWaitTime;
     }
-    private void OnDrawGizmos()
-    {
-
-    }
-
 }

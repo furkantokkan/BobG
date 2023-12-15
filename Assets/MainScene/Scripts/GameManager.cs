@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class GameManager : SingletonPersistent<GameManager>
+public class GameManager : Singleton<GameManager>
 {
     public const int MAX_LEVEL_INDEX = 15;
 
@@ -12,7 +12,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public int deadEnemyCount;
 
-    public static List<GameObject> allEnemiesList = new List<GameObject>();
+    public List<GameObject> allEnemiesList = new List<GameObject>();
 
     public bool ZombieMode = false;
     
@@ -55,14 +55,6 @@ public class GameManager : SingletonPersistent<GameManager>
             case GAMESTATE.Ingame:
                 GameIngame();
                 break;
-            case GAMESTATE.Finish:
-                GameFinish();
-                break;
-            case GAMESTATE.GameOver:
-                GameOver();
-                break;
-            case GAMESTATE.Menu:
-                break;
             case GAMESTATE.Empty:
                 Empty();
                 break;
@@ -78,8 +70,7 @@ public class GameManager : SingletonPersistent<GameManager>
             return;
 
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
-
-        StartCoroutine(SpawnManager.Instance.SetSpawner());
+        
         deadEnemyCount = 0;
 
         Joystick.Instance?.UseOnStart();
@@ -88,20 +79,8 @@ public class GameManager : SingletonPersistent<GameManager>
     async void GameIngame()
     {
         await System.Threading.Tasks.Task.Delay(3000);
-        if (allEnemiesList.Count <= 0 && Instance.ZombieMode && !SpawnManager.Instance.waitForSpawn)
+        if (allEnemiesList.Count <= 0 && ZombieMode && !SpawnManager.Instance.waitForSpawn)
             Instance.Gamestate = GAMESTATE.Finish;
-    }
-
-    void GameFinish()
-    {
-        CountDown -= Time.deltaTime;
-        UIManager.Instance.fillImage.fillAmount = Mathf.Lerp(UIManager.Instance.fillImage.fillAmount,
-            UIManager.Instance._fill, Time.deltaTime * .9f);
-    }
-
-    void GameOver()
-    {
-        CountDown -= Time.deltaTime;
     }
 
     public void Menu()
@@ -115,8 +94,8 @@ public class GameManager : SingletonPersistent<GameManager>
     void Empty()
     {
         CountDown -= Time.deltaTime;
-        if (CountDown <= 0)
-            Gamestate = GAMESTATE.GameOver;
+        if (CountDown <= 0) Gamestate = GAMESTATE.GameOver;
+        allEnemiesList = new List<GameObject>();
     }
 
     public void RestartButton()
@@ -132,7 +111,6 @@ public class GameManager : SingletonPersistent<GameManager>
         if (SceneManager.sceneCount > 1)
             SceneManager.UnloadSceneAsync(1);
 
-        UIManager.Instance.SetLevel();
         Gamestate = GAMESTATE.Start;
         CountDown = 2;
         OnGameStart();

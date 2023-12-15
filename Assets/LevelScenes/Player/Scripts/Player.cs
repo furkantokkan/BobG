@@ -56,6 +56,8 @@ public class Player : Humanoid
         maxArmor = progressController.GetStat(Stat.ARMOR);
         maxSpeed = progressController.GetStat(Stat.SPEED);
 
+        StartCoroutine(SpawnManager.Instance.SetSpawner());
+        
         UpdateStats();
     }
 
@@ -154,36 +156,14 @@ public class Player : Humanoid
     }
     private void DetectEnemy()
     {
-        #region zombie
-
-        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, visibleRadius, transform.forward, 2f, LayerMask.GetMask("Enemies"));
-        //foreach (RaycastHit item in hits)
-        //{
-        //    enemyDistance = float.MaxValue;
-
-        //    float distanceToEnemy = Vector3.Distance(item.transform.position, this.transform.position);
-
-        //    if (distanceToEnemy < enemyDistance)
-        //    {
-        //        enemyDistance = distanceToEnemy;
-
-        //        EnemyCollider = item.transform.GetComponent<Collider>();
-        //        target = item.ga;
-        //    }
-        //}
-        //if (hits.Length <= 0)
-        //{
-        //    return;
-        //}
-        #endregion
         enemyDistance = float.MaxValue;
 
-        if (GameManager.allEnemiesList.Count < 0)
+        if (GameManager.Instance.allEnemiesList.Count < 0)
         {
             return;
         }
 
-        foreach (GameObject item in GameManager.allEnemiesList)
+        foreach (GameObject item in GameManager.Instance.allEnemiesList)
         {
             if (item == null)
             {
@@ -226,7 +206,7 @@ public class Player : Humanoid
             healthBar.fillAmount -= (float)(other.GetComponent<Bullet>().bulletDamage - currentArmor < 5 ? 5 :
                 other.GetComponent<Bullet>().bulletDamage - currentArmor) / maxHealth;
             healthBar.color = Color.Lerp(Color.green, Color.red, 1.2f - healthBar.fillAmount);
-            Destroy(other.gameObject);
+            ObjectPool.Instance.SetPooledObject(other.gameObject, 0);
             if (healthBar.fillAmount <= 0 && GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
             {
                 healthBar.transform.parent.gameObject.SetActive(false);

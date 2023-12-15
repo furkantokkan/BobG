@@ -2,16 +2,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : SingletonPersistent<UIManager>
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField] GameObject InGameP, NextP, GameOverP, MenuP, ModeP;
     TextMeshProUGUI m_CoinText, m_LevelText;
-    [SerializeField] TextMeshProUGUI m_Enemy_Left;
+    [SerializeField] TextMeshProUGUI m_Enemy_Left, m_FinishMoneyText;
     [SerializeField] Sprite MuteOn, MuteOff, TapticOn, TapticOff;
-    public Image fillImage;
     private GameObject m_Settings;
     private int m_Coin;
-    [HideInInspector] public float _fill = 0;
     public GameObject upgradePanel;
     [SerializeField] private UpgradeCosts upgradeCosts;
     private UpgradeCosts currentCosts = new UpgradeCosts();
@@ -52,7 +50,7 @@ public class UIManager : SingletonPersistent<UIManager>
 
         UpdatePanelTexts(panel, progress);
         UpdatePanelCosts(panel, progress);
-        UpdatePanelInteractivity(panel);
+        UpdatePanelInteractivity(panel, progress);
     }
 
     private void UpdatePanelTexts(UpgradePanel panel, ProgressController progress)
@@ -77,13 +75,13 @@ public class UIManager : SingletonPersistent<UIManager>
         panel.speedAmount.text = currentCosts.speed.ToString();
         panel.healthAmount.text = currentCosts.health.ToString();
     }
-    private void UpdatePanelInteractivity(UpgradePanel panel)
+    private void UpdatePanelInteractivity(UpgradePanel panel, ProgressController progress)
     {
-        panel.incomeButton.interactable = m_Coin >= currentCosts.income;
-        panel.powerButton.interactable = m_Coin >= currentCosts.power;
-        panel.armorButton.interactable = m_Coin >= currentCosts.armor;
-        panel.speedButton.interactable = m_Coin >= currentCosts.speed;
-        panel.healthButton.interactable = m_Coin >= currentCosts.health;
+        panel.incomeButton.interactable = m_Coin >= currentCosts.income && progress.incomeLevel < GameManager.MAX_LEVEL_INDEX;
+        panel.powerButton.interactable = m_Coin >= currentCosts.power && progress.powerLevel < GameManager.MAX_LEVEL_INDEX;
+        panel.armorButton.interactable = m_Coin >= currentCosts.armor && progress.armorLevel < GameManager.MAX_LEVEL_INDEX;
+        panel.speedButton.interactable = m_Coin >= currentCosts.speed && progress.speedLevel < GameManager.MAX_LEVEL_INDEX;
+        panel.healthButton.interactable = m_Coin >= currentCosts.health && progress.healthLevel < GameManager.MAX_LEVEL_INDEX;
     }
     public void PanelController(GameManager.GAMESTATE currentPanel)
     {
@@ -100,7 +98,10 @@ public class UIManager : SingletonPersistent<UIManager>
                 GameOverP.SetActive(true);
                 break;
             case GameManager.GAMESTATE.Finish:
-                ImageFiller();
+                int earnedMoney = Random.Range(50, 100);
+                m_FinishMoneyText.text = "+ " + (earnedMoney * PlayerPrefs.GetInt("Level", 1));
+                Coin += earnedMoney * PlayerPrefs.GetInt("Level", 1);
+                SetLevel();
                 NextP.SetActive(true);
                 break;
             case GameManager.GAMESTATE.Menu:
@@ -142,10 +143,6 @@ public class UIManager : SingletonPersistent<UIManager>
     Sprite IconChanger(Sprite first, Sprite second, bool state)
     {
         return state ? first : second;
-    }
-    void ImageFiller()
-    {
-        _fill = _fill >= 1 ? 0 : _fill += .2f;
     }
 
     public void OnClickUpgradeButton(string name)

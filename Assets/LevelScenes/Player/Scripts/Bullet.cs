@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,8 +8,14 @@ public class Bullet : MonoBehaviour
 
     public int bulletDamage = 0;
 
+    private float bulletLifeTime = 3f;
     void FixedUpdate()
     {
         transform.localPosition += transform.forward * (bulletSpeed * Time.deltaTime);
+        bulletLifeTime -= Time.deltaTime;
+        if (bulletLifeTime <= 0)
+        {
+            ObjectPool.Instance.SetPooledObject(gameObject, 0);
+        }
     }
 }

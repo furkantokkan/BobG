@@ -108,7 +108,6 @@ public class ProgressController : MonoBehaviour
         }
         if (newLevel > GameManager.MAX_LEVEL_INDEX)
         {
-            print("Return");
             return;
         }
 

@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
+  bulletPoint: {fileID: 0}
 --- !u!1 &693940692230007821
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  bulletPoint: {fileID: 0}
 --- !u!1 &1052307067025656932
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  bulletPoint: {fileID: 0}
 --- !u!1 &1991203262588457423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167978fa4a5a86c40ba8ffac4e9d82d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
 --- !u!1 &2459658644479248644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,11 +2111,13 @@ MonoBehaviour:
   currentArmor: 0
   maxArmor: 0
   currentIncome: 0
+  currentWeapon: {fileID: 0}
   animationFirePosition: 0.507
   bulletPoint: {fileID: 2699777382182329714}
   fireRate: 2
   rotateRoot: {fileID: 7383631788929352615}
   playerSpeed: 10
+  target: {fileID: 0}
   meshAnimator: {fileID: 2699777382177287250}
 --- !u!114 &1206298723
 MonoBehaviour:
@@ -2515,6 +2521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 5
+  bulletPoint: {fileID: 0}
 --- !u!1 &4923267553450641741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,6 +3180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+  bulletPoint: {fileID: 0}
 --- !u!1 &6826386022826101312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,6 +3603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
+  bulletPoint: {fileID: 0}
 --- !u!1 &7848528144217360751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,6 +3970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4
+  bulletPoint: {fileID: 0}
 --- !u!1 &8315938250344928161
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,6 +4239,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 72af5d7f8780fa54588fb9328551bd19, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 72af5d7f8780fa54588fb9328551bd19, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 1
       objectReference: {fileID: 0}
@@ -4238,7 +4252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 72af5d7f8780fa54588fb9328551bd19, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 72af5d7f8780fa54588fb9328551bd19, type: 3}
       propertyPath: playOnAwake
