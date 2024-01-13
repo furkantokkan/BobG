@@ -16,16 +16,14 @@ public class Zombie : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         player = FindObjectOfType<Player>();
         getnim = transform.GetChild(0).GetComponent<Animator>();
-    }
-    private void OnEnable()
-    {
         GameManager.Instance.allEnemiesList.Add(gameObject);
     }
-    private void OnDisable()
+    
+    void Timer()
     {
-        GameManager.Instance.allEnemiesList.Remove(gameObject);
+        GameManager.Instance.Gamestate = GameManager.GAMESTATE.Finish;
     }
-
+    
     void Update()
     {
         if (GameManager.Instance.Gamestate == GameManager.GAMESTATE.Ingame)
@@ -47,16 +45,20 @@ public class Zombie : MonoBehaviour
         }
         if (maxHealth <= 0 && isDead == false)
         {
-            GameManager.Instance.deadEnemyCount += 1;
             getnim.SetTrigger("Dead");
             if (GameManager.Instance.allEnemiesList.Contains(gameObject))
             {
                 GameManager.Instance.allEnemiesList.Remove(gameObject);
             }
+            GameManager.Instance.deadEnemyCount += 1;
             agent.isStopped = true;
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<CapsuleCollider>().isTrigger = true;
             isDead = true;
+            if (SpawnManager.Instance.enemySpawnCount - GameManager.Instance.deadEnemyCount <= 0)
+            {
+                Invoke("Timer",2f);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

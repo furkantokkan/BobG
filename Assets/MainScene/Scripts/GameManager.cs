@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool ZombieMode = false;
     
-    public Camera menuCamera;
+    public GameObject menuObjects;
 
     #region GameState
     public enum GAMESTATE
@@ -52,9 +52,6 @@ public class GameManager : Singleton<GameManager>
 
         switch (_gamestate)
         {
-            case GAMESTATE.Ingame:
-                GameIngame();
-                break;
             case GAMESTATE.Empty:
                 Empty();
                 break;
@@ -64,7 +61,7 @@ public class GameManager : Singleton<GameManager>
     #region States
     public void OnGameStart()
     {
-        menuCamera.gameObject.SetActive(false);
+        menuObjects.SetActive(false);
         Gamestate = GAMESTATE.Ingame;
         if (SceneManager.sceneCount > 2)
             return;
@@ -75,18 +72,10 @@ public class GameManager : Singleton<GameManager>
 
         Joystick.Instance?.UseOnStart();
     }
-
-    async void GameIngame()
-    {
-        await System.Threading.Tasks.Task.Delay(3000);
-        if (allEnemiesList.Count <= 0 && ZombieMode && !SpawnManager.Instance.waitForSpawn)
-            Instance.Gamestate = GAMESTATE.Finish;
-    }
-
     public void Menu()
     {
         Gamestate = GAMESTATE.Menu;
-        menuCamera.gameObject.SetActive(true);
+        menuObjects.SetActive(true);
         CountDown = 2;
         SceneManager.UnloadSceneAsync(1);
     }

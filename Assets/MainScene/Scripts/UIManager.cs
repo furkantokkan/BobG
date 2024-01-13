@@ -8,7 +8,7 @@ public class UIManager : Singleton<UIManager>
     TextMeshProUGUI m_CoinText, m_LevelText;
     [SerializeField] TextMeshProUGUI m_Enemy_Left, m_FinishMoneyText;
     [SerializeField] Sprite MuteOn, MuteOff, TapticOn, TapticOff;
-    private GameObject m_Settings;
+    public GameObject[] m_Settings;
     private int m_Coin;
     public GameObject upgradePanel;
     [SerializeField] private UpgradeCosts upgradeCosts;
@@ -29,13 +29,13 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         InitializeUIElements();
+        Coin = 100000;
     }
 
     private void InitializeUIElements()
     {
         m_LevelText = InGameP.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         m_CoinText = InGameP.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
-        m_Settings = InGameP.transform.GetChild(2).GetChild(0).gameObject;
         m_LevelText.text = "LEVEL " + PlayerPrefs.GetInt("Level", 1);
         m_Coin = PlayerPrefs.GetInt("Coin", 0);
     }
@@ -96,6 +96,7 @@ public class UIManager : Singleton<UIManager>
                 break;
             case GameManager.GAMESTATE.GameOver:
                 GameOverP.SetActive(true);
+                Coin = PlayerPrefs.GetInt("Coin", 0);
                 break;
             case GameManager.GAMESTATE.Finish:
                 int earnedMoney = Random.Range(50, 100);
@@ -124,21 +125,30 @@ public class UIManager : Singleton<UIManager>
     }
     public void Settings()
     {
-        if (m_Settings.activeInHierarchy)
-            m_Settings.SetActive(false);
-        else
-            m_Settings.SetActive(true);
+        foreach (var VARIABLE in m_Settings)
+        {
+            if (VARIABLE.activeInHierarchy)
+                VARIABLE.SetActive(false);
+            else
+                VARIABLE.SetActive(true);
+        }
     }
     public void Mute()
     {
         var component = Camera.main.GetComponent<AudioListener>();
         component.enabled = !component.isActiveAndEnabled;
-        m_Settings.transform.GetChild(1).GetComponent<Image>().sprite = IconChanger(MuteOn, MuteOff, component.isActiveAndEnabled);
+        foreach (var VARIABLE in m_Settings)
+        {
+            VARIABLE.transform.GetChild(1).GetComponent<Image>().sprite = IconChanger(MuteOn, MuteOff, component.isActiveAndEnabled);
+        }
     }
     public void Taptic()
     {
         GameManager.Instance.taptic = !GameManager.Instance.taptic;
-        m_Settings.transform.GetChild(0).GetComponent<Image>().sprite = IconChanger(TapticOn, TapticOff, GameManager.Instance.taptic);
+        foreach (var VARIABLE in m_Settings)
+        {
+            VARIABLE.transform.GetChild(0).GetComponent<Image>().sprite = IconChanger(TapticOn, TapticOff, GameManager.Instance.taptic);
+        }
     }
     Sprite IconChanger(Sprite first, Sprite second, bool state)
     {
