@@ -29,7 +29,6 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         InitializeUIElements();
-        Coin = 100000;
     }
 
     private void InitializeUIElements()
